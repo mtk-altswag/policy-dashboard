@@ -1,9 +1,10 @@
-name: Refresh Policy Dashboard
+name: Deploy to GitHub Pages
 
 on:
-  schedule:
-    - cron: '0 14 * * *'  # 9 AM ET daily
-  workflow_dispatch:  # Manual trigger
+  push:
+    paths:
+      - "site/**"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -15,38 +16,19 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  refresh:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run refresh script
-        env:
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
-          SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-        run: python refresh.py
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/
 
-  deploy:
-    needs: refresh
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
