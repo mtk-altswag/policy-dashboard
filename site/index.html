@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policy Governance Reporting</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:'Inter',sans-serif;min-height:100vh}
+header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:flex;align-items:center;gap:14px}
+.logo-svg{width:32px;height:32px}
+.logo-text{font-size:20px;font-weight:700;letter-spacing:1px}
+.header-divider{width:1px;height:28px;background:#333;margin:0 8px}
+.header-title{font-size:16px;font-weight:600;color:#ccc}
+.header-subtitle{font-size:12px;color:#999;margin-left:auto}
+.container{max-width:1200px;margin:0 auto;padding:24px 32px 48px}
+.main-tab-bar{display:flex;gap:8px;margin-bottom:20px}
+.main-tab-btn{padding:10px 24px;border-radius:24px;border:1px solid #444;background:#111;color:#aaa;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s}
+.main-tab-btn.active{background:#fff;color:#000;border-color:#fff}
+.section-title{font-size:14px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin:28px 0 14px}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.kpi-card{background:#111;border:1px solid #333;border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:16px;border-left:4px solid #fff;transition:all .2s}
+.kpi-card.clickable{cursor:pointer}.kpi-card.clickable:hover{border-color:#444;background:#181818}
+.kpi-card.active-sel{border-left-color:#fff;background:#181818}
+.kpi-card.retired{border-left-color:#777;opacity:.7}
+.kpi-icon{width:36px;height:36px;flex-shrink:0}
+.kpi-info{display:flex;flex-direction:column}
+.kpi-value{font-size:28px;font-weight:700}
+.kpi-label{font-size:12px;color:#aaa;font-weight:500}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.card{background:#111;border:1px solid #333;border-radius:12px;padding:20px;display:flex;flex-direction:column}
+.card.full-width{grid-column:1/-1}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;flex-wrap:wrap}
+.card-title{font-size:13px;font-weight:600;color:#ccc}
+.card-controls{display:flex;align-items:center;gap:8px}
+.dim-select{background:#000;color:#ccc;border:1px solid #444;border-radius:6px;padding:4px 8px;font-size:11px;font-family:'Inter',sans-serif}
+.pill-group{display:flex;border:1px solid #444;border-radius:6px;overflow:hidden}
+.pill-btn{padding:4px 10px;font-size:11px;background:#000;color:#aaa;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.pill-btn.active{background:#fff;color:#000}
+.stat-tile{display:inline-flex;align-items:center;gap:8px;background:#111;border:1px solid #222;border-radius:8px;padding:8px 14px;margin-bottom:16px;font-size:12px;color:#ccc}
+.stat-tile .val{font-weight:700;color:#fff;font-size:16px}
+.cc{flex:1;min-height:0}
+.status-table{width:100%;border-collapse:collapse;font-size:13px}
+.status-table th{text-align:left;padding:10px 12px;color:#aaa;font-weight:500;border-bottom:1px solid #222;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.status-table td{padding:10px 12px;border-bottom:1px solid #222;color:#ddd}
+.status-table .total-row td{border-top:2px solid #333;font-weight:700;color:#fff}
+.due-layout{display:flex;gap:0;flex:1;min-height:0;overflow:hidden}
+.due-chart{flex:1;min-width:0;min-height:0;display:flex;align-items:stretch}
+.due-key{width:320px;flex-shrink:0;border-left:1px solid #333;padding:10px 16px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.due-item{display:flex;align-items:center;gap:6px;font-size:11px}
+.due-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.due-term{font-weight:600;color:#ccc;min-width:110px;white-space:nowrap}
+.due-desc{color:#999;font-size:10px}
+.hidden{display:none!important}
+
+.approved-tile{display:flex;align-items:center;gap:10px;background:#111;border:1px solid #222;border-radius:10px;padding:12px 18px;margin-top:16px;cursor:pointer;transition:all .2s;user-select:none}
+.approved-tile:hover{background:#181818;border-color:#333}
+.approved-tile .at-icon{flex-shrink:0}
+.approved-tile .at-label{font-size:13px;color:#ccc}
+.approved-tile .at-val{font-size:20px;font-weight:700;color:#fff;margin-left:auto}
+.approved-tile .at-arrow{color:#aaa;font-size:14px;margin-left:8px;transition:transform .2s}
+.approved-tile.open .at-arrow{transform:rotate(180deg)}
+.approved-drilldown{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.approved-drilldown.open{max-height:400px}
+.approved-drilldown table{width:100%;border-collapse:collapse;font-size:12px;margin-top:0}
+.approved-drilldown th{text-align:left;padding:8px 12px;color:#999;font-weight:500;border-bottom:1px solid #222;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.approved-drilldown td{padding:8px 12px;border-bottom:1px solid #222;color:#ddd}
+.approved-drilldown td:first-child{color:#fff;font-weight:500}
+.due-drilldown{margin-top:12px;max-height:300px;overflow-y:auto;display:none}
+.due-drilldown.open{display:block}
+.due-drilldown table{width:100%;border-collapse:collapse;font-size:12px}
+.due-drilldown th{text-align:left;padding:8px 12px;color:#999;font-weight:500;border-bottom:1px solid #222;font-size:11px;text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;background:#111}
+.due-drilldown td{padding:8px 12px;border-bottom:1px solid #222;color:#ddd}
+.due-drilldown td:first-child{color:#fff;font-weight:500}
+.due-drilldown-label{font-size:12px;color:#aaa;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.due-drilldown-label .dd-status{color:#fff;font-weight:600}
+.due-drilldown-label .dd-close{cursor:pointer;margin-left:auto;color:#aaa;font-size:14px}
+.due-drilldown-label .dd-close:hover{color:#fff}
+.dd-search{background:#000;color:#ddd;border:1px solid #444;border-radius:6px;padding:5px 10px;font-size:12px;font-family:'Inter',sans-serif;width:220px;margin-left:12px}
+.dd-search::placeholder{color:#777}
+
+</style>
+</head>
+<body>
+<header>
+<svg class="logo-svg" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="8" height="8" rx="2" fill="#fff"/><rect x="12" y="1" width="8" height="8" rx="2" fill="#fff"/><rect x="23" y="1" width="8" height="8" rx="2" fill="#fff"/><rect x="1" y="12" width="8" height="8" rx="2" fill="#fff"/><rect x="12" y="12" width="8" height="8" rx="2" fill="#fff"/><rect x="23" y="12" width="8" height="8" rx="2" fill="#fff"/><rect x="1" y="23" width="8" height="8" rx="2" fill="#fff"/><rect x="12" y="23" width="8" height="8" rx="2" fill="#fff"/><rect x="23" y="23" width="8" height="8" rx="2" fill="#fff"/></svg>
+<span class="logo-text">block</span>
+<div class="header-divider"></div>
+<span class="header-title">Policy Governance Reporting</span>
+<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Mar 27, 2026 at 09:39 AM</div><div style="color:#666;font-size:10px">Source: LogicGate via Snowflake</div></div>
+</header>
+<div class="container">
+<div class="main-tab-bar">
+<button class="main-tab-btn active" id="mt-inv" onclick="switchMainTab('inventory')">Inventory Overview</button>
+<button class="main-tab-btn" id="mt-lc" onclick="switchMainTab('lifecycle')">Document Lifecycle Status</button>
+</div>
+
+<!-- ===== MAIN TAB 1: INVENTORY OVERVIEW ===== -->
+<div id="main-tab-inventory">
+<div class="section-title">Inventory Overview</div>
+<div class="kpi-row">
+<div class="kpi-card clickable active-sel" id="kpi-active" onclick="showActiveTab()">
+<svg class="kpi-icon" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#fff" stroke-width="2"/><path d="M11 18l5 5 9-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="kpi-info"><span class="kpi-value">155</span><span class="kpi-label">Active</span></div>
+</div>
+<div class="kpi-card clickable" id="kpi-intake" onclick="showIntakeTab()">
+<svg class="kpi-icon" viewBox="0 0 36 36" fill="none"><path d="M18 4v18m0 0l-6-6m6 6l6-6" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 26c0 2 2 4 4 4h16c2 0 4-2 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+<div class="kpi-info"><span class="kpi-value">26</span><span class="kpi-label">Intake</span></div>
+</div>
+<div class="kpi-card retired">
+<svg class="kpi-icon" viewBox="0 0 36 36" fill="none"><rect x="5" y="8" width="26" height="22" rx="3" stroke="#777" stroke-width="2"/><path d="M5 14h26" stroke="#777" stroke-width="2"/><path d="M14 19h8" stroke="#777" stroke-width="2" stroke-linecap="round"/></svg>
+<div class="kpi-info"><span class="kpi-value" style="color:#777">24</span><span class="kpi-label">Retired</span></div>
+</div>
+</div>
+
+<div class="pill-group" id="inv-pill-group" style="margin-bottom:20px;display:inline-flex">
+<button class="pill-btn active" id="inv-pill-active" onclick="showActiveTab()">Active</button>
+<button class="pill-btn" id="inv-pill-intake" onclick="showIntakeTab()">Intake</button>
+</div>
+
+<!-- Active sub-tab -->
+<div id="tab-active">
+<div class="section-title">Active Documents Breakdown</div>
+
+<div class="grid-2">
+<div class="card" style="height:300px">
+<div class="card-header">
+<span class="card-title">Distribution</span>
+<div class="card-controls">
+<select class="dim-select" id="a-dim1-sel" onchange="updateADim1()"><option value="domain">By Domain</option><option value="tier">By Tier</option><option value="doctype">By Document Type</option></select>
+<div class="pill-group" id="a-dim1-pills">
+<button class="pill-btn active" onclick="setAPill('dim1','all',this)">All</button>
+<button class="pill-btn" onclick="setAPill('dim1','policy',this)">Policy</button>
+<button class="pill-btn" onclick="setAPill('dim1','standard',this)">Standard</button>
+</div>
+</div>
+</div>
+<canvas id="a-dim1" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+<div class="card" style="height:300px">
+<div class="card-header">
+<span class="card-title">Organization</span>
+<div class="card-controls">
+<select class="dim-select" id="a-org-sel" onchange="updateAOrg()"><option value="business">By Business</option><option value="legal">By Legal Entity</option><option value="region">By Region</option></select>
+<div class="pill-group" id="a-org-pills">
+<button class="pill-btn active" onclick="setAPill('org','all',this)">All</button>
+<button class="pill-btn" onclick="setAPill('org','policy',this)">Policy</button>
+<button class="pill-btn" onclick="setAPill('org','standard',this)">Standard</button>
+</div>
+</div>
+</div>
+<canvas id="a-org" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+</div>
+<div class="approved-tile" id="approved-toggle" onclick="toggleApproved()">
+<svg class="at-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#aaa" stroke-width="1.5"/><path d="M9 4.5v4.5l3.5 2" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/></svg>
+<span class="at-label">Approved in last 30 days</span>
+<span class="at-val">11</span>
+<span class="at-arrow">&#9660;</span>
+</div>
+<div class="approved-drilldown" id="approved-drilldown">
+<table>
+<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th></tr></thead>
+<tbody>
+<tr><td>Block Inc. Compliance Committee &amp; Forum Oversight Standard</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Clearpay Finance Limited Consumer Due Diligence Standard</td><td>Clearpay Finance Limited</td><td>Financial Crimes</td></tr><tr><td>Clearpay Fitness and Propriety Standard</td><td>Clearpay Finance Limited</td><td>Governance</td></tr><tr><td>Clearpay UK - Senior Managers Certification Regime &amp; Conduct Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td></tr><tr><td>Clearpay UK - Training and Competence Standard</td><td>Clearpay Finance Limited</td><td>Governance</td></tr><tr><td>Clearpay UK Payment Service Provider Due Diligence Standard</td><td>Clearpay Finance Limited</td><td>Financial Crimes</td></tr><tr><td>Clearpay UK Vulnerable Customer Standard</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td></tr><tr><td>Square AU Pty. Ltd. Enhanced Customer Due Diligence Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Suspicious Matter Report Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square Canada, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy</td><td>Square Canada, Inc.</td><td>Financial Crimes</td></tr></tbody>
+</table>
+</div>
+<div class="section-title">Document Review Schedule</div>
+<div class="card full-width" style="height:250px">
+<canvas id="a-schedule" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+</div>
+
+<!-- Intake sub-tab -->
+<div id="tab-intake" class="hidden">
+<div class="section-title">Intake Documents Breakdown</div>
+<div class="grid-2">
+<div class="card" style="height:300px">
+<div class="card-header">
+<span class="card-title">Distribution</span>
+<div class="card-controls">
+<select class="dim-select" id="i-dim1-sel" onchange="updateIDim1()"><option value="domain">By Domain</option><option value="tier">By Tier</option><option value="doctype">By Document Type</option></select>
+<div class="pill-group" id="i-dim1-pills">
+<button class="pill-btn active" onclick="setIPill('dim1','all',this)">All</button>
+<button class="pill-btn" onclick="setIPill('dim1','policy',this)">Policy</button>
+<button class="pill-btn" onclick="setIPill('dim1','standard',this)">Standard</button>
+</div>
+</div>
+</div>
+<canvas id="i-dim1" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+<div class="card" style="height:300px">
+<div class="card-header">
+<span class="card-title">Organization</span>
+<div class="card-controls">
+<select class="dim-select" id="i-org-sel" onchange="updateIOrg()"><option value="business">By Business</option><option value="legal">By Legal Entity</option><option value="region">By Region</option></select>
+<div class="pill-group" id="i-org-pills">
+<button class="pill-btn active" onclick="setIPill('org','all',this)">All</button>
+<button class="pill-btn" onclick="setIPill('org','policy',this)">Policy</button>
+<button class="pill-btn" onclick="setIPill('org','standard',this)">Standard</button>
+</div>
+</div>
+</div>
+<canvas id="i-org" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MAIN TAB 2: DOCUMENT LIFECYCLE STATUS ===== -->
+<div id="main-tab-lifecycle" class="hidden">
+<div class="pill-group" style="margin-bottom:20px;display:inline-flex">
+<button class="pill-btn active" id="lc-pill-active" onclick="switchLcTab('active')">Active</button>
+<button class="pill-btn" id="lc-pill-intake" onclick="switchLcTab('intake')">Intake</button>
+</div>
+
+<!-- Lifecycle Active -->
+<div id="lc-active">
+<div class="section-title">Document Lifecycle Tracking</div>
+<div class="card full-width" style="margin-bottom:16px">
+<table class="status-table">
+<thead><tr><th>Domain</th><th>Current</th><th>Under QC</th><th>In Approvals</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Consumer Protection</td><td>51</td><td>0</td><td>4</td><td><strong>55</strong></td></tr><tr><td>Governance</td><td>37</td><td>2</td><td>4</td><td><strong>43</strong></td></tr><tr><td>Financial Crimes</td><td>34</td><td>3</td><td>5</td><td><strong>42</strong></td></tr><tr><td>Ethics and Employee Conduct</td><td>7</td><td>0</td><td>7</td><td><strong>14</strong></td></tr><tr style="font-weight:700;border-top:2px solid #333"><td>Total</td><td>129</td><td>5</td><td>20</td><td>154</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card full-width" style="height:300px;margin-bottom:16px">
+<div class="card-header"><span class="card-title">By Due Date Status</span></div>
+<div style="font-size:11px;color:#aaa;margin-bottom:8px;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1a6 6 0 100 12A6 6 0 007 1z" stroke="#aaa" stroke-width="1.2"/><path d="M6 5.5h2v4H6z" fill="#aaa"/><circle cx="7" cy="4" r=".8" fill="#aaa"/></svg>Click on a bar to view document details</div>
+<div class="due-layout">
+<div class="due-chart"><canvas id="lc-a-due" class="cc" style="flex:1;min-height:0"></canvas></div>
+<div class="due-key">
+<div class="due-item"><span class="due-dot" style="background:#fff"></span><span class="due-term">Current</span><span class="due-desc">Up to date</span></div>
+<div class="due-item"><span class="due-dot" style="background:#ccc"></span><span class="due-term">Coming Due</span><span class="due-desc">Due within 90 days</span></div>
+<div class="due-item"><span class="due-dot" style="background:#999"></span><span class="due-term">Pending Review</span><span class="due-desc">Past review date; within 30-day grace period</span></div>
+<div class="due-item"><span class="due-dot" style="background:#777"></span><span class="due-term">Overdue</span><span class="due-desc">More than 30 days past due</span></div>
+<div class="due-item"><span class="due-dot" style="background:#555"></span><span class="due-term">Extended</span><span class="due-desc">Extension granted</span></div>
+<div class="due-item"><span class="due-dot" style="background:#444"></span><span class="due-term">Ext. Coming Due</span><span class="due-desc">Within 30 days of extended deadline</span></div>
+<div class="due-item"><span class="due-dot" style="background:#333"></span><span class="due-term">Overdue Past Ext.</span><span class="due-desc">Beyond extended deadline</span></div>
+</div>
+</div>
+</div>
+<div class="due-drilldown" id="due-drilldown">
+<div class="due-drilldown-label"><span>Showing: </span><span class="dd-status" id="dd-status-label"></span><input class="dd-search" id="dd-search" type="text" placeholder="Search documents..." oninput="filterDueDrilldown()"><span class="dd-close" onclick="closeDueDrilldown()">&#10005;</span></div>
+<table>
+<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th></tr></thead>
+<tbody id="dd-tbody"></tbody>
+</table>
+</div>
+
+</div>
+
+<!-- Lifecycle Intake -->
+<div id="lc-intake" class="hidden">
+<div class="section-title">Document Lifecycle Tracking</div>
+<div class="card full-width" style="margin-bottom:16px">
+<table class="status-table">
+<thead><tr><th>Domain</th><th>New Drafting</th><th>Under QC</th><th>In Approvals</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Consumer Protection</td><td>8</td><td>2</td><td>1</td><td><strong>12</strong></td></tr><tr><td>Governance</td><td>7</td><td>0</td><td>1</td><td><strong>8</strong></td></tr><tr><td>Ethics and Employee Conduct</td><td>4</td><td>0</td><td>0</td><td><strong>4</strong></td></tr><tr><td>Financial Crimes</td><td>1</td><td>0</td><td>0</td><td><strong>2</strong></td></tr><tr style="font-weight:700;border-top:2px solid #333"><td>Total</td><td>20</td><td>2</td><td>2</td><td>26</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<script>
+const DC=['#FFFFFF','#D4D4D4','#AAAAAA','#888888','#666666','#4D4D4D','#3A3A3A','#BBBBBB','#E0E0E0'];
+const charts={};
+const DUE_DRILL={
+'Coming Due':[
+{n:'Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML & CTF) Program - Part B - Customer Identification and Verification',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes'},
+{n:'Afterpay Canada Australian Anti-Money Laundering / Counter-Terrorism Financing (AML/CTF) Program',le:'Afterpay Canada Ltd',d:'Financial Crimes'},
+{n:'Afterpay Canada Limited Canada Marketing Standard',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
+{n:'Afterpay Canada Limited French Language Standard',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
+{n:'Afterpay New Zealand Australian Anti-Money Laundering / Countering Financing of Terrorism (AML/CFT) Program',le:'Afterpay NZ Limited',d:'Financial Crimes'},
+{n:'Afterpay US Inc Third Party Risk Management (TPRM) Standard',le:'Afterpay US Services',d:'Governance'},
+{n:'Afterpay US Inc US Complaint Standard',le:'Afterpay US Services',d:'Consumer Protection'},
+{n:'Afterpay US Inc. Regulatory Change Management Standard',le:'Afterpay US Services',d:'Governance'},
+{n:'Block Inc. Activation Customer Risk Rating Program',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Anti-Money Laundering (AML), Counter-Terrorist Financing (CFT) & Sanctions Product Risk Assessment Program',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT) & Sanctions Annual Risk Assessment Standard',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Block Compliance Risk and Control Standard',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Compliance Audit, Exam & Independent Assessment Management Program',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Custody & Liquidity Management Policy',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Escalation Framework for Non-Completion of Compliance Training',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Global Geographic Risk Ratings Methodology & Program',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Service Level Agreement and Backlog Management Program',le:'Block, Inc.',d:'Governance'},
+{n:'Block, Inc. Anti-Bribery & Anti-Corruption Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
+{n:'Block, Inc. Compliance Policy on Policies',le:'Block, Inc.',d:'Governance'},
+{n:'Block, Inc. Controlling the Assault of Non-Solicited Pornography & Marketing Act (CAN-SPAM) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Gifts & Entertainment Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
+{n:'Block, Inc. Global Conflicts of Interest Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
+{n:'Block, Inc. Model Governance Policy',le:'Block, Inc.',d:'Governance'},
+{n:'Block, Inc. Speak Up Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
+{n:'Cash App Global Cash App Sanctions Compliance Standard',le:'Cash App US',d:'Financial Crimes'},
+{n:'Cash App Investing LLC Anti-Money Laundering & Countering the Financing of Terrorism (AML & CFT) Standard',le:'Cash App Investing LLC',d:'Financial Crimes'},
+{n:'Cash App UK SEL Financial Crimes Program',le:'Cash App UK',d:'Financial Crimes'},
+{n:'Cash App US Complaints Standard Cash',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Consumer Protection Program Standard',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Disputes Standard',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Know Your Business Program for Cash for Business Customers',le:'Cash App US',d:'Financial Crimes'},
+{n:'Cash App US Lending Operations Complaints Standard',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Transaction Monitoring Modeling Program',le:'Cash App US',d:'Governance'},
+{n:'Clearpay Finance Limited Merchant Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes'},
+{n:'Compliance Incident Management Reporting Standard ',le:'Block, Inc.',d:'Governance'},
+{n:'SEL Electronic Money Directive (EMD) Policy',le:'Squareup Europe Ltd.',d:'Governance'},
+{n:'SEL Financial Crimes Program',le:'Squareup Europe Ltd.',d:'Financial Crimes'},
+{n:'SEL Speak Up Policy',le:'Squareup Europe Ltd.',d:'Ethics and Employee Conduct'},
+{n:'SIL Conduct Standards Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct'},
+{n:'SIL Financial Crimes Program',le:'Squareup International Ltd.',d:'Financial Crimes'},
+{n:'SIL Fitness & Probity Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct'},
+{n:'SIL Regulatory Compliance Monitoring Program',le:'Squareup International Ltd.',d:'Governance'},
+{n:'Square AU Pty. Ltd. Anti-Money Laundering & Counter-Terrorism Financing (AML & CTF) Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
+{n:'Square AU Pty. Ltd. Anti-Money Laundering & Counter-Terrorist Financing (AML & CTF) Risk Awareness Training Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
+{n:'Square AU Pty. Ltd. Employee Due Diligence Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
+{n:'Square AU Pty. Ltd. Politically Exposed Person (PEP) Watchlist Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
+{n:'Square Capital LLC. Credit Card Bank Secrecy Act & Anti-Money Laundering (BSA & AML) Square Capital Program',le:'Square Capital, LLC',d:'Financial Crimes'},
+{n:'Square U.S. Continuous Customer Risk Rating Program',le:'Square US',d:'Governance'},
+{n:'Square U.S. Transaction Monitoring Program Standard',le:'Square US',d:'Financial Crimes'}
+],
+'Current':[
+{n:'Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML & CTF) Program - Part A',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes'},
+{n:'Afterpay Australia Pty. Ltd. Unsuitability Assessment Policy',le:'Afterpay Australia Pty Ltd',d:'Governance'},
+{n:'Afterpay Australia and New Zealand Complaints Standard ',le:'Afterpay Australia Pty Ltd - Afterpay NZ Limited',d:'Consumer Protection'},
+{n:'Afterpay Canada Anti-Money Laundering and Counter-Terrorism Financing (AML & CTF) Standard',le:'Afterpay Canada Ltd',d:'Financial Crimes'},
+{n:'Afterpay Canada Limited Canada Accessibility Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
+{n:'Afterpay Canada Limited Canada’s Anti-Spam Legislation (CASL) Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
+{n:'Afterpay Canada Ltd Incident Management Response Plan',le:'Afterpay Canada Ltd',d:'Governance'},
+{n:'Afterpay Canada Ltd. Afterpay Third Party Risk Management (TPRM) Policy',le:'Afterpay Canada Ltd',d:'Governance'},
+{n:'Afterpay Canada and Square Canada Record Retention Policy',le:'Afterpay Canada Ltd - Square Canada, Inc.',d:'Governance'},
+{n:'Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme',le:'Afterpay NZ Limited',d:'Financial Crimes'},
+{n:'Block Inc. Bank Secrecy Act / Anti-Money Laundering & Counter-Terrorist Financing (BSA / AML & CFT) Program (US)',le:'Block, Inc.',d:'Financial Crimes'},
+{n:'Block Inc. Global Modern Slavery Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
+{n:'Block Inc. Regulatory Change Management ',le:'Block, Inc.',d:'Governance'},
+{n:'Block, Inc. Anti-Money Laundering & Counter-Terrorist Financing (AML & CFT) Policy',le:'Block, Inc.',d:'Financial Crimes'},
+{n:'Block, Inc. Code of Business Conduct & Ethics',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
+{n:'Block, Inc. Compliance Management System (CMS) Policy',le:'Block, Inc.',d:'Governance'},
+{n:'Block, Inc. Electronic Funds Transfer Act (EFTA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Electronic Signatures in Global and National Commerce Act (E-SIGN) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Equal Credit Opportunity Act (ECOA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Fair & Responsible Lending Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Fair Credit Reporting Act (FCRA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Fair Debt Collection Practices Act (FDCPA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Global Complaint Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Global Sanctions Policy',le:'Block, Inc.',d:'Financial Crimes'},
+{n:'Block, Inc. Gramm-Leach-Bliley Act (GLBA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Military Lending Act (MLA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Servicemember Civil Relief Act (SCRA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Telephone Consumer Protection Act (TCPA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Truth in Lending Act (TILA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block, Inc. Unfair, Deceptive, or Abusive Acts or Practices / Unfair or Deceptive Acts or Practices (UDAAP/UDAP) Policy',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Cash App Investing LLC Investing Communications Requirements Standard',le:'Cash App Investing LLC',d:'Ethics and Employee Conduct'},
+{n:'Cash App Lending Identity Theft Prevention/Red Flags Standard',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App Risk and Compliance Adverse Actions Policy',le:'Cash App US',d:'Financial Crimes'},
+{n:'Cash App US Acquiring Chargebacks Standard',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Bitcoin (BTC) Travel Rule Program',le:'Cash App US',d:'Financial Crimes'},
+{n:'Cash App US Cash App Continuous Customer Risk Rating Program',le:'Cash App US',d:'Governance'},
+{n:'Cash App US Compliance Real Time Transaction Blocking Program',le:'Cash App US',d:'Financial Crimes'},
+{n:'Cash App US Denylist Appeals Policy',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Elder Financial Exploitation Policy',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Identity Verification Standard',le:'Cash App US',d:'Financial Crimes'},
+{n:'Cash App US Know Your Customer (KYC) Policy',le:'Cash App US',d:'Financial Crimes'},
+{n:'Cash App US Know Your Customer (KYC) Standard',le:'Cash App US',d:'Financial Crimes'},
+{n:'Cash App US Peer-to-Peer (P2P) Scam Policy',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App, US Business Activity Monitoring (BAM) Policy',le:'Cash App US',d:'Governance'},
+{n:'Clearpay Finance Limited Consumer Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes'},
+{n:'Clearpay Fitness and Propriety Standard',le:'Clearpay Finance Limited',d:'Governance'},
+{n:'Clearpay UK - Senior Managers Certification Regime & Conduct Policy',le:'Clearpay Finance Limited',d:'Consumer Protection'},
+{n:'Clearpay UK - Training and Competence Standard',le:'Clearpay Finance Limited',d:'Governance'},
+{n:'Clearpay UK Anti-Money Laundering and Counter Terrorist Financing (AML & CFT) Policy',le:'Clearpay Finance Limited',d:'Financial Crimes'},
+{n:'Clearpay UK Payment Service Provider Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes'},
+{n:'Clearpay UK Vulnerable Customer Standard',le:'Clearpay Finance Limited',d:'Consumer Protection'},
+{n:'SEL Conflicts of Interest Policy',le:'Squareup Europe Ltd.',d:'Ethics and Employee Conduct'},
+{n:'SEL Consumer Protection Policy',le:'Squareup Europe Ltd.',d:'Consumer Protection'},
+{n:'SEL Outsourcing Policy',le:'Squareup Europe Ltd.',d:'Governance'},
+{n:'SEL Vulnerable Customer Policy',le:'Cash App UK',d:'Consumer Protection'},
+{n:'SIL Conflicts of Interest Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct'},
+{n:'SIL Customer Communication Standard ',le:'Squareup International Ltd.',d:'Consumer Protection'},
+{n:'SIL Outsourcing Policy',le:'Squareup International Ltd.',d:'Governance'},
+{n:'SIL Speak Up Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct'},
+{n:'Square AU Pty. Ltd. Australian Financial Services License (AFSL) Representatives Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection'},
+{n:'Square AU Pty. Ltd. Breach Reporting Policy',le:'Square AU Pty. Ltd.',d:'Governance'},
+{n:'Square AU Pty. Ltd. Complaints Policy',le:'Square AU Pty. Ltd.',d:'Governance'},
+{n:'Square AU Pty. Ltd. Compliance Management Policy (CMS) Policy',le:'Square AU Pty. Ltd.',d:'Governance'},
+{n:'Square AU Pty. Ltd. Conflicts of Interest Policy',le:'Square AU Pty. Ltd.',d:'Ethics and Employee Conduct'},
+{n:'Square AU Pty. Ltd. Consumer Protection Policy',le:'Square AU Pty. Ltd.',d:'Consumer Protection'},
+{n:'Square AU Pty. Ltd. Enhanced Customer Due Diligence Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
+{n:'Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
+{n:'Square AU Pty. Ltd. Hardship Support Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection'},
+{n:'Square AU Pty. Ltd. Regulatory Change Management Program',le:'Square AU Pty. Ltd.',d:'Governance'},
+{n:'Square AU Pty. Ltd. Responsible Managers Standards',le:'Square AU Pty. Ltd.',d:'Consumer Protection'},
+{n:'Square AU Pty. Ltd. Suspicious Matter Report Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
+{n:'Square AU Pty. Ltd. Third Party Risk Management (TPRM) Policy',le:'Square AU Pty. Ltd.',d:'Governance'},
+{n:'Square Canada Incident Response Plan',le:'Square Canada, Inc.',d:'Governance'},
+{n:'Square Canada Third Party Risk Management (TPRM) Policy',le:'Square Canada, Inc.',d:'Governance'},
+{n:'Square Canada, Inc. Anti-Money Laundering & Counter-Terrorist Financing (AML & CFT) Policy',le:'Square Canada, Inc.',d:'Financial Crimes'},
+{n:'Square Capital, LLC Commercial Telemarketing Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square Capital, LLC Compliance Management Policy',le:'Square Capital, LLC',d:'Governance'},
+{n:'Square Capital, LLC Controlling the Assault of Non-Solicited Pornography and Marketing Act (CAN-SPAM) Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square Capital, LLC Credit Card Privacy Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square Capital, LLC Electronic Signature (E-SIGN) Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square Capital, LLC Equal Credit Opportunity Act (ECOA) Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square Capital, LLC Fair and Accurate Credit Transactions Act Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square Capital, LLC Red Flags Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square Capital, LLC Servicemembers Civil Relief Act (SCRA) Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square Capital, LLC Unfair or Deceptive Acts Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
+{n:'Square K.K. Anti-Money Laundering (AML), Counter Terrorist Financing (CTF) & Financial Sanctions Program',le:'Square K.K.',d:'Financial Crimes'},
+{n:'Square K.K. Anti-Social Forces Management Policy',le:'Square K.K.',d:'Financial Crimes'},
+{n:'Square K.K. Anti-Social Forces Management Program',le:'Square K.K.',d:'Financial Crimes'},
+{n:'Square K.K. Compliance Management System Policy',le:'Square K.K.',d:'Governance'},
+{n:'Square K.K. Outsourcing Management Policy',le:'Square K.K.',d:'Governance'},
+{n:'Square U.S. Identity Verification Policy',le:'Square US',d:'Financial Crimes'},
+{n:'Square U.S. Know Your Customer (KYC) Program',le:'Square US',d:'Financial Crimes'}
+],
+'Extended':[
+{n:'Afterpay Canada Limited Canada Complaints Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
+{n:'Afterpay Canada Limited Canada Consumer Protection Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
+{n:'Block Inc. Compliance Training Program Standard  ',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Global Complaint Program Standard',le:'Block, Inc.',d:'Consumer Protection'},
+{n:'Block Inc. Global Compliance Monitoring & Testing Program',le:'Block, Inc.',d:'Governance'},
+{n:'Block Inc. Global Sanctions Compliance Program Standard',le:'Block, Inc.',d:'Financial Crimes'},
+{n:'Cash App US Unacceptable Use Monitoring Standard',le:'Cash App US',d:'Financial Crimes'}
+],
+'Pending Review':[
+{n:'Afterpay US, Inc. Compliance Management System (CMS) Policy',le:'Afterpay US Services',d:'Governance'},
+{n:'Cash App US Fraud Risk Management Standard',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Loan Loss and Charge Off Policy (Lending)',le:'Cash App US',d:'Consumer Protection'},
+{n:'Cash App US Unacceptable Customer Use Policy',le:'Cash App US',d:'Consumer Protection'},
+{n:'SIL Consumer Protection Policy',le:'Squareup International Ltd.',d:'Consumer Protection'},
+{n:'Square AU Pty. Ltd. Vulnerable Customers Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection'}
+]
+};
+
+/* ---- Bar value label plugin ---- */
+const barPlugin={id:'barLabels',afterDatasetsDraw(chart){const ctx=chart.ctx;ctx.save();ctx.font='400 12px Inter';ctx.fillStyle='#aaa';chart.data.datasets.forEach((ds,di)=>{const meta=chart.getDatasetMeta(di);meta.data.forEach((bar,i)=>{const v=ds.data[i];if(chart.config.type==='bar'&&chart.options.indexAxis==='y'){ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(v,bar.x+6,bar.y)}else if(chart.config.type==='bar'){ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText(v,bar.x,bar.y-4)}})}); ctx.restore()}};
+Chart.register(barPlugin);
+
+/* ---- Chart builders ---- */
+function makeDonut(id,labels,data,total){
+if(charts[id]){charts[id].destroy();delete charts[id]}
+const ctx=document.getElementById(id);if(!ctx)return;
+charts[id]=new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:DC.slice(0,data.length),borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#aaa',font:{size:11,family:'Inter'},padding:10,boxWidth:12}},tooltip:{enabled:true}}},plugins:[{id:'centerText',afterDraw(chart){const{ctx:c,width:w,height:h}=chart;c.save();c.textAlign='center';c.textBaseline='middle';const cy=h/2-10;c.font='700 24px Inter';c.fillStyle='#fff';c.fillText(total,w/2,cy);c.font='400 10px Inter';c.fillStyle='#aaa';c.fillText('TOTAL',w/2,cy+20);c.restore()}},{id:'segLabels',afterDraw(chart){const{ctx:c}=chart;c.save();const meta=chart.getDatasetMeta(0);meta.data.forEach(function(arc,i){var v=chart.data.datasets[0].data[i];if(v===0)return;var pos=arc.tooltipPosition();c.font='600 11px Inter';c.fillStyle='#000';c.textAlign='center';c.textBaseline='middle';c.fillText(v,pos.x,pos.y)});c.restore()}}]})
+}
+function makeBar(id,labels,data,maxVal){
+if(charts[id]){charts[id].destroy();delete charts[id]}
+const ctx=document.getElementById(id);if(!ctx)return;
+charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#fff',borderRadius:3,barThickness:18}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{display:false,max:maxVal*1.25},y:{ticks:{color:'#aaa',font:{size:11,family:'Inter'}},grid:{display:false},border:{display:false}}},plugins:{legend:{display:false}}}})
+}
+function makeVertBar(id,labels,data){
+if(charts[id]){charts[id].destroy();delete charts[id]}
+const ctx=document.getElementById(id);if(!ctx)return;
+charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#fff',borderRadius:3,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:22}},scales:{x:{ticks:{color:'#aaa',font:{size:11,family:'Inter'}},grid:{display:false},border:{display:false}},y:{ticks:{color:'#aaa',font:{size:11,family:'Inter'}},grid:{color:'#333'},border:{display:false}}},plugins:{legend:{display:false}}}})
+}
+function makeDueBar(id,labels,data,maxVal,colors){
+if(charts[id]){charts[id].destroy();delete charts[id]}
+var bgColors=colors||labels.map(function(){return '#fff'});
+var ctx=document.getElementById(id);if(!ctx)return;
+charts[id]=new Chart(ctx,{type:'bar',data:{labels:labels,datasets:[{data:data,backgroundColor:bgColors,borderRadius:3,barThickness:18}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',onHover:function(e,els){e.native.target.style.cursor=els.length>0?'pointer':'default'},onClick:function(e,els){if(els.length>0){var idx=els[0].index;showDueDrilldown(labels[idx])}},scales:{x:{display:false,max:maxVal*1.25},y:{ticks:{color:'#aaa',font:{size:13,family:'Inter'}},grid:{display:false},border:{display:false}}},plugins:{legend:{display:false}}}})
+}
+
+/* ---- DATA ---- */
+const A_DIM1={
+'domain.all':{l:["Consumer Protection", "Governance", "Financial Crimes", "Ethics and Employee Conduct"],d:[55, 44, 42, 14],t:155},
+'tier.all':{l:["Tier 2", "Tier 3", "Tier 1"],d:[95, 55, 5],t:155},
+'doctype.all':{l:["Policy", "Standard"],d:[78, 77],t:155},
+'domain.policy':{l:["Consumer Protection", "Governance", "Ethics and Employee Conduct", "Financial Crimes"],d:[37, 20, 13, 8],t:78},
+'tier.policy':{l:["Tier 2", "Tier 1"],d:[73, 5],t:78},
+'doctype.policy':{l:["Policy"],d:[78],t:78},
+'domain.standard':{l:["Financial Crimes", "Governance", "Consumer Protection", "Ethics and Employee Conduct"],d:[34, 24, 18, 1],t:77},
+'tier.standard':{l:["Tier 3", "Tier 2"],d:[55, 22],t:77},
+'doctype.standard':{l:["Standard"],d:[77],t:77}
+};
+const A_ORG={
+'business.all':{l:["Square", "Block", "Cash App", "Afterpay", "Clearpay", "Emerging Businesses", "Afterpay, Square"],d:[56, 42, 27, 20, 8, 1, 1],m:56},
+'legal.all':{l:["Block, Inc.", "Cash App US", "Square AU Pty. Ltd.", "Square Capital, LLC", "Afterpay Canada Ltd", "Squareup International Ltd.", "Clearpay Finance Limited", "Squareup Europe Ltd.", "Other"],d:[42, 24, 18, 11, 10, 9, 8, 6, 27],m:42},
+'region.all':{l:["US", "Global", "AU", "UK", "CA", "EU", "JP", "NZ", "Other"],d:[58, 29, 21, 16, 14, 9, 5, 2, 1],m:58},
+'business.policy':{l:["Square", "Block", "Cash App", "Afterpay", "Clearpay", "Afterpay, Square", "Emerging Businesses"],d:[33, 25, 9, 7, 2, 1, 1],m:33},
+'legal.policy':{l:["Block, Inc.", "Square Capital, LLC", "Cash App US", "Squareup International Ltd.", "Square AU Pty. Ltd.", "Afterpay Canada Ltd", "Squareup Europe Ltd.", "Square K.K.", "Other"],d:[26, 10, 8, 6, 6, 5, 5, 3, 9],m:26},
+'region.policy':{l:["US", "Global", "UK", "CA", "AU", "EU", "JP"],d:[33, 13, 8, 8, 7, 6, 3],m:33},
+'business.standard':{l:["Square", "Cash App", "Block", "Afterpay", "Clearpay"],d:[23, 18, 17, 13, 6],m:23},
+'legal.standard':{l:["Block, Inc.", "Cash App US", "Square AU Pty. Ltd.", "Clearpay Finance Limited", "Afterpay Canada Ltd", "Square US", "Afterpay US Services", "Squareup International Ltd.", "Other"],d:[16, 16, 12, 6, 5, 3, 3, 3, 13],m:16},
+'region.standard':{l:["US", "Global", "AU", "UK", "CA", "EU", "JP", "NZ", "Other"],d:[25, 16, 14, 8, 6, 3, 2, 2, 1],m:25}
+};
+const I_DIM1={
+'domain.all':{l:["Consumer Protection", "Governance", "Ethics and Employee Conduct", "Financial Crimes"],d:[12, 8, 4, 2],t:26},
+'tier.all':{l:["Tier 2", "Tier 3"],d:[19, 7],t:26},
+'doctype.all':{l:["Policy", "Standard"],d:[19, 7],t:26},
+'domain.policy':{l:["Consumer Protection", "Governance", "Ethics and Employee Conduct"],d:[10, 5, 4],t:19},
+'tier.policy':{l:["Tier 2", "Tier 3"],d:[18, 1],t:19},
+'doctype.policy':{l:["Policy"],d:[19],t:19},
+'domain.standard':{l:["Governance", "Consumer Protection", "Financial Crimes"],d:[3, 2, 2],t:7},
+'tier.standard':{l:["Tier 3", "Tier 2"],d:[6, 1],t:7},
+'doctype.standard':{l:["Standard"],d:[7],t:7}
+};
+const I_ORG={
+'business.all':{l:["Clearpay", "Block", "Afterpay", "Cash App"],d:[19, 5, 1, 1],m:19},
+'legal.all':{l:["Clearpay Finance Limited", "Block, Inc.", "Cash App US", "Afterpay Australia Pty Ltd - Afterpay NZ Limited"],d:[19, 5, 1, 1],m:19},
+'region.all':{l:["UK", "Global", "US", "AU, NZ"],d:[19, 5, 1, 1],m:19},
+'business.policy':{l:["Clearpay", "Afterpay"],d:[18, 1],m:18},
+'legal.policy':{l:["Clearpay Finance Limited", "Afterpay Australia Pty Ltd - Afterpay NZ Limited"],d:[18, 1],m:18},
+'region.policy':{l:["UK", "AU, NZ"],d:[18, 1],m:18},
+'business.standard':{l:["Block", "Cash App", "Clearpay"],d:[5, 1, 1],m:5},
+'legal.standard':{l:["Block, Inc.", "Cash App US", "Clearpay Finance Limited"],d:[5, 1, 1],m:5},
+'region.standard':{l:["Global", "UK", "US"],d:[5, 1, 1],m:5}
+};
+
+/* ---- State ---- */
+let aFilter={dim1:'all',org:'all'};
+let iFilter={dim1:'all',org:'all'};
+
+function getKey(sel,filter){return sel+'.'+filter}
+
+function updateADim1(){const s=document.getElementById('a-dim1-sel').value;const k=getKey(s,aFilter.dim1);const d=A_DIM1[k];if(d)makeDonut('a-dim1',d.l,d.d,d.t)}
+function updateAOrg(){const s=document.getElementById('a-org-sel').value;const k=getKey(s,aFilter.org);const d=A_ORG[k];if(d)makeBar('a-org',d.l,d.d,d.m)}
+function updateIDim1(){const s=document.getElementById('i-dim1-sel').value;const k=getKey(s,iFilter.dim1);const d=I_DIM1[k];if(d)makeDonut('i-dim1',d.l,d.d,d.t)}
+function updateIOrg(){const s=document.getElementById('i-org-sel').value;const k=getKey(s,iFilter.org);const d=I_ORG[k];if(d)makeBar('i-org',d.l,d.d,d.m)}
+
+function setAPill(chart,val,btn){
+aFilter[chart]=val;
+btn.parentElement.querySelectorAll('.pill-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+if(chart==='dim1')updateADim1();else updateAOrg();
+}
+function setIPill(chart,val,btn){
+iFilter[chart]=val;
+btn.parentElement.querySelectorAll('.pill-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+if(chart==='dim1')updateIDim1();else updateIOrg();
+}
+
+/* ---- Tab switching ---- */
+function switchMainTab(tab){
+document.getElementById('mt-inv').classList.toggle('active',tab==='inventory');
+document.getElementById('mt-lc').classList.toggle('active',tab==='lifecycle');
+document.getElementById('main-tab-inventory').classList.toggle('hidden',tab!=='inventory');
+document.getElementById('main-tab-lifecycle').classList.toggle('hidden',tab!=='lifecycle');
+if(tab==='inventory'){buildInventoryCharts()}
+if(tab==='lifecycle'){buildLcCharts()}
+}
+
+function showActiveTab(){
+document.getElementById('tab-active').classList.remove('hidden');
+document.getElementById('tab-intake').classList.add('hidden');
+document.getElementById('kpi-active').classList.add('active-sel');
+document.getElementById('kpi-intake').classList.remove('active-sel');
+document.getElementById('inv-pill-active').classList.add('active');
+document.getElementById('inv-pill-intake').classList.remove('active');
+updateADim1();updateAOrg();makeVertBar('a-schedule',["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Dec"],[1, 40, 7, 7, 13, 4, 8, 9, 29, 19]);
+}
+function showIntakeTab(){
+document.getElementById('tab-intake').classList.remove('hidden');
+document.getElementById('tab-active').classList.add('hidden');
+document.getElementById('kpi-intake').classList.add('active-sel');
+document.getElementById('kpi-active').classList.remove('active-sel');
+document.getElementById('inv-pill-intake').classList.add('active');
+document.getElementById('inv-pill-active').classList.remove('active');
+updateIDim1();updateIOrg();
+}
+
+function switchLcTab(tab){
+document.getElementById('lc-pill-active').classList.toggle('active',tab==='active');
+document.getElementById('lc-pill-intake').classList.toggle('active',tab==='intake');
+document.getElementById('lc-active').classList.toggle('hidden',tab!=='active');
+document.getElementById('lc-intake').classList.toggle('hidden',tab!=='intake');
+buildLcCharts(tab);
+}
+
+function buildInventoryCharts(){
+const activeVisible=!document.getElementById('tab-active').classList.contains('hidden');
+if(activeVisible){updateADim1();updateAOrg()}
+else{updateIDim1();updateIOrg()}
+}
+
+function buildLcCharts(tab){
+if(!tab){tab=document.getElementById('lc-pill-active').classList.contains('active')?'active':'intake'}
+if(tab==='active'){
+makeDueBar('lc-a-due',["Current", "Coming Due", "Extended", "Pending Review"],[92, 49, 7, 6],92,["#fff", "#fff", "#F59E0B", "#F87171"]);
+closeDueDrilldown();
+}else{
+}
+}
+
+
+function toggleApproved(){
+var tile=document.getElementById('approved-toggle');
+var dd=document.getElementById('approved-drilldown');
+tile.classList.toggle('open');
+dd.classList.toggle('open');
+}
+var ddCurrentStatus='';
+function showDueDrilldown(status){
+var rows=DUE_DRILL[status];
+if(!rows)return;
+ddCurrentStatus=status;
+var search=document.getElementById('dd-search');
+search.value='';
+renderDueDrillRows(rows,status);
+document.getElementById('due-drilldown').classList.add('open');
+document.getElementById('due-drilldown').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderDueDrillRows(rows,status){
+var tbody=document.getElementById('dd-tbody');
+var label=document.getElementById('dd-status-label');
+label.textContent=status+' ('+rows.length+')';
+tbody.innerHTML=rows.map(function(r){return '<tr><td>'+r.n+'</td><td>'+r.le+'</td><td>'+r.d+'</td></tr>'}).join('');
+}
+function filterDueDrilldown(){
+var q=document.getElementById('dd-search').value.toLowerCase();
+var rows=DUE_DRILL[ddCurrentStatus];
+if(!rows)return;
+var filtered=rows.filter(function(r){return r.n.toLowerCase().indexOf(q)!==-1||r.le.toLowerCase().indexOf(q)!==-1||r.d.toLowerCase().indexOf(q)!==-1});
+renderDueDrillRows(filtered,ddCurrentStatus);
+}
+function closeDueDrilldown(){
+document.getElementById('due-drilldown').classList.remove('open');
+document.getElementById('dd-search').value='';
+}
+/* ---- Init ---- */
+document.addEventListener('DOMContentLoaded',function(){
+switchMainTab('inventory');
+showActiveTab();
+});
+</script>
+</body>
+</html>
