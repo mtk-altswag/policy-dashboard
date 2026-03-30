@@ -13,13 +13,13 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 .logo-svg{width:32px;height:32px}
 .logo-text{font-size:20px;font-weight:700;letter-spacing:1px}
 .header-divider{width:1px;height:28px;background:#333;margin:0 8px}
-.header-title{font-size:16px;font-weight:600;color:#ccc}
-.header-subtitle{font-size:12px;color:#999;margin-left:auto}
+.header-title{font-size:20px;font-weight:700;color:#fff}
+.header-subtitle{font-size:13px;color:#999;margin-left:auto}
 .container{max-width:1200px;margin:0 auto;padding:24px 32px 48px}
 .main-tab-bar{display:flex;gap:8px;margin-bottom:20px}
 .main-tab-btn{padding:10px 24px;border-radius:24px;border:1px solid #444;background:#111;color:#aaa;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s}
-.main-tab-btn.active{background:#fff;color:#000;border-color:#fff}
-.section-title{font-size:14px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin:28px 0 14px}
+.main-tab-btn.active{background:#333;color:#fff;border-color:#555}
+.section-title{font-size:15px;font-weight:600;color:#f0f0f0;text-transform:uppercase;letter-spacing:1px;margin:28px 0 14px}
 .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
 .kpi-card{background:#111;border:1px solid #333;border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:16px;border-left:4px solid #fff;transition:all .2s}
 .kpi-card.clickable{cursor:pointer}.kpi-card.clickable:hover{border-color:#444;background:#181818}
@@ -28,22 +28,22 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 .kpi-icon{width:36px;height:36px;flex-shrink:0}
 .kpi-info{display:flex;flex-direction:column}
 .kpi-value{font-size:28px;font-weight:700}
-.kpi-label{font-size:12px;color:#aaa;font-weight:500}
+.kpi-label{font-size:13px;color:#aaa;font-weight:500}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .card{background:#111;border:1px solid #333;border-radius:12px;padding:20px;display:flex;flex-direction:column}
 .card.full-width{grid-column:1/-1}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;flex-wrap:wrap}
-.card-title{font-size:13px;font-weight:600;color:#ccc}
+.card-title{font-size:14px;font-weight:600;color:#ccc}
 .card-controls{display:flex;align-items:center;gap:8px}
-.dim-select{background:#000;color:#ccc;border:1px solid #444;border-radius:6px;padding:4px 8px;font-size:11px;font-family:'Inter',sans-serif}
+.dim-select{background:#000;color:#ccc;border:1px solid #444;border-radius:6px;padding:4px 8px;font-size:12px;font-family:'Inter',sans-serif}
 .pill-group{display:flex;border:1px solid #444;border-radius:6px;overflow:hidden}
-.pill-btn{padding:4px 10px;font-size:11px;background:#000;color:#aaa;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
-.pill-btn.active{background:#fff;color:#000}
-.stat-tile{display:inline-flex;align-items:center;gap:8px;background:#111;border:1px solid #222;border-radius:8px;padding:8px 14px;margin-bottom:16px;font-size:12px;color:#ccc}
+.pill-btn{padding:5px 14px;font-size:12px;background:transparent;color:#999;border:1px solid #555;border-radius:4px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;font-weight:500}
+.pill-btn.active{background:#fff;color:#000;border-color:#fff;font-weight:600}
+.stat-tile{display:inline-flex;align-items:center;gap:8px;background:#111;border:1px solid #222;border-radius:8px;padding:8px 14px;margin-bottom:16px;font-size:13px;color:#ccc}
 .stat-tile .val{font-weight:700;color:#fff;font-size:16px}
 .cc{flex:1;min-height:0}
 .status-table{width:100%;border-collapse:collapse;font-size:13px}
-.status-table th{text-align:left;padding:10px 12px;color:#aaa;font-weight:500;border-bottom:1px solid #222;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.status-table th{text-align:left;padding:10px 12px;color:#aaa;font-weight:500;border-bottom:1px solid #222;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
 .status-table td{padding:10px 12px;border-bottom:1px solid #222;color:#ddd}
 .status-table .total-row td{border-top:2px solid #333;font-weight:700;color:#fff}
 .due-layout{display:flex;gap:0;flex:1;min-height:0;overflow:hidden}
@@ -52,33 +52,54 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 .due-item{display:flex;align-items:center;gap:6px;font-size:11px}
 .due-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .due-term{font-weight:600;color:#ccc;min-width:110px;white-space:nowrap}
-.due-desc{color:#999;font-size:10px}
+.due-desc{color:#999;font-size:11px}
 .hidden{display:none!important}
 
 .approved-tile{display:flex;align-items:center;gap:10px;background:#111;border:1px solid #222;border-radius:10px;padding:12px 18px;margin-top:16px;cursor:pointer;transition:all .2s;user-select:none}
 .approved-tile:hover{background:#181818;border-color:#333}
 .approved-tile .at-icon{flex-shrink:0}
-.approved-tile .at-label{font-size:13px;color:#ccc}
+.approved-tile .at-label{font-size:14px;color:#ccc}
 .approved-tile .at-val{font-size:20px;font-weight:700;color:#fff;margin-left:auto}
 .approved-tile .at-arrow{color:#aaa;font-size:14px;margin-left:8px;transition:transform .2s}
 .approved-tile.open .at-arrow{transform:rotate(180deg)}
 .approved-drilldown{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.approved-drilldown.open{max-height:400px}
+.approved-drilldown.open{max-height:500px;overflow-y:auto}
 .approved-drilldown table{width:100%;border-collapse:collapse;font-size:12px;margin-top:0}
-.approved-drilldown th{text-align:left;padding:8px 12px;color:#999;font-weight:500;border-bottom:1px solid #222;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.approved-drilldown table{width:100%;table-layout:fixed}
+.approved-drilldown th:nth-child(1),.approved-drilldown td:nth-child(1){width:50%}
+.approved-drilldown th:nth-child(2),.approved-drilldown td:nth-child(2){width:25%}
+.approved-drilldown th:nth-child(3),.approved-drilldown td:nth-child(3){width:25%}
+.approved-drilldown th{text-align:left;padding:8px 12px;color:#999;font-weight:500;border-bottom:1px solid #222;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
 .approved-drilldown td{padding:8px 12px;border-bottom:1px solid #222;color:#ddd}
 .approved-drilldown td:first-child{color:#fff;font-weight:500}
+.exception-drilldown{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.exception-drilldown.open{max-height:500px;overflow-y:auto}
+.exception-drilldown table{width:100%;border-collapse:collapse;font-size:12px;margin-top:0;table-layout:fixed}
+.exception-drilldown th:nth-child(1),.exception-drilldown td:nth-child(1){width:30%}
+.exception-drilldown th:nth-child(2),.exception-drilldown td:nth-child(2){width:18%}
+.exception-drilldown th:nth-child(3),.exception-drilldown td:nth-child(3){width:15%}
+.exception-drilldown th:nth-child(4),.exception-drilldown td:nth-child(4){width:37%}
+.exception-drilldown th{text-align:left;padding:8px 12px;color:#999;font-weight:500;border-bottom:1px solid #222;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.exception-drilldown td{padding:8px 12px;border-bottom:1px solid #222;color:#ddd}
+.exception-drilldown td:first-child{color:#fff;font-weight:500}
+.exception-drilldown .empty-msg{padding:16px;color:#777;font-style:italic;text-align:center}
 .due-drilldown{margin-top:12px;max-height:300px;overflow-y:auto;display:none}
 .due-drilldown.open{display:block}
 .due-drilldown table{width:100%;border-collapse:collapse;font-size:12px}
-.due-drilldown th{text-align:left;padding:8px 12px;color:#999;font-weight:500;border-bottom:1px solid #222;font-size:11px;text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;background:#111}
+.due-drilldown table{width:100%;table-layout:fixed}
+.due-drilldown th:nth-child(1),.due-drilldown td:nth-child(1){width:40%}
+.due-drilldown th:nth-child(2),.due-drilldown td:nth-child(2){width:18%}
+.due-drilldown th:nth-child(3),.due-drilldown td:nth-child(3){width:15%}
+.due-drilldown th:nth-child(4),.due-drilldown td:nth-child(4){width:14%;white-space:nowrap}
+.due-drilldown th:nth-child(5),.due-drilldown td:nth-child(5){width:13%;white-space:nowrap}
+.due-drilldown th{text-align:left;padding:8px 12px;color:#999;font-weight:500;border-bottom:1px solid #222;font-size:12px;text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;background:#111}
 .due-drilldown td{padding:8px 12px;border-bottom:1px solid #222;color:#ddd}
-.due-drilldown td:first-child{color:#fff;font-weight:500}
-.due-drilldown-label{font-size:12px;color:#aaa;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.due-drilldown td:first-child{color:#fff;font-weight:500;word-wrap:break-word}
+.due-drilldown-label{font-size:13px;color:#aaa;margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .due-drilldown-label .dd-status{color:#fff;font-weight:600}
 .due-drilldown-label .dd-close{cursor:pointer;margin-left:auto;color:#aaa;font-size:14px}
 .due-drilldown-label .dd-close:hover{color:#fff}
-.dd-search{background:#000;color:#ddd;border:1px solid #444;border-radius:6px;padding:5px 10px;font-size:12px;font-family:'Inter',sans-serif;width:220px;margin-left:12px}
+.dd-search{background:#000;color:#ddd;border:1px solid #444;border-radius:6px;padding:5px 10px;font-size:13px;font-family:'Inter',sans-serif;width:220px;margin-left:12px}
 .dd-search::placeholder{color:#777}
 
 </style>
@@ -89,7 +110,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <span class="logo-text">block</span>
 <div class="header-divider"></div>
 <span class="header-title">Policy Governance Reporting</span>
-<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Mar 30, 2026 at 10:02 AM ET</div><div style="color:#666;font-size:10px">Source: LogicGate via Snowflake</div></div>
+<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Mar 30, 2026 at 03:39 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div></div>
 </header>
 <div class="container">
 <div class="main-tab-bar">
@@ -125,7 +146,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <div class="section-title">Active Documents Breakdown</div>
 
 <div class="grid-2">
-<div class="card" style="height:300px">
+<div class="card" style="height:360px">
 <div class="card-header">
 <span class="card-title">Distribution</span>
 <div class="card-controls">
@@ -139,7 +160,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </div>
 <canvas id="a-dim1" class="cc" style="flex:1;min-height:0"></canvas>
 </div>
-<div class="card" style="height:300px">
+<div class="card" style="height:360px">
 <div class="card-header">
 <span class="card-title">Organization</span>
 <div class="card-controls">
@@ -167,9 +188,31 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <tr><td>Block Inc. Compliance Committee &amp; Forum Oversight Standard</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block Inc. Global Compliance Monitoring &amp; Testing Program</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block, Inc. Governance Quality Assurance Standard</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Clearpay Fitness and Propriety Standard</td><td>Clearpay Finance Limited</td><td>Governance</td></tr><tr><td>Clearpay UK - Senior Managers Certification Regime &amp; Conduct Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td></tr><tr><td>Clearpay UK - Training and Competence Standard</td><td>Clearpay Finance Limited</td><td>Governance</td></tr><tr><td>Clearpay UK Payment Service Provider Due Diligence Standard</td><td>Clearpay Finance Limited</td><td>Financial Crimes</td></tr><tr><td>Clearpay UK Vulnerable Customer Standard</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td></tr><tr><td>Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CTF) Risk Awareness Training Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Employee and Personnel Due Diligence Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Enhanced Customer Due Diligence Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Politically Exposed Person (PEP) Watchlist Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Regulatory Change Management Program</td><td>Square AU Pty. Ltd.</td><td>Governance</td></tr><tr><td>Square AU Pty. Ltd. Suspicious Matter Report Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square Canada, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy</td><td>Square Canada, Inc.</td><td>Financial Crimes</td></tr></tbody>
 </table>
 </div>
-<div class="section-title">Document Review Schedule</div>
+<div class="approved-tile" id="exception-toggle" onclick="toggleExceptions()">
+<svg class="at-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5L1.5 15.5h15L9 1.5z" stroke="#aaa" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 7v3.5" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="13" r=".8" fill="#aaa"/></svg>
+<span class="at-label">Documents with Active Exceptions</span>
+<span class="at-val">0</span>
+<span class="at-arrow">&#9660;</span>
+</div>
+<div class="exception-drilldown" id="exception-drilldown">
+<table>
+<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th><th>Business Justification</th></tr></thead>
+<tbody>
+<tr><td colspan="4" class="empty-msg">No active exceptions at this time</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section-title">Document Review Schedule</div><div style="font-size:12px;color:#999;margin:-10px 0 12px">Documents awaiting review, grouped by due month</div>
 <div class="card full-width" style="height:250px">
+<div style="font-size:12px;color:#bbb;margin-bottom:8px;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1a6 6 0 100 12A6 6 0 007 1z" stroke="#bbb" stroke-width="1.2"/><path d="M6 5.5h2v4H6z" fill="#bbb"/><circle cx="7" cy="4" r=".8" fill="#bbb"/></svg>Select a bar to explore details</div>
 <canvas id="a-schedule" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+<div class="due-drilldown" id="sched-drilldown">
+<div class="due-drilldown-label"><span>Showing: </span><span class="dd-status" id="sched-status-label"></span><input class="dd-search" id="sched-search" type="text" placeholder="Search documents..." oninput="filterSchedDrilldown()"><span class="dd-close" onclick="closeSchedDrilldown()">&#10005;</span></div>
+<table>
+<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th><th>Due Date</th><th>Days Until Due</th></tr></thead>
+<tbody id="sched-tbody"></tbody>
+</table>
 </div>
 </div>
 
@@ -177,7 +220,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <div id="tab-intake" class="hidden">
 <div class="section-title">Intake Documents Breakdown</div>
 <div class="grid-2">
-<div class="card" style="height:300px">
+<div class="card" style="height:360px">
 <div class="card-header">
 <span class="card-title">Distribution</span>
 <div class="card-controls">
@@ -191,7 +234,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </div>
 <canvas id="i-dim1" class="cc" style="flex:1;min-height:0"></canvas>
 </div>
-<div class="card" style="height:300px">
+<div class="card" style="height:360px">
 <div class="card-header">
 <span class="card-title">Organization</span>
 <div class="card-controls">
@@ -205,6 +248,15 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </div>
 <canvas id="i-org" class="cc" style="flex:1;min-height:0"></canvas>
 </div>
+</div>
+<div class="section-title">Incoming Documents</div>
+<div class="card full-width" style="margin-bottom:16px;max-height:400px;overflow-y:auto">
+<table class="status-table">
+<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th><th>Target Approval Date</th></tr></thead>
+<tbody>
+<tr><td>Afterpay Fit and Proper Policy</td><td>Afterpay Australia Pty Ltd - Afterpay NZ Limited</td><td>Governance</td><td>Dec 31, 2026</td></tr><tr><td>Block Compliance University Standard</td><td>Block, Inc.</td><td>Governance</td><td>May 01, 2026</td></tr><tr><td>Block, Inc. Compliance Detections Program Standard</td><td>Block, Inc.</td><td>Financial Crimes</td><td>Nov 30, 2025</td></tr><tr><td>Cash App US Drugs Standard</td><td>Cash App US</td><td>Financial Crimes</td><td>May 31, 2026</td></tr><tr><td>Clearpay UK - Anti-Bribery &amp; Corruption Policy</td><td>Clearpay Finance Limited</td><td>Ethics and Employee Conduct</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Complaints Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Compliance &amp; Risk Management Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Compliance Monitoring Policy</td><td>Clearpay Finance Limited</td><td>Governance</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Conduct Policy</td><td>Clearpay Finance Limited</td><td>Ethics and Employee Conduct</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Conflicts of Interest</td><td>Clearpay Finance Limited</td><td>Ethics and Employee Conduct</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Consumer Duty Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Data Protection Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Incident Management &amp; Reporting Policy</td><td>Clearpay Finance Limited</td><td>Governance</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Outsourcing Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Policy Framework</td><td>Clearpay Finance Limited</td><td>Governance</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Training &amp; Competency Policy</td><td>Clearpay Finance Limited</td><td>Governance</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Vulnerable Customer Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Whistleblowing Policy</td><td>Clearpay Finance Limited</td><td>Ethics and Employee Conduct</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK Customer Communications Standard </td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Feb 28, 2026</td></tr><tr><td>Clearpay UK Data Reciprocity Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK Hardship and Collections policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK Marketing &amp; Financial Promotions Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK Responsible Lending Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Compliance Issue Management Oversight Framework</td><td>Block, Inc.</td><td>Governance</td><td>May 30, 2026</td></tr><tr><td>Escalation Framework for Non-Completion of Compliance Training (External Workers)</td><td>Block, Inc.</td><td>Governance</td><td>Mar 31, 2026</td></tr><tr><td>Red Flags/Identity Theft Risk Assessment Standard</td><td>Block, Inc.</td><td>Consumer Protection</td><td>Sep 30, 2026</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -223,23 +275,23 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <table class="status-table">
 <thead><tr><th>Domain</th><th>Current</th><th>Under QC</th><th>In Approvals</th><th>Total</th></tr></thead>
 <tbody>
-<tr><td>Consumer Protection</td><td>51</td><td>0</td><td>4</td><td><strong>55</strong></td></tr><tr><td>Governance</td><td>39</td><td>2</td><td>3</td><td><strong>44</strong></td></tr><tr><td>Financial Crimes</td><td>36</td><td>3</td><td>3</td><td><strong>42</strong></td></tr><tr><td>Ethics and Employee Conduct</td><td>7</td><td>0</td><td>7</td><td><strong>14</strong></td></tr><tr style="font-weight:700;border-top:2px solid #333"><td>Total</td><td>133</td><td>5</td><td>17</td><td>155</td></tr>
+<tr><td>Consumer Protection</td><td>51</td><td>0</td><td>4</td><td><strong>55</strong></td></tr><tr><td>Governance</td><td>40</td><td>2</td><td>3</td><td><strong>45</strong></td></tr><tr><td>Financial Crimes</td><td>36</td><td>3</td><td>3</td><td><strong>42</strong></td></tr><tr><td>Ethics and Employee Conduct</td><td>7</td><td>0</td><td>7</td><td><strong>14</strong></td></tr><tr style="font-weight:700;border-top:2px solid #333"><td>Total</td><td>134</td><td>5</td><td>17</td><td>156</td></tr>
 </tbody>
 </table>
 </div>
 <div class="card full-width" style="height:300px;margin-bottom:16px">
 <div class="card-header"><span class="card-title">By Due Date Status</span></div>
-<div style="font-size:11px;color:#aaa;margin-bottom:8px;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1a6 6 0 100 12A6 6 0 007 1z" stroke="#aaa" stroke-width="1.2"/><path d="M6 5.5h2v4H6z" fill="#aaa"/><circle cx="7" cy="4" r=".8" fill="#aaa"/></svg>Click on a bar to view document details</div>
+<div style="font-size:12px;color:#bbb;margin-bottom:8px;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1a6 6 0 100 12A6 6 0 007 1z" stroke="#bbb" stroke-width="1.2"/><path d="M6 5.5h2v4H6z" fill="#bbb"/><circle cx="7" cy="4" r=".8" fill="#bbb"/></svg>Select a bar to explore details</div>
 <div class="due-layout">
 <div class="due-chart"><canvas id="lc-a-due" class="cc" style="flex:1;min-height:0"></canvas></div>
 <div class="due-key">
-<div class="due-item"><span class="due-dot" style="background:#fff"></span><span class="due-term">Current</span><span class="due-desc">Up to date</span></div>
-<div class="due-item"><span class="due-dot" style="background:#ccc"></span><span class="due-term">Coming Due</span><span class="due-desc">Due within 90 days</span></div>
-<div class="due-item"><span class="due-dot" style="background:#999"></span><span class="due-term">Pending Review</span><span class="due-desc">Past review date; within 30-day grace period</span></div>
-<div class="due-item"><span class="due-dot" style="background:#777"></span><span class="due-term">Overdue</span><span class="due-desc">More than 30 days past due</span></div>
-<div class="due-item"><span class="due-dot" style="background:#555"></span><span class="due-term">Extended</span><span class="due-desc">Extension granted</span></div>
-<div class="due-item"><span class="due-dot" style="background:#444"></span><span class="due-term">Ext. Coming Due</span><span class="due-desc">Within 30 days of extended deadline</span></div>
-<div class="due-item"><span class="due-dot" style="background:#333"></span><span class="due-term">Overdue Past Ext.</span><span class="due-desc">Beyond extended deadline</span></div>
+<div class="due-item"><span class="due-dot" style="background:#7a9e7a"></span><span class="due-term">Current</span><span class="due-desc">Up to date</span></div>
+<div class="due-item"><span class="due-dot" style="background:#b8b070"></span><span class="due-term">Coming Due</span><span class="due-desc">Due within 90 days</span></div>
+<div class="due-item"><span class="due-dot" style="background:#c4a55a"></span><span class="due-term">Extended</span><span class="due-desc">Extension granted</span></div>
+<div class="due-item"><span class="due-dot" style="background:#b89060"></span><span class="due-term">Ext. Coming Due</span><span class="due-desc">Within 30 days of extended deadline</span></div>
+<div class="due-item"><span class="due-dot" style="background:#b07070"></span><span class="due-term">Pending Review</span><span class="due-desc">Past review date; within 30-day grace period</span></div>
+<div class="due-item"><span class="due-dot" style="background:#a05555"></span><span class="due-term">Overdue</span><span class="due-desc">More than 30 days past due</span></div>
+<div class="due-item"><span class="due-dot" style="background:#884040"></span><span class="due-term">Overdue Past Ext.</span><span class="due-desc">Beyond extended deadline</span></div>
 </div>
 </div>
 </div>
@@ -268,7 +320,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </div>
 
 <script>
-const DC=['#FFFFFF','#D4D4D4','#AAAAAA','#888888','#666666','#4D4D4D','#3A3A3A','#BBBBBB','#E0E0E0'];
+const DC=['#e8e8e8','#666666','#c0c0c0','#444444','#a0a0a0','#333333','#d4d4d4','#555555','#888888'];
 const charts={};
 const DUE_DRILL={
 'Coming Due':[
@@ -329,6 +381,7 @@ const DUE_DRILL={
 {n:'Afterpay Canada and Square Canada Record Retention Policy',le:'Afterpay Canada Ltd - Square Canada, Inc.',d:'Governance'},
 {n:'Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme',le:'Afterpay NZ Limited',d:'Financial Crimes'},
 {n:'Block Inc. Bank Secrecy Act / Anti-Money Laundering & Counter-Terrorist Financing (BSA / AML & CFT) Program (US)',le:'Block, Inc.',d:'Financial Crimes'},
+{n:'Block Inc. Compliance Committee & Forum Oversight Standard',le:'Block, Inc.',d:'Governance'},
 {n:'Block Inc. Global Compliance Monitoring & Testing Program',le:'Block, Inc.',d:'Governance'},
 {n:'Block Inc. Global Modern Slavery Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
 {n:'Block Inc. Regulatory Change Management ',le:'Block, Inc.',d:'Governance'},
@@ -435,6 +488,7 @@ const DUE_DRILL={
 {n:'Square AU Pty. Ltd. Vulnerable Customers Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection'}
 ]
 };
+const SCHED_DRILL={"Mar": [{"n": "Afterpay US, Inc. Compliance Management System (CMS) Policy", "le": "Afterpay US Services", "d": "Governance", "due": "Mar 01, 2026", "days": -29}, {"n": "Cash App US Loan Loss and Charge Off Policy (Lending)", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 01, 2026", "days": -29}, {"n": "Cash App US Unacceptable Customer Use Policy", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 01, 2026", "days": -29}, {"n": "SIL Consumer Protection Policy", "le": "Squareup International Ltd.", "d": "Consumer Protection", "due": "Mar 01, 2026", "days": -29}, {"n": "Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML & CTF) Program - Part B - Customer Identification and Verification", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "Afterpay Canada Australian Anti-Money Laundering / Counter-Terrorism Financing (AML/CTF) Program", "le": "Afterpay Canada Ltd", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "Afterpay Canada Limited Canada Complaints Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": 1}, {"n": "Afterpay Canada Limited Canada Consumer Protection Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": 1}, {"n": "Afterpay New Zealand Australian Anti-Money Laundering / Countering Financing of Terrorism (AML/CFT) Program", "le": "Afterpay NZ Limited", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "Afterpay US Inc Third Party Risk Management (TPRM) Standard", "le": "Afterpay US Services", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Afterpay US Inc US Complaint Standard", "le": "Afterpay US Services", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": 1}, {"n": "Afterpay US Inc. Regulatory Change Management Standard", "le": "Afterpay US Services", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Block Inc. Anti-Money Laundering (AML), Counter-Terrorist Financing (CFT) & Sanctions Product Risk Assessment Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Block Inc. Compliance Audit, Exam & Independent Assessment Management Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Block Inc. Custody & Liquidity Management Policy", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Block Inc. Global Complaint Program Standard", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": 1}, {"n": "Block Inc. Global Geographic Risk Ratings Methodology & Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Block Inc. Global Sanctions Compliance Program Standard", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "Block Inc. Service Level Agreement and Backlog Management Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Block, Inc. Anti-Bribery & Anti-Corruption Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": 1}, {"n": "Block, Inc. Gifts & Entertainment Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": 1}, {"n": "Block, Inc. Global Conflicts of Interest Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": 1}, {"n": "Block, Inc. Model Governance Policy", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Block, Inc. Speak Up Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": 1}, {"n": "Cash App Investing LLC Anti-Money Laundering & Countering the Financing of Terrorism (AML & CFT) Standard", "le": "Cash App Investing LLC", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "Cash App US Complaints Standard Cash", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": 1}, {"n": "Cash App US Consumer Protection Program Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": 1}, {"n": "Cash App US Know Your Business Program for Cash for Business Customers", "le": "Cash App US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "Cash App US Lending Operations Complaints Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": 1}, {"n": "Cash App US Transaction Monitoring Modeling Program", "le": "Cash App US", "d": "Governance", "due": "Mar 31, 2026", "days": 1}, {"n": "Cash App US Unacceptable Use Monitoring Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "Clearpay Finance Limited Merchant Due Diligence Standard", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "SIL Conduct Standards Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": 1}, {"n": "SIL Fitness & Probity Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": 1}, {"n": "Square Capital LLC. Credit Card Bank Secrecy Act & Anti-Money Laundering (BSA & AML) Square Capital Program", "le": "Square Capital, LLC", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}, {"n": "Square U.S. Transaction Monitoring Program Standard", "le": "Square US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": 1}], "Apr": [{"n": "Block Inc. Compliance Training Program Standard  ", "le": "Block, Inc.", "d": "Governance", "due": "Apr 01, 2026", "days": 2}, {"n": "Block Inc. Escalation Framework for Non-Completion of Compliance Training", "le": "Block, Inc.", "d": "Governance", "due": "Apr 01, 2026", "days": 2}, {"n": "Afterpay Canada Limited Canada Marketing Standard", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Apr 30, 2026", "days": 31}, {"n": "Afterpay Canada Limited French Language Standard", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Apr 30, 2026", "days": 31}, {"n": "SEL Electronic Money Directive (EMD) Policy", "le": "Squareup Europe Ltd.", "d": "Governance", "due": "Apr 30, 2026", "days": 31}, {"n": "SEL Speak Up Policy", "le": "Squareup Europe Ltd.", "d": "Ethics and Employee Conduct", "due": "Apr 30, 2026", "days": 31}, {"n": "SIL Regulatory Compliance Monitoring Program", "le": "Squareup International Ltd.", "d": "Governance", "due": "Apr 30, 2026", "days": 31}], "May": [{"n": "Compliance Incident Management Reporting Standard ", "le": "Block, Inc.", "d": "Governance", "due": "May 30, 2026", "days": 61}, {"n": "Block Inc. Activation Customer Risk Rating Program", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 62}, {"n": "Block Inc. Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT) & Sanctions Annual Risk Assessment Standard", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 62}, {"n": "Block Inc. Block Compliance Risk and Control Standard", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 62}, {"n": "Cash App Global Cash App Sanctions Compliance Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "May 31, 2026", "days": 62}, {"n": "SEL Financial Crimes Program", "le": "Squareup Europe Ltd.", "d": "Financial Crimes", "due": "May 31, 2026", "days": 62}, {"n": "Square U.S. Continuous Customer Risk Rating Program", "le": "Square US", "d": "Governance", "due": "May 31, 2026", "days": 62}], "Jun": [{"n": "Block, Inc. Compliance Policy on Policies", "le": "Block, Inc.", "d": "Governance", "due": "Jun 06, 2026", "days": 68}, {"n": "Cash App US Disputes Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 13, 2026", "days": 75}, {"n": "Cash App US Bitcoin (BTC) Travel Rule Program", "le": "Cash App US", "d": "Financial Crimes", "due": "Jun 30, 2026", "days": 92}, {"n": "Cash App US Cash App Continuous Customer Risk Rating Program", "le": "Cash App US", "d": "Governance", "due": "Jun 30, 2026", "days": 92}, {"n": "Cash App US Denylist Appeals Policy", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 92}, {"n": "Cash App US Elder Financial Exploitation Policy", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 92}, {"n": "Cash App, US Business Activity Monitoring (BAM) Policy", "le": "Cash App US", "d": "Governance", "due": "Jun 30, 2026", "days": 92}, {"n": "SEL Consumer Protection Policy", "le": "Squareup Europe Ltd.", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 92}, {"n": "Square K.K. Anti-Money Laundering (AML), Counter Terrorist Financing (CTF) & Financial Sanctions Program", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 30, 2026", "days": 92}, {"n": "Square K.K. Anti-Social Forces Management Policy", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 30, 2026", "days": 92}, {"n": "Square K.K. Anti-Social Forces Management Program", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 30, 2026", "days": 92}, {"n": "Square K.K. Compliance Management System Policy", "le": "Square K.K.", "d": "Governance", "due": "Jun 30, 2026", "days": 92}, {"n": "Square K.K. Outsourcing Management Policy", "le": "Square K.K.", "d": "Governance", "due": "Jun 30, 2026", "days": 92}], "Jul": [{"n": "Clearpay Finance Limited Consumer Due Diligence Standard", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Jul 15, 2026", "days": 107}, {"n": "Square U.S. Know Your Customer (KYC) Program", "le": "Square US", "d": "Financial Crimes", "due": "Jul 23, 2026", "days": 115}, {"n": "Afterpay Australia Pty. Ltd. Unsuitability Assessment Policy", "le": "Afterpay Australia Pty Ltd", "d": "Governance", "due": "Jul 31, 2026", "days": 123}, {"n": "SEL Vulnerable Customer Policy", "le": "Cash App UK", "d": "Consumer Protection", "due": "Jul 31, 2026", "days": 123}], "Aug": [{"n": "Square U.S. Identity Verification Policy", "le": "Square US", "d": "Financial Crimes", "due": "Aug 12, 2026", "days": 135}, {"n": "Afterpay Canada Ltd Incident Management Response Plan", "le": "Afterpay Canada Ltd", "d": "Governance", "due": "Aug 31, 2026", "days": 154}, {"n": "Afterpay Canada Ltd. Afterpay Third Party Risk Management (TPRM) Policy", "le": "Afterpay Canada Ltd", "d": "Governance", "due": "Aug 31, 2026", "days": 154}, {"n": "Block Inc. Bank Secrecy Act / Anti-Money Laundering & Counter-Terrorist Financing (BSA / AML & CFT) Program (US)", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 154}, {"n": "Cash App Investing LLC Investing Communications Requirements Standard", "le": "Cash App Investing LLC", "d": "Ethics and Employee Conduct", "due": "Aug 31, 2026", "days": 154}, {"n": "Cash App US Acquiring Chargebacks Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Aug 31, 2026", "days": 154}, {"n": "Cash App US Compliance Real Time Transaction Blocking Program", "le": "Cash App US", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 154}, {"n": "Clearpay UK Anti-Money Laundering and Counter Terrorist Financing (AML & CFT) Policy", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 154}], "Sep": [{"n": "Afterpay Canada and Square Canada Record Retention Policy", "le": "Afterpay Canada Ltd - Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 162}, {"n": "Square Canada Incident Response Plan", "le": "Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 162}, {"n": "Square Canada Third Party Risk Management (TPRM) Policy", "le": "Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 162}, {"n": "Cash App UK SEL Financial Crimes Program", "le": "Cash App UK", "d": "Financial Crimes", "due": "Sep 29, 2026", "days": 183}, {"n": "SEL Conflicts of Interest Policy", "le": "Squareup Europe Ltd.", "d": "Ethics and Employee Conduct", "due": "Sep 30, 2026", "days": 184}, {"n": "SEL Outsourcing Policy", "le": "Squareup Europe Ltd.", "d": "Governance", "due": "Sep 30, 2026", "days": 184}, {"n": "SIL Conflicts of Interest Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Sep 30, 2026", "days": 184}, {"n": "SIL Financial Crimes Program", "le": "Squareup International Ltd.", "d": "Financial Crimes", "due": "Sep 30, 2026", "days": 184}, {"n": "SIL Outsourcing Policy", "le": "Squareup International Ltd.", "d": "Governance", "due": "Sep 30, 2026", "days": 184}], "Oct": [{"n": "Block Inc. Global Modern Slavery Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Oct 03, 2026", "days": 187}, {"n": "Cash App Risk and Compliance Adverse Actions Policy", "le": "Cash App US", "d": "Financial Crimes", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Commercial Telemarketing Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Compliance Management Policy", "le": "Square Capital, LLC", "d": "Governance", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Controlling the Assault of Non-Solicited Pornography and Marketing Act (CAN-SPAM) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Credit Card Privacy Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Electronic Signature (E-SIGN) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Equal Credit Opportunity Act (ECOA) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Fair and Accurate Credit Transactions Act Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Red Flags Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 187}, {"n": "Square Capital, LLC Servicemembers Civil Relief Act (SCRA) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 187}, {"n": "Block, Inc. Controlling the Assault of Non-Solicited Pornography & Marketing Act (CAN-SPAM) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 30, 2026", "days": 214}, {"n": "Block, Inc. Anti-Money Laundering & Counter-Terrorist Financing (AML & CFT) Policy", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Code of Business Conduct & Ethics", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Compliance Management System (CMS) Policy", "le": "Block, Inc.", "d": "Governance", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Electronic Funds Transfer Act (EFTA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Electronic Signatures in Global and National Commerce Act (E-SIGN) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Equal Credit Opportunity Act (ECOA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Fair & Responsible Lending Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Fair Credit Reporting Act (FCRA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Fair Debt Collection Practices Act (FDCPA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Global Sanctions Policy", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Gramm-Leach-Bliley Act (GLBA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Military Lending Act (MLA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Servicemember Civil Relief Act (SCRA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Telephone Consumer Protection Act (TCPA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Truth in Lending Act (TILA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Block, Inc. Unfair, Deceptive, or Abusive Acts or Practices / Unfair or Deceptive Acts or Practices (UDAAP/UDAP) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}, {"n": "Cash App Lending Identity Theft Prevention/Red Flags Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 215}], "Dec": [{"n": "SIL Speak Up Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Dec 08, 2026", "days": 253}, {"n": "Cash App US Identity Verification Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Dec 15, 2026", "days": 260}, {"n": "Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML & CTF) Program - Part A", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "Dec 16, 2026", "days": 261}, {"n": "Cash App US Know Your Customer (KYC) Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Dec 23, 2026", "days": 268}, {"n": "Afterpay Australia and New Zealand Complaints Standard ", "le": "Afterpay Australia Pty Ltd - Afterpay NZ Limited", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 276}, {"n": "Afterpay Canada Anti-Money Laundering and Counter-Terrorism Financing (AML & CTF) Standard", "le": "Afterpay Canada Ltd", "d": "Financial Crimes", "due": "Dec 31, 2026", "days": 276}, {"n": "Afterpay Canada Limited Canada Accessibility Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 276}, {"n": "Afterpay Canada Limited Canada\u2019s Anti-Spam Legislation (CASL) Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 276}, {"n": "Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme", "le": "Afterpay NZ Limited", "d": "Financial Crimes", "due": "Dec 31, 2026", "days": 276}, {"n": "SIL Customer Communication Standard ", "le": "Squareup International Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 276}, {"n": "Square AU Pty. Ltd. Australian Financial Services License (AFSL) Representatives Standard", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 276}, {"n": "Square AU Pty. Ltd. Breach Reporting Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 276}, {"n": "Square AU Pty. Ltd. Complaints Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 276}, {"n": "Square AU Pty. Ltd. Compliance Management Policy (CMS) Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 276}, {"n": "Square AU Pty. Ltd. Conflicts of Interest Policy", "le": "Square AU Pty. Ltd.", "d": "Ethics and Employee Conduct", "due": "Dec 31, 2026", "days": 276}, {"n": "Square AU Pty. Ltd. Consumer Protection Policy", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 276}, {"n": "Square AU Pty. Ltd. Responsible Managers Standards", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 276}, {"n": "Square AU Pty. Ltd. Third Party Risk Management (TPRM) Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 276}]};
 
 /* ---- Bar value label plugin ---- */
 const barPlugin={id:'barLabels',afterDatasetsDraw(chart){const ctx=chart.ctx;ctx.save();ctx.font='400 12px Inter';ctx.fillStyle='#aaa';chart.data.datasets.forEach((ds,di)=>{const meta=chart.getDatasetMeta(di);meta.data.forEach((bar,i)=>{const v=ds.data[i];if(chart.config.type==='bar'&&chart.options.indexAxis==='y'){ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(v,bar.x+6,bar.y)}else if(chart.config.type==='bar'){ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText(v,bar.x,bar.y-4)}})}); ctx.restore()}};
@@ -444,17 +498,17 @@ Chart.register(barPlugin);
 function makeDonut(id,labels,data,total){
 if(charts[id]){charts[id].destroy();delete charts[id]}
 const ctx=document.getElementById(id);if(!ctx)return;
-charts[id]=new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:DC.slice(0,data.length),borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#aaa',font:{size:11,family:'Inter'},padding:10,boxWidth:12}},tooltip:{enabled:true}}},plugins:[{id:'centerText',afterDraw(chart){const{ctx:c,width:w,height:h}=chart;c.save();c.textAlign='center';c.textBaseline='middle';const cy=h/2-10;c.font='700 24px Inter';c.fillStyle='#fff';c.fillText(total,w/2,cy);c.font='400 10px Inter';c.fillStyle='#aaa';c.fillText('TOTAL',w/2,cy+20);c.restore()}},{id:'segLabels',afterDraw(chart){const{ctx:c}=chart;c.save();const meta=chart.getDatasetMeta(0);meta.data.forEach(function(arc,i){var v=chart.data.datasets[0].data[i];if(v===0)return;var pos=arc.tooltipPosition();c.font='600 11px Inter';c.fillStyle='#000';c.textAlign='center';c.textBaseline='middle';c.fillText(v,pos.x,pos.y)});c.restore()}}]})
+charts[id]=new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:DC.slice(0,data.length),borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#aaa',font:{size:12,family:'Inter'},padding:10,boxWidth:12}},tooltip:{enabled:true}}},plugins:[{id:'centerText',afterDraw(chart){const{ctx:c,width:w,height:h}=chart;c.save();c.textAlign='center';c.textBaseline='middle';const cy=h/2-10;c.font='700 24px Inter';c.fillStyle='#fff';c.fillText(total,w/2,cy);c.font='400 11px Inter';c.fillStyle='#aaa';c.fillText('TOTAL',w/2,cy+20);c.restore()}},{id:'segLabels',afterDraw(chart){const{ctx:c}=chart;c.save();const meta=chart.getDatasetMeta(0);meta.data.forEach(function(arc,i){var v=chart.data.datasets[0].data[i];if(v===0)return;var pos=arc.tooltipPosition();c.font='600 12px Inter';var bg=chart.data.datasets[0].backgroundColor[i]||'#fff';var r=parseInt(bg.slice(1,3),16),g=parseInt(bg.slice(3,5),16),b=parseInt(bg.slice(5,7),16);c.fillStyle=(r*0.299+g*0.587+b*0.114)>140?'#000':'#fff';c.textAlign='center';c.textBaseline='middle';c.fillText(v,pos.x,pos.y)});c.restore()}}]})
 }
 function makeBar(id,labels,data,maxVal){
 if(charts[id]){charts[id].destroy();delete charts[id]}
 const ctx=document.getElementById(id);if(!ctx)return;
-charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#fff',borderRadius:3,barThickness:18}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{display:false,max:maxVal*1.25},y:{ticks:{color:'#aaa',font:{size:11,family:'Inter'}},grid:{display:false},border:{display:false}}},plugins:{legend:{display:false}}}})
+charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#fff',borderRadius:3,barThickness:18}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{display:false,max:maxVal*1.25},y:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{display:false},border:{display:false}}},plugins:{legend:{display:false}}}})
 }
 function makeVertBar(id,labels,data){
 if(charts[id]){charts[id].destroy();delete charts[id]}
 const ctx=document.getElementById(id);if(!ctx)return;
-charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#fff',borderRadius:3,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:22}},scales:{x:{ticks:{color:'#aaa',font:{size:11,family:'Inter'}},grid:{display:false},border:{display:false}},y:{ticks:{color:'#aaa',font:{size:11,family:'Inter'}},grid:{color:'#333'},border:{display:false}}},plugins:{legend:{display:false}}}})
+charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#fff',borderRadius:3,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:22}},onHover:function(e,els){e.native.target.style.cursor=els.length>0?'pointer':'default'},onClick:function(e,els){if(els.length>0){var idx=els[0].index;showSchedDrilldown(labels[idx])}},scales:{x:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{display:false},border:{display:false}},y:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{color:'#333'},border:{display:false}}},plugins:{legend:{display:false}}}});
 }
 function makeDueBar(id,labels,data,maxVal,colors){
 if(charts[id]){charts[id].destroy();delete charts[id]}
@@ -551,6 +605,7 @@ document.getElementById('kpi-intake').classList.remove('active-sel');
 document.getElementById('inv-pill-active').classList.add('active');
 document.getElementById('inv-pill-intake').classList.remove('active');
 updateADim1();updateAOrg();makeVertBar('a-schedule',["Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Dec"],[36, 7, 7, 13, 4, 8, 9, 29, 18]);
+closeSchedDrilldown();
 }
 function showIntakeTab(){
 document.getElementById('tab-intake').classList.remove('hidden');
@@ -579,7 +634,7 @@ else{updateIDim1();updateIOrg()}
 function buildLcCharts(tab){
 if(!tab){tab=document.getElementById('lc-pill-active').classList.contains('active')?'active':'intake'}
 if(tab==='active'){
-makeDueBar('lc-a-due',["Current", "Coming Due", "Extended", "Pending Review"],[98, 44, 7, 6],98,["#fff", "#fff", "#F59E0B", "#F87171"]);
+makeDueBar('lc-a-due',["Current", "Coming Due", "Extended", "Pending Review"],[99, 44, 7, 6],99,["#7a9e7a", "#b8b070", "#c4a55a", "#b07070"]);
 closeDueDrilldown();
 }else{
 }
@@ -589,6 +644,12 @@ closeDueDrilldown();
 function toggleApproved(){
 var tile=document.getElementById('approved-toggle');
 var dd=document.getElementById('approved-drilldown');
+tile.classList.toggle('open');
+dd.classList.toggle('open');
+}
+function toggleExceptions(){
+var tile=document.getElementById('exception-toggle');
+var dd=document.getElementById('exception-drilldown');
 tile.classList.toggle('open');
 dd.classList.toggle('open');
 }
@@ -615,6 +676,34 @@ var rows=DUE_DRILL[ddCurrentStatus];
 if(!rows)return;
 var filtered=rows.filter(function(r){return r.n.toLowerCase().indexOf(q)!==-1||r.le.toLowerCase().indexOf(q)!==-1||r.d.toLowerCase().indexOf(q)!==-1});
 renderDueDrillRows(filtered,ddCurrentStatus);
+}
+var schedCurrentMonth='';
+function showSchedDrilldown(month){
+var rows=SCHED_DRILL[month];
+if(!rows)return;
+schedCurrentMonth=month;
+var search=document.getElementById('sched-search');
+search.value='';
+renderSchedDrillRows(rows,month);
+document.getElementById('sched-drilldown').classList.add('open');
+document.getElementById('sched-drilldown').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderSchedDrillRows(rows,month){
+var tbody=document.getElementById('sched-tbody');
+var label=document.getElementById('sched-status-label');
+label.textContent=month+' ('+rows.length+')';
+tbody.innerHTML=rows.map(function(r){var dc=r.days<0?'#a05555':r.days<=30?'#b8b070':'#ccc';var dl=Math.abs(r.days)===1?' day':' days';var td5='<td style="color:'+dc+'">';return '<tr><td>'+r.n+'</td><td>'+r.le+'</td><td>'+r.d+'</td><td>'+r.due+'</td>'+td5+r.days+dl+'</td></tr>'}).join('');
+}
+function filterSchedDrilldown(){
+var q=document.getElementById('sched-search').value.toLowerCase();
+var rows=SCHED_DRILL[schedCurrentMonth];
+if(!rows)return;
+var filtered=rows.filter(function(r){return r.n.toLowerCase().indexOf(q)!==-1||r.le.toLowerCase().indexOf(q)!==-1||r.d.toLowerCase().indexOf(q)!==-1});
+renderSchedDrillRows(filtered,schedCurrentMonth);
+}
+function closeSchedDrilldown(){
+document.getElementById('sched-drilldown').classList.remove('open');
+document.getElementById('sched-search').value='';
 }
 function closeDueDrilldown(){
 document.getElementById('due-drilldown').classList.remove('open');
