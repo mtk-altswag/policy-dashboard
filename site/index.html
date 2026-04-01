@@ -102,6 +102,11 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 .dd-search{background:#000;color:#ddd;border:1px solid #444;border-radius:6px;padding:5px 10px;font-size:13px;font-family:'Inter',sans-serif;width:220px;margin-left:12px}
 .dd-search::placeholder{color:#777}
 
+.repo-link{color:#6ea8fe;text-decoration:none;transition:color .15s}
+.repo-link:hover{color:#9ec5fe;text-decoration:underline}
+#repo-table thead th{position:sticky;top:0;background:#111;z-index:1;box-shadow:0 1px 0 #333}
+.repo-filter-select{background:#000;color:#ccc;border:1px solid #444;border-radius:8px;padding:6px 12px;font-size:13px;font-family:'Inter',sans-serif;min-width:160px;height:38px}
+
 </style>
 </head>
 <body>
@@ -110,12 +115,13 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <span class="logo-text">block</span>
 <div class="header-divider"></div>
 <span class="header-title">Policy Governance Reporting</span>
-<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 01, 2026 at 04:34 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div></div>
+<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 01, 2026 at 05:05 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div><div style="color:#555;font-size:10px;margin-top:2px">Dashboard refreshed twice daily</div></div>
 </header>
 <div class="container">
 <div class="main-tab-bar">
 <button class="main-tab-btn active" id="mt-inv" onclick="switchMainTab('inventory')">Inventory Overview</button>
 <button class="main-tab-btn" id="mt-lc" onclick="switchMainTab('lifecycle')">Document Lifecycle Status</button>
+<button class="main-tab-btn" id="mt-repo" onclick="switchMainTab('repo')">Document Repository</button>
 </div>
 
 <!-- ===== MAIN TAB 1: INVENTORY OVERVIEW ===== -->
@@ -318,6 +324,190 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </div>
 </div>
 </div>
+
+
+<!-- ===== MAIN TAB 3: DOCUMENT REPOSITORY ===== -->
+<div id="main-tab-repo" class="hidden">
+<div class="section-title">Document Repository</div>
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;flex:1">
+<div style="display:inline-flex;align-items:center;gap:8px;background:#111;border:1px solid #333;border-radius:8px;padding:0 14px;height:38px;font-size:13px;color:#ccc;white-space:nowrap"><span style="font-weight:700;color:#fff;font-size:16px" id="repo-count">156</span>&nbsp;Published Documents</div>
+<input class="dd-search" id="repo-search" type="text" placeholder="Search documents..." oninput="filterRepo()" style="width:280px;height:38px;border-radius:8px;border:1px solid #333;background:#111;padding:0 12px;font-size:13px">
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+<span style="font-size:12px;color:#777">Filters:</span>
+<select class="repo-filter-select" id="repo-filter1-col" onchange="updateRepoFilterOptions('filter1')"><option value="">Primary Filter...</option><option value="1">Domain</option><option value="2">Legal Entity</option><option value="3">Document Owner</option><option value="4">Tier</option></select>
+<select class="repo-filter-select" id="repo-filter1-val" onchange="applyRepoFilters()" disabled><option value="">Select value...</option></select>
+<select class="repo-filter-select" id="repo-filter2-col" onchange="updateRepoFilterOptions('filter2')"><option value="">Secondary Filter...</option><option value="1">Domain</option><option value="2">Legal Entity</option><option value="3">Document Owner</option><option value="4">Tier</option></select>
+<select class="repo-filter-select" id="repo-filter2-val" onchange="applyRepoFilters()" disabled><option value="">Select value...</option></select>
+<button class="pill-btn" onclick="clearRepoFilters()" style="height:38px;padding:0 16px;border-radius:8px">Clear Filters</button>
+</div>
+<div class="card full-width" style="max-height:calc(100vh - 220px);overflow-y:auto">
+<table class="status-table" id="repo-table">
+<thead><tr><th style="width:35%">Document Name</th><th style="width:18%">Domain</th><th style="width:20%">Legal Entity</th><th style="width:17%">Document Owner</th><th style="width:10%">Tier</th></tr></thead>
+<tbody id="repo-tbody">
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1_UF-7jujmnBZ3ZaveKoLAQBMCs7WvpvD/view?usp=drive_link" target="_blank">Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part A</a></td><td>Financial Crimes</td><td>Afterpay Australia Pty Ltd</td><td>Martina Kann</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1g3tH_sX8zSebCyavtY1j8PD-pS1AyG6y/view" target="_blank">Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part B - Customer Identification and Verification</a></td><td>Financial Crimes</td><td>Afterpay Australia Pty Ltd</td><td>Martina Kann</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1mFWUJkb8gQ_ms8mw45GrpZbixL7qEPyJ/view" target="_blank">Afterpay Australia Pty. Ltd. Unsuitability Assessment Policy</a></td><td>Governance</td><td>Afterpay Australia Pty Ltd</td><td>Martina Kann</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1eH-sjjLtH2ac2TvcHckH4YGiUHNYzBhk/view?usp=drive_link" target="_blank">Afterpay Australia and New Zealand Complaints Standard</a></td><td>Consumer Protection</td><td>Afterpay Australia Pty Ltd - Afterpay NZ Limited</td><td>Eve Ishak</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1ICJvBn9f8Y64y7P2ur4B1vkOrT7zdvyD/view?usp=sharing" target="_blank">Afterpay Canada Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Standard</a></td><td>Financial Crimes</td><td>Afterpay Canada Ltd</td><td>Safiya Adenekan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1jE_FgwFatRlHOpv7nz__WRhP4sryK7RX/view?usp=sharing" target="_blank">Afterpay Canada Australian Anti-Money Laundering / Counter-Terrorism Financing (AML/CTF) Program</a></td><td>Financial Crimes</td><td>Afterpay Canada Ltd</td><td>Pascalle Castagne</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1LEwpzslvJVTOPf3n17321mwdhIMtbu9v/view?usp=sharing" target="_blank">Afterpay Canada Limited Canada Accessibility Policy</a></td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Pascalle Castagne</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1nTHVSYAwlZ32ixzzbUJQwCCWmEj2yqvD/view" target="_blank">Afterpay Canada Limited Canada Complaints Policy</a></td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Safiya Adenekan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/17WQqrEPujuNcpcdSj1Y7-wfoQ9RvnZLg/view" target="_blank">Afterpay Canada Limited Canada Consumer Protection Policy</a></td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Safiya Adenekan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Vq8baRTI4Da6-FF-BUbB4RdCecIrYyNQ/view?usp=sharing" target="_blank">Afterpay Canada Limited Canada Marketing Standard</a></td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Safiya Adenekan</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1-W8472Mabulua-gm_IgqBMq6Np9x_YPk/view?usp=sharing" target="_blank">Afterpay Canada Limited Canada’s Anti-Spam Legislation (CASL) Policy</a></td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Pascalle Castagne</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1VxOerZRyR8rWXFaWOOyuUgGLGJ379Qpb/view" target="_blank">Afterpay Canada Limited French Language Standard</a></td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Safiya Adenekan</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1X7ymlhZhzS_sam9pAnAGJpNkUJQ8FA2_/view" target="_blank">Afterpay Canada Ltd Incident Management Response Plan</a></td><td>Governance</td><td>Afterpay Canada Ltd</td><td>Safiya Adenekan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1YQqKWOGb_EImrzY7hv-lZ59QfJDZeRMc/view" target="_blank">Afterpay Canada Ltd. Afterpay Third Party Risk Management (TPRM) Policy</a></td><td>Governance</td><td>Afterpay Canada Ltd</td><td>Safiya Adenekan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/19zpySwnF_SrvEC_4MhwMgaT3WZBl9c8s/view" target="_blank">Afterpay Canada and Square Canada Record Retention Policy</a></td><td>Governance</td><td>Afterpay Canada Ltd - Square Canada, Inc.</td><td>Safiya Adenekan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1aKZ-uenIPspJdtJMwt5qZIkFT0Uso2A0/view?usp=drive_link" target="_blank">Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme</a></td><td>Financial Crimes</td><td>Afterpay NZ Limited</td><td>Eve Ishak</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1QSgNhokKU_38M9De8nhZ8q3FmIE_vJFi/view?usp=drive_link" target="_blank">Afterpay New Zealand Australian Anti-Money Laundering / Countering Financing of Terrorism (AML/CFT) Program</a></td><td>Financial Crimes</td><td>Afterpay NZ Limited</td><td>Martina Kann</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Ebk1kVicfI5LWjYkIMHxj-GIH2Dl4v98/view" target="_blank">Afterpay US Inc Third Party Risk Management (TPRM) Standard</a></td><td>Governance</td><td>Afterpay US Services</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1jZ1jQoafkudJylvL9mK8I3hmGuXjKV-I/view" target="_blank">Afterpay US Inc US Complaint Standard</a></td><td>Consumer Protection</td><td>Afterpay US Services</td><td>Corey Chamberlain</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/12VuBLjl_qcfyxX0fc7acf5wSBcjvC19S/view?usp=sharing" target="_blank">Afterpay US Inc. Regulatory Change Management Standard</a></td><td>Governance</td><td>Afterpay US Services</td><td>Corey Chamberlain</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1xBhaaKiDDInmgG7RawEQb6lUfG_ONN7a/view?usp=sharing" target="_blank">Block Inc. Activation Customer Risk Rating Program</a></td><td>Governance</td><td>Block, Inc.</td><td>—</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1n5m0IcHs8wZfvxS5e9rnz3maZkE1kCst/view?usp=drive_link" target="_blank">Block Inc. Anti-Money Laundering (AML), Counter-Terrorist Financing (CFT) &amp; Sanctions Product Risk Assessment Program</a></td><td>Governance</td><td>Block, Inc.</td><td>Amit Bhushan</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://docs.google.com/document/d/1qhmHLZxJbDYp1Apj3Pjm7lM9imXwrrVOS9IBYblkOO8/edit?tab=t.0" target="_blank">Block Inc. Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT) &amp; Sanctions Annual Risk Assessment Standard</a></td><td>Governance</td><td>Block, Inc.</td><td>Amit Bhushan</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/16p6Ctudvx_gihdD0pMtl2HJidrp4kU2E/view" target="_blank">Block Inc. Bank Secrecy Act / Anti-Money Laundering &amp; Counter-Terrorist Financing (BSA / AML &amp; CFT) Program (US)</a></td><td>Financial Crimes</td><td>Block, Inc.</td><td>Ken Triemstra</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1-4tXrY-MzmL2WQnd6sfiYr1AFpXyurPb/view" target="_blank">Block Inc. Block Compliance Risk and Control Standard</a></td><td>Governance</td><td>Block, Inc.</td><td>Amit Bhushan</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1DGUqWirYMNF8LbXm33Ib7DVlcMSTUYev/view?usp=drive_link" target="_blank">Block Inc. Compliance Audit, Exam &amp; Independent Assessment Management Program</a></td><td>Governance</td><td>Block, Inc.</td><td>Danielle Franklin</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1r6g6mcjtYtos7m4eHxlEmxaAt71iJhNa/view?usp=sharing" target="_blank">Block Inc. Compliance Committee &amp; Forum Oversight Standard</a></td><td>Governance</td><td>Block, Inc.</td><td>Michael Read</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1CqmKKbUW9kW0eRuFkqCqUoJ96IAnx5LS/view" target="_blank">Block Inc. Compliance Training Program Standard</a></td><td>Governance</td><td>Block, Inc.</td><td>Lorianne Woldehanna</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1NQwmPWx5KQq8aTUogBorumyqVoyJNk61/view?usp=sharing" target="_blank">Block Inc. Custody &amp; Liquidity Management Policy</a></td><td>Governance</td><td>Block, Inc.</td><td>Laurence Aderemi</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/10X_qYvPrLpY5Uo-AvwA8mP29bG5jbqQb/view?usp=sharing" target="_blank">Block Inc. Escalation Framework for Non-Completion of Compliance Training (Employees)</a></td><td>Governance</td><td>Block, Inc.</td><td>Stevi Winer</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Xr63Xm6iKW5e2yT_La59gjUiV8L_iQsJ/view?usp=sharing" target="_blank">Block Inc. Escalation Framework for Non-Completion of Compliance Training (External Workers)</a></td><td>Governance</td><td>Block, Inc.</td><td>Stevi Winer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1V8NVSZkp1RtZ2Lsgf5eOXwltSJImbS0X/view" target="_blank">Block Inc. Global Complaint Program Standard</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Briana Peterkin</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1MPiNEOqauSkQMCU_W6NQT79iFqe9B2Up/view?usp=sharing" target="_blank">Block Inc. Global Compliance Monitoring &amp; Testing Program</a></td><td>Governance</td><td>Block, Inc.</td><td>Keith Roche</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1cIUtC18i37PZpFj1m5xgmTLXJ7H7-xOT/view?usp=drive_link" target="_blank">Block Inc. Global Geographic Risk Ratings Methodology &amp; Program</a></td><td>Governance</td><td>Block, Inc.</td><td>Amit Bhushan</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1VXt78v-miG_y6CQ9wjfzapqHuuXqxn4d/view?usp=sharing" target="_blank">Block Inc. Global Modern Slavery Policy</a></td><td>Ethics and Employee Conduct</td><td>Block, Inc.</td><td>Joshua Rusenko</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1HUd0JQvTK9cmirS9Qhk7C0p6_XYrCD63/view?usp=sharing" target="_blank">Block Inc. Global Sanctions Compliance Program Standard</a></td><td>Financial Crimes</td><td>Block, Inc.</td><td>Faisal Sohail</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1aVp-hbeZ-GzAOdfJRp7hwbHv80gyidGQ/view?usp=sharing" target="_blank">Block Inc. Regulatory Change Management</a></td><td>Governance</td><td>Block, Inc.</td><td>Brian Kearns</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1zWb-AxK6FsEbiBK-egN6pKO_z6QbBrXx/view?usp=sharing" target="_blank">Block Inc. Service Level Agreement and Backlog Management Program</a></td><td>Governance</td><td>Block, Inc.</td><td>Matthew DiGiacobbe</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1yqd2fCXYtuven0AFXg9Au10PUIVsypJp/view?usp=sharing" target="_blank">Block, Inc. Anti-Bribery &amp; Anti-Corruption Policy</a></td><td>Ethics and Employee Conduct</td><td>Block, Inc.</td><td>Joshua Rusenko</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1uXbMrhZC-r347TH2oK3ekPSfZJp3L07n/view" target="_blank">Block, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy</a></td><td>Financial Crimes</td><td>Block, Inc.</td><td>Ken Triemstra</td><td>Tier 1</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1jSeUEIbQudlH9sqNBL-KMkUv8la3ExYu/view?usp=sharing" target="_blank">Block, Inc. Code of Business Conduct &amp; Ethics</a></td><td>Ethics and Employee Conduct</td><td>Block, Inc.</td><td>Matt Latham</td><td>Tier 1</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1QgpDdLZeQcS_tPJUw_xvqhosiyI2PHwJ/view" target="_blank">Block, Inc. Compliance Management System (CMS) Policy</a></td><td>Governance</td><td>Block, Inc.</td><td>Tyler Hand</td><td>Tier 1</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1fvt49euVrP98pmbcasSUVvpLp6J_9gO-/view?usp=drive_link" target="_blank">Block, Inc. Compliance Policy on Policies</a></td><td>Governance</td><td>Block, Inc.</td><td>Stevi Winer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1QgpDdLZeQcS_tPJUw_xvqhosiyI2PHwJ/view" target="_blank">Block, Inc. Controlling the Assault of Non-Solicited Pornography &amp; Marketing Act (CAN-SPAM) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Brian Kollmeyer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1D2IAJoy5JV2V3lmG7mPVAwd4K8e4Z0iG/view?usp=drive_link" target="_blank">Block, Inc. Electronic Funds Transfer Act (EFTA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Brian Kollmeyer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1TIkasbOOcnbk7SkVV0ZpjJoJLJjKdavX/view?usp=drive_link" target="_blank">Block, Inc. Electronic Signatures in Global and National Commerce Act (E-SIGN) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Brian Kollmeyer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/18IjsYnonYytwM3hc9z_wF_lmvhuokJ1U/view?usp=drive_link" target="_blank">Block, Inc. Equal Credit Opportunity Act (ECOA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1lf7Lydc_Cdu3u96y-1xdgP1RnAeg8gc6/view?usp=drive_link" target="_blank">Block, Inc. Fair &amp; Responsible Lending Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1q94SlAEuqS_x3gmfyiQMgNc9CRj-1Uwk/view?usp=drive_link" target="_blank">Block, Inc. Fair Credit Reporting Act (FCRA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1HUKtlT-TVJbRXs8THJCqiGE5W1jEtbL5/view?usp=drive_link" target="_blank">Block, Inc. Fair Debt Collection Practices Act (FDCPA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Xwum1kg-eXc9MgezG444ZYHbnNtFqxWq/view?usp=sharing" target="_blank">Block, Inc. Gifts &amp; Entertainment Policy</a></td><td>Ethics and Employee Conduct</td><td>Block, Inc.</td><td>Matt Latham</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1BaYDvMNRXkaDeDXGrg9LmAz8-C-Y6t8X/view?usp=sharing" target="_blank">Block, Inc. Global Complaint Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Briana Peterkin</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1pRWYLlq7JQMvMd-D-z8jeW0V3Uk3MqGE/view?usp=sharing" target="_blank">Block, Inc. Global Conflicts of Interest Policy</a></td><td>Ethics and Employee Conduct</td><td>Block, Inc.</td><td>Matt Latham</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Co7opy_mta9hoz_oIxnrybiieH67MAJa/view" target="_blank">Block, Inc. Global Sanctions Policy</a></td><td>Financial Crimes</td><td>Block, Inc.</td><td>Faisal Sohail</td><td>Tier 1</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/17FGeeO3anQuSHmGIhEoDyjHPNJIP9O30/view?usp=sharing" target="_blank">Block, Inc. Governance Quality Assurance Standard</a></td><td>Governance</td><td>Block, Inc.</td><td>Melissa Benjamin</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/12JBaYHW53hWzpY52OT3YCmmmMu_DhCcr/view?usp=drive_link" target="_blank">Block, Inc. Gramm-Leach-Bliley Act (GLBA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Brian Kollmeyer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1zMz1pAq5qNdl1_410YKoLIyb6eIyElCg/view?usp=drive_link" target="_blank">Block, Inc. Military Lending Act (MLA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1XFwdbO8OlP188tVPznnrPkRLE61QgwX8/view?usp=sharing" target="_blank">Block, Inc. Model Governance Policy</a></td><td>Governance</td><td>Block, Inc.</td><td>Amit Bhushan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1mEut4jxBhv_M17Tb7LJzswf_cbQPfchG/view?usp=drive_link" target="_blank">Block, Inc. Servicemember Civil Relief Act (SCRA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1VfNf0NBg-s18YlBQinK10cKu3KO76H83/view?usp=sharing" target="_blank">Block, Inc. Speak Up Policy</a></td><td>Ethics and Employee Conduct</td><td>Block, Inc.</td><td>Matt Latham</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/10NTSqGtV7RoPNdzbvZ-OQ6kNz60lzItr/view?usp=drive_link" target="_blank">Block, Inc. Telephone Consumer Protection Act (TCPA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Brian Kollmeyer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/17wxmlq2j5J6huUjjRWTiAT3Y5176g6oc/view?usp=drive_link" target="_blank">Block, Inc. Truth in Lending Act (TILA) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/19IW-9VAYkC6cZ5SCP-IECdelqm-60EIg/view?usp=drive_link" target="_blank">Block, Inc. Unfair, Deceptive, or Abusive Acts or Practices / Unfair or Deceptive Acts or Practices (UDAAP/UDAP) Policy</a></td><td>Consumer Protection</td><td>Block, Inc.</td><td>Brian Kollmeyer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1CkMpR8FExFuneJUMv_uMV7gui7LKeYoL/view" target="_blank">Cash App Global Cash App Sanctions Compliance Standard</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Harrison Fink</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1dtE9z5FlOOfU634LbPCwPGRu4vgYZZEq/view?usp=sharing" target="_blank">Cash App Investing LLC Anti-Money Laundering &amp; Countering the Financing of Terrorism (AML &amp; CFT) Standard</a></td><td>Financial Crimes</td><td>Cash App Investing LLC</td><td>Christine Delaney</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/16j8N05YW7ENhnzm087DYYyVY_qXLGG-0/view?usp=sharing" target="_blank">Cash App Investing LLC Investing Communications Requirements Standard</a></td><td>Ethics and Employee Conduct</td><td>Cash App Investing LLC</td><td>Ashley Adkins</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1cRg9CTQxexEKWFgVwqjwbeetv5qDkCK_/view?usp=sharing" target="_blank">Cash App Lending Identity Theft Prevention/Red Flags Standard</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1_8W12nC-1E8uwM9AjefINhXcBilAmX40/view?usp=sharing" target="_blank">Cash App Risk and Compliance Adverse Actions Policy</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Kellan Fay</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1sz1AYUKBJqlYoDqps3JIs4HlF4kJeC2y/view?usp=sharing" target="_blank">Cash App UK SEL Financial Crimes Program</a></td><td>Financial Crimes</td><td>Cash App UK</td><td>Adrienne Lamond</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1ZkGUkB_l2LM8mFbKnl5BvCkAh_ub7TTn/view?usp=sharing" target="_blank">Cash App US Acquiring Chargebacks Standard</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Lee Buchmann</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1TSZr9uNQr11OKxYA2LTpO0fIKKOiNZeC/view?usp=sharing" target="_blank">Cash App US Bitcoin (BTC) Travel Rule Program</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Sondah Ouattara</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1j66BvHEhDnqJSeOEWXywvZ2cvH4aSfEI/view?usp=sharing" target="_blank">Cash App US Cash App Continuous Customer Risk Rating Program</a></td><td>Governance</td><td>Cash App US</td><td>—</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/19l4FDxiYeIgBArQH4eP6C6YEmSR80pxd/view" target="_blank">Cash App US Complaints Standard Cash</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Brian Kollmeyer</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1woZVQCIW8QwnZx84HTb14uUKkAu_e7Gx/view?usp=sharing" target="_blank">Cash App US Compliance Real Time Transaction Blocking Program</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Vijay Sathish</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1KlVrzcMvewyMCUuf6_XEbmdxitjH4twt/view" target="_blank">Cash App US Consumer Protection Program Standard</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Brian Kollmeyer</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1VkRm4ejVC40S21a4VbmTKQX3V99IVtkr/view?usp=sharing" target="_blank">Cash App US Customer Conduct &amp; Staff Protection Policy</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Brett Sellers</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/16hd6aFYjgHRWxKqPVIh42O8Diclk4A8U/view" target="_blank">Cash App US Denylist Appeals Policy</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Brian Kollmeyer</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Fj9jkUepjLx8vhCwMCCgUdDKaaCDHz4Z/view?usp=sharing" target="_blank">Cash App US Disputes Standard</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Paige D&#x27;Monte</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1ODQ18sDUw8mID3aL63TY8iDzGZ_gQifm/view" target="_blank">Cash App US Elder Financial Exploitation Policy</a></td><td>Consumer Protection</td><td>Cash App US</td><td>—</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/109vDIEcKBaLa1m-Ykxni_lh1C_ycliGU/view?usp=sharing" target="_blank">Cash App US Fraud Risk Management Standard</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Brendan Culhane</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1PeK3SBv1cyE4S5iJRUB0dinc2hwGAbFG/view?usp=sharing" target="_blank">Cash App US Identity Verification Standard</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Courtney Smith</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1xDvyvxwRUkQlEp0L62A49Aw76fW1G4rb/view" target="_blank">Cash App US Know Your Business Program for Cash for Business Customers</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Vanessa Simpson</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1RG4upe4hcDzwXb7ah9NMeQwshUJhSifX/view?usp=sharing" target="_blank">Cash App US Know Your Customer (KYC) Policy</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Adrian Gardner</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1klBbo92ChRV8n49W7rVWqvt0TSn-fQUt/view?usp=sharing" target="_blank">Cash App US Know Your Customer (KYC) Standard</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Rosa Brown</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/16FHg8DJ4AIEP-1EgtZfzoedYoCCS67wX/view?usp=sharing" target="_blank">Cash App US Lending Operations Complaints Standard</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Corey Chamberlain</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1eIytVubc5pKQGRumMr3xpL3DQFK5YXdF/view?usp=sharing" target="_blank">Cash App US Loan Loss and Charge Off Policy (Lending)</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1InahAFzpg0zTiZiB-4ytptq3r4Zw26bu/view?usp=sharing" target="_blank">Cash App US Peer-to-Peer (P2P) Scam Policy</a></td><td>Consumer Protection</td><td>Cash App US</td><td>Brendan Culhane</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1wza_dkx0a3c_LpwQg_wRcnGvjVE4Wp1T/view?usp=sharing" target="_blank">Cash App US Transaction Monitoring Modeling Program</a></td><td>Governance</td><td>Cash App US</td><td>Vijay Sathish</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1ceejskU0ZWqslm_8XYF0P0d0RjxVWG1e/view" target="_blank">Cash App US Unacceptable Use Monitoring Standard</a></td><td>Financial Crimes</td><td>Cash App US</td><td>Adrian Gardner</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1c7xsQ2AaovZo9rJIrxvj2GsxZG0Vbhxv/view?usp=sharing" target="_blank">Cash App, US Business Activity Monitoring (BAM) Policy</a></td><td>Governance</td><td>Cash App US</td><td>Jason Liberman</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Rny0YbcwdCK6uP_WGud3vcr_RFon_hqi/view?usp=sharing" target="_blank">Clearpay Finance Limited Consumer Due Diligence Standard</a></td><td>Financial Crimes</td><td>Clearpay Finance Limited</td><td>Anthony Laycock</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1KpN_X7DxOf4bdSp2R2vOBRLbkjciF2w1/view" target="_blank">Clearpay Finance Limited Merchant Due Diligence Standard</a></td><td>Financial Crimes</td><td>Clearpay Finance Limited</td><td>Anthony Laycock</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1zP4EQBWxaoGmDIuGmv9kq2RVQ7LfjvzA/view?usp=sharing" target="_blank">Clearpay Fitness and Propriety Standard</a></td><td>Governance</td><td>Clearpay Finance Limited</td><td>Amanda Ettridge</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/13PJg1oGqroTvTWY5XaKI9e6mMp8WtDc3/view?usp=sharing" target="_blank">Clearpay UK - Senior Managers Certification Regime &amp; Conduct Policy</a></td><td>Consumer Protection</td><td>Clearpay Finance Limited</td><td>Adrienne Lamond</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1yn0JHDf-pODYLHlXPvpkgNUjzaA5BbTb/view?usp=sharing" target="_blank">Clearpay UK - Training and Competence Standard</a></td><td>Governance</td><td>Clearpay Finance Limited</td><td>Amanda Ettridge</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1uMHwJsysKpUXrd9gOziUBlZWqSDwgfuC/view?usp=drive_link" target="_blank">Clearpay UK Anti-Money Laundering and Counter Terrorist Financing (AML &amp; CFT) Policy</a></td><td>Financial Crimes</td><td>Clearpay Finance Limited</td><td>Anthony Laycock</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1eVlSH97orVs24wKYLjp-Nvy1n9rgj2t-/view?usp=sharing" target="_blank">Clearpay UK Payment Service Provider Due Diligence Standard</a></td><td>Financial Crimes</td><td>Clearpay Finance Limited</td><td>Anthony Laycock</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1czKlHFQxs6iCdT1bDxgNdnbuqGNK4xLh/view?usp=sharing" target="_blank">Clearpay UK Vulnerable Customer Standard</a></td><td>Consumer Protection</td><td>Clearpay Finance Limited</td><td>Amanda Ettridge</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1RlSkVHMoT6Kbzc8qGf_H-W_mSfbpopFJ/view" target="_blank">Compliance Incident Management Reporting Standard</a></td><td>Governance</td><td>Block, Inc.</td><td>Sherry Stevens</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1ZVBiPUvCHulJPBXxfB2ccdLrO0G7OP3w/view?usp=sharing" target="_blank">SEL Conflicts of Interest Policy</a></td><td>Ethics and Employee Conduct</td><td>Squareup Europe Ltd.</td><td>Ryan Goldstone</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1BWxh3pIcQ5y_fXx461x6iXqiNz_P2Ony/view" target="_blank">SEL Consumer Protection Policy</a></td><td>Consumer Protection</td><td>Squareup Europe Ltd.</td><td>Ryan Goldstone</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1d1dw_68iIX3NwJ3KufbA5iRhIU-kFiS8/view" target="_blank">SEL Electronic Money Directive (EMD) Policy</a></td><td>Governance</td><td>Squareup Europe Ltd.</td><td>Ryan Goldstone</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/18JYqNcJhF4A2zaCPI87oPPJiJp2gm5NM/view?usp=sharing" target="_blank">SEL Financial Crimes Program</a></td><td>Financial Crimes</td><td>Squareup Europe Ltd.</td><td>Ryan Goldstone</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1zUeoxVcZjMjue-pWcfONWkoY_1D_HCb5/view?usp=sharing" target="_blank">SEL Outsourcing Policy</a></td><td>Governance</td><td>Squareup Europe Ltd.</td><td>Ryan Goldstone</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1xewIB_KIMjRQ7Nuocbs-SQ94FT7eFIOT/view" target="_blank">SEL Speak Up Policy</a></td><td>Ethics and Employee Conduct</td><td>Squareup Europe Ltd.</td><td>Ryan Goldstone</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/13z4bKBDN4R9rDA0h2A0GtztQ3-mdq3jo/view?usp=sharing" target="_blank">SEL Vulnerable Customer Policy</a></td><td>Consumer Protection</td><td>Cash App UK</td><td>Ryan Goldstone</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1SCbJtjGY01OGdn38f26ZpJJkJSNysmzI/view?usp=sharing" target="_blank">SIL Conduct Standards Policy</a></td><td>Ethics and Employee Conduct</td><td>Squareup International Ltd.</td><td>Elizabeth Henry</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1M_TQonWxBgXZXQWRvpmT_EraPGacpMYs/view?usp=sharing" target="_blank">SIL Conflicts of Interest Policy</a></td><td>Ethics and Employee Conduct</td><td>Squareup International Ltd.</td><td>Elizabeth Henry</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1-pwVFoEWvHYlyS_sYKvps6jCnuAiyumr/view?usp=sharing" target="_blank">SIL Consumer Protection Policy</a></td><td>Consumer Protection</td><td>Squareup International Ltd.</td><td>Elizabeth Henry</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/188znMXPS8ILbgnmuLLHWRmeJAwHucSFT/view?usp=drive_link" target="_blank">SIL Customer Communication Standard</a></td><td>Consumer Protection</td><td>Squareup International Ltd.</td><td>Pauline O&#x27;Brien</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Nhz9zy4x0scT4lWEh23MancaIO5Mivi0/view?usp=sharing" target="_blank">SIL Financial Crimes Program</a></td><td>Financial Crimes</td><td>Squareup International Ltd.</td><td>Elizabeth Henry</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1CaKMJ1VrA2yfW4JuqDOCBBKbwlpANqWr/view?usp=sharing" target="_blank">SIL Fitness &amp; Probity Policy</a></td><td>Ethics and Employee Conduct</td><td>Squareup International Ltd.</td><td>Elizabeth Henry</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1wSQhXmFr6A0nfT9Bp72Yi_Xp-AzQnHMU/view?usp=sharing" target="_blank">SIL Outsourcing Policy</a></td><td>Governance</td><td>Squareup International Ltd.</td><td>Elizabeth Henry</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1RgPbkqPS_aedudEacyhx4G3WSb9WfAtO/view" target="_blank">SIL Regulatory Compliance Monitoring Program</a></td><td>Governance</td><td>Squareup International Ltd.</td><td>Elizabeth Henry</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1vSSyj1JdPlob8Z-09ppFEo9q4Yxyx92F/view?usp=sharing" target="_blank">SIL Speak Up Policy</a></td><td>Ethics and Employee Conduct</td><td>Squareup International Ltd.</td><td>Elizabeth Henry</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1qqUuXJk0X_YGk9jE9mxIkXzcKoeE820i/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program</a></td><td>Financial Crimes</td><td>Square AU Pty. Ltd.</td><td>Jing Wang</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1RsSiNiSdCQZKFtRmgAr7BvfuzcVxuP5Z/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CTF) Risk Awareness Training Program</a></td><td>Financial Crimes</td><td>Square AU Pty. Ltd.</td><td>Jing Wang</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1P3jD9iEC8D9CV01FdQrl7Dc75yu5pdPV/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Australian Financial Services License (AFSL) Representatives Standard</a></td><td>Consumer Protection</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1RtqkgU4bGJ2moZWYTQymQ-bEGWPscIaJ/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Breach Reporting Policy</a></td><td>Governance</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1XXmJPzWq9U4A_3eZ3IbFCreV2Bq49EQf/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Complaints Policy</a></td><td>Governance</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1TyXjOWnPbnwJHFK6KBP9dGZ_j__DzypJ/view?usp=drive_link" target="_blank">Square AU Pty. Ltd. Compliance Management Policy (CMS) Policy</a></td><td>Governance</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1yaOA_2VV3RDNLN6hk8EGnUMN5pUhBc7O/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Conflicts of Interest Policy</a></td><td>Ethics and Employee Conduct</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Kd0f_CRdV-C1HB9mqQmmn2z6R8lZ5wB_/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Consumer Protection Policy</a></td><td>Consumer Protection</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1-JUjddDJ9THyyh1gRm4acTGbwyfOFpqi/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Employee and Personnel Due Diligence Program</a></td><td>Financial Crimes</td><td>Square AU Pty. Ltd.</td><td>Jing Wang</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1AIiYdZ1W9dTzn0MU9Bu7inn47KM4K-oS/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Enhanced Customer Due Diligence Program</a></td><td>Financial Crimes</td><td>Square AU Pty. Ltd.</td><td>Jing Wang</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1uo4EuuffGzJSTDUmkIkXg-drWHrwgfq0/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program</a></td><td>Financial Crimes</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1q6qHXqoawxIfl6x24cJCTIWPccQRj8Yu/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Hardship Support Standard</a></td><td>Consumer Protection</td><td>Square AU Pty. Ltd.</td><td>Kathryn Boltuzic</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1AwaazRaobApCjjVWnJsPcx1xF6kBy0i1/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Politically Exposed Person (PEP) Watchlist Program</a></td><td>Financial Crimes</td><td>Square AU Pty. Ltd.</td><td>Jing Wang</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1-RqCyqBBPLpXaV9cfee7TUsy2ncQK595/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Regulatory Change Management Program</a></td><td>Governance</td><td>Square AU Pty. Ltd.</td><td>Kathryn Boltuzic</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1szbKvAbr3HMygoEI-oiGIWMynjb-Firg/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Responsible Managers Standards</a></td><td>Consumer Protection</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1mFBEPFDQK36mrgyiIFYHtAYzmTB8D0ID/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Suspicious Matter Report Program</a></td><td>Financial Crimes</td><td>Square AU Pty. Ltd.</td><td>Jing Wang</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1_zRTn3ZEJeWgt84U0ngyOJIHQWowTiRr/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Third Party Risk Management (TPRM) Policy</a></td><td>Governance</td><td>Square AU Pty. Ltd.</td><td>Lance Howard</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1skwcC4dpBTnaiBfzYwqj5eUNNacqYowH/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Vulnerable Customers Standard</a></td><td>Consumer Protection</td><td>Square AU Pty. Ltd.</td><td>Kathryn Boltuzic</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/116EFEHHqCnm0bLzksTczbKtPPfiiEPeB/view" target="_blank">Square Canada Incident Response Plan</a></td><td>Governance</td><td>Square Canada, Inc.</td><td>Safiya Adenekan</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/14NrjvfkYCG-beaqD6EliZ6aIShQp5s2d/view" target="_blank">Square Canada Third Party Risk Management (TPRM) Policy</a></td><td>Governance</td><td>Square Canada, Inc.</td><td>Safiya Adenekan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/18cqIq0_CjdNj5ugPPvn1u4Br49d-lS7K/view?usp=drive_link" target="_blank">Square Canada, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy</a></td><td>Financial Crimes</td><td>Square Canada, Inc.</td><td>Safiya Adenekan</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/15u7lZZqqVvegmMDvEQ9Wcr3CzJEVFnpL/view" target="_blank">Square Capital LLC. Credit Card Bank Secrecy Act &amp; Anti-Money Laundering (BSA &amp; AML) Square Capital Program</a></td><td>Financial Crimes</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1IGb9oFhpgiaYu4Hiq-Kd8PhEOWjn39i4/view?usp=sharing" target="_blank">Square Capital, LLC Commercial Telemarketing Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1KNpgcsWRsDIrgdrHJg4qYT3S7Jc8glxW/view?usp=sharing" target="_blank">Square Capital, LLC Compliance Management Policy</a></td><td>Governance</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1QuIezHg8kMA34esg3y5gK5QRnLHSxYIS/view?usp=sharing" target="_blank">Square Capital, LLC Controlling the Assault of Non-Solicited Pornography and Marketing Act (CAN-SPAM) Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1_hEH1k4HeZKwaZ41D6q4pxDLsT-MIQma/view?usp=sharing" target="_blank">Square Capital, LLC Credit Card Privacy Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1ieomC-pgmWJZTPBcS8HAOOTxdnO38Di2/view?usp=sharing" target="_blank">Square Capital, LLC Electronic Signature (E-SIGN) Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1kbTZve2WaFAzXiucAMbDPQzonRqC6DwG/view?usp=sharing" target="_blank">Square Capital, LLC Equal Credit Opportunity Act (ECOA) Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1tzRLqR3JW0NZJNbd1PAx2uPKD8rCczRl/view?usp=sharing" target="_blank">Square Capital, LLC Fair and Accurate Credit Transactions Act Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1SuopK-NKaIHvDsGz-I7BM2DXcJKgzcsA/view?usp=sharing" target="_blank">Square Capital, LLC Red Flags Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1ro8hYbobY9K9PuM7IGdmb05dJ-0Nd2dH/view?usp=sharing" target="_blank">Square Capital, LLC Servicemembers Civil Relief Act (SCRA) Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/17Brzh3TgE0OHf0JMElKa8nCP3bnQkaTN/view?usp=sharing" target="_blank">Square Capital, LLC Unfair or Deceptive Acts Policy</a></td><td>Consumer Protection</td><td>Square Capital, LLC</td><td>Corey Chamberlain</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1ocWEebKJ5koul4RPD9t7kgO27WKYuUdC/view?usp=sharing" target="_blank">Square K.K. Anti-Money Laundering (AML), Counter Terrorist Financing (CTF) &amp; Financial Sanctions Program</a></td><td>Financial Crimes</td><td>Square K.K.</td><td>—</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1AHKUfrjlAkuwdvmQRgc7f1f9hA396waj/view?usp=sharing" target="_blank">Square K.K. Anti-Social Forces Management Policy</a></td><td>Financial Crimes</td><td>Square K.K.</td><td>—</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1elgJGU12VH2bX3kmdnFvjt-FIjq97nHO/view?usp=sharing" target="_blank">Square K.K. Anti-Social Forces Management Program</a></td><td>Financial Crimes</td><td>Square K.K.</td><td>—</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1vqcU7vmBXYHTsaqpvXn5DTb97WsN1Ksx/view?usp=sharing" target="_blank">Square K.K. Compliance Management System Policy</a></td><td>Governance</td><td>Square K.K.</td><td>—</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1vnq44TnDCPmj3LHfY9vRnTrc1oKUtGGi/view?usp=sharing" target="_blank">Square K.K. Outsourcing Management Policy</a></td><td>Governance</td><td>Square K.K.</td><td>—</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Ar576oI8v_CQfaLNMOW5XTHkayg28kB4/view?usp=sharing" target="_blank">Square U.S. Continuous Customer Risk Rating Program</a></td><td>Governance</td><td>Square US</td><td>—</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1yBJyo9iZXzTtrSv6z7qJ6GfxO7VaOWDs/view?usp=sharing" target="_blank">Square U.S. Identity Verification Policy</a></td><td>Financial Crimes</td><td>Square US</td><td>—</td><td>Tier 2</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/15TWdk8ns_9pn6jYxd7GZPi4N1jVtd6-r/view?usp=sharing" target="_blank">Square U.S. Know Your Customer (KYC) Program</a></td><td>Financial Crimes</td><td>Square US</td><td>—</td><td>Tier 3</td></tr>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1BuVqRkBVDjVngEAMYURenxu1r-xkqOBO/view?usp=sharing" target="_blank">Square U.S. Transaction Monitoring Program Standard</a></td><td>Financial Crimes</td><td>Square US</td><td>Audra McKay</td><td>Tier 3</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
 
 <script>
 const DC=['#e8e8e8','#666666','#c0c0c0','#444444','#a0a0a0','#333333','#d4d4d4','#555555','#888888'];
@@ -591,8 +781,10 @@ if(chart==='dim1')updateIDim1();else updateIOrg();
 function switchMainTab(tab){
 document.getElementById('mt-inv').classList.toggle('active',tab==='inventory');
 document.getElementById('mt-lc').classList.toggle('active',tab==='lifecycle');
+document.getElementById('mt-repo').classList.toggle('active',tab==='repo');
 document.getElementById('main-tab-inventory').classList.toggle('hidden',tab!=='inventory');
 document.getElementById('main-tab-lifecycle').classList.toggle('hidden',tab!=='lifecycle');
+document.getElementById('main-tab-repo').classList.toggle('hidden',tab!=='repo');
 if(tab==='inventory'){buildInventoryCharts()}
 if(tab==='lifecycle'){buildLcCharts()}
 }
@@ -708,6 +900,64 @@ document.getElementById('sched-search').value='';
 function closeDueDrilldown(){
 document.getElementById('due-drilldown').classList.remove('open');
 document.getElementById('dd-search').value='';
+}
+function filterRepo(){
+var q=document.getElementById('repo-search').value.toLowerCase();
+applyRepoFilters();
+}
+function updateRepoFilterOptions(filterId){
+var colSel=document.getElementById('repo-'+filterId+'-col');
+var valSel=document.getElementById('repo-'+filterId+'-val');
+var colIdx=parseInt(colSel.value);
+valSel.innerHTML='<option value="">Select value...</option>';
+if(!colIdx){valSel.disabled=true;applyRepoFilters();return;}
+valSel.disabled=false;
+var rows=document.getElementById('repo-tbody').getElementsByTagName('tr');
+var vals={};
+for(var i=0;i<rows.length;i++){
+var cells=rows[i].getElementsByTagName('td');
+if(cells.length>colIdx){var v=cells[colIdx].textContent.trim();if(v&&v!=='—')vals[v]=true;}
+}
+var sorted=Object.keys(vals).sort();
+for(var i=0;i<sorted.length;i++){
+var opt=document.createElement('option');
+opt.value=sorted[i];opt.textContent=sorted[i];
+valSel.appendChild(opt);
+}
+applyRepoFilters();
+}
+function applyRepoFilters(){
+var f1col=parseInt(document.getElementById('repo-filter1-col').value)||0;
+var f1val=document.getElementById('repo-filter1-val').value;
+var f2col=parseInt(document.getElementById('repo-filter2-col').value)||0;
+var f2val=document.getElementById('repo-filter2-val').value;
+var q=document.getElementById('repo-search').value.toLowerCase();
+var rows=document.getElementById('repo-tbody').getElementsByTagName('tr');
+var visCount=0;
+for(var i=0;i<rows.length;i++){
+var cells=rows[i].getElementsByTagName('td');
+var show=true;
+if(q){var textMatch=false;for(var j=0;j<cells.length;j++){if(cells[j].textContent.toLowerCase().indexOf(q)!==-1){textMatch=true;break}}if(!textMatch)show=false;}
+if(show&&f1col&&f1val){if(cells[f1col].textContent.trim()!==f1val)show=false;}
+if(show&&f2col&&f2val){if(cells[f2col].textContent.trim()!==f2val)show=false;}
+rows[i].style.display=show?'':'none';
+if(show)visCount++;
+}
+var countEl=document.getElementById('repo-count');
+if(countEl)countEl.textContent=visCount;
+}
+function clearRepoFilters(){
+document.getElementById('repo-filter1-col').value='';
+document.getElementById('repo-filter1-val').innerHTML='<option value="">Select value...</option>';
+document.getElementById('repo-filter1-val').disabled=true;
+document.getElementById('repo-filter2-col').value='';
+document.getElementById('repo-filter2-val').innerHTML='<option value="">Select value...</option>';
+document.getElementById('repo-filter2-val').disabled=true;
+document.getElementById('repo-search').value='';
+var rows=document.getElementById('repo-tbody').getElementsByTagName('tr');
+for(var i=0;i<rows.length;i++)rows[i].style.display='';
+var countEl=document.getElementById('repo-count');
+if(countEl)countEl.textContent=156;
 }
 /* ---- Init ---- */
 document.addEventListener('DOMContentLoaded',function(){
