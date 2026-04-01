@@ -110,7 +110,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <span class="logo-text">block</span>
 <div class="header-divider"></div>
 <span class="header-title">Policy Governance Reporting</span>
-<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 01, 2026 at 10:03 AM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div></div>
+<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 01, 2026 at 04:34 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div></div>
 </header>
 <div class="container">
 <div class="main-tab-bar">
@@ -465,6 +465,7 @@ const DUE_DRILL={
 {n:'Block Inc. Global Complaint Program Standard',le:'Block, Inc.',d:'Consumer Protection'},
 {n:'Block Inc. Global Sanctions Compliance Program Standard',le:'Block, Inc.',d:'Financial Crimes'},
 {n:'Block, Inc. Anti-Bribery &amp; Anti-Corruption Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
+{n:'Cash App US Consumer Protection Program Standard',le:'Cash App US',d:'Consumer Protection'},
 {n:'Cash App US Unacceptable Use Monitoring Standard',le:'Cash App US',d:'Financial Crimes'},
 {n:'Square Capital LLC. Credit Card Bank Secrecy Act &amp; Anti-Money Laundering (BSA &amp; AML) Square Capital Program',le:'Square Capital, LLC',d:'Financial Crimes'}
 ],
@@ -479,7 +480,6 @@ const DUE_DRILL={
 {n:'Block Inc. Global Geographic Risk Ratings Methodology &amp; Program',le:'Block, Inc.',d:'Governance'},
 {n:'Block, Inc. Model Governance Policy',le:'Block, Inc.',d:'Governance'},
 {n:'Cash App US Complaints Standard Cash',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Consumer Protection Program Standard',le:'Cash App US',d:'Consumer Protection'},
 {n:'Cash App US Fraud Risk Management Standard',le:'Cash App US',d:'Consumer Protection'},
 {n:'Cash App US Know Your Business Program for Cash for Business Customers',le:'Cash App US',d:'Financial Crimes'},
 {n:'Cash App US Lending Operations Complaints Standard',le:'Cash App US',d:'Consumer Protection'},
@@ -534,7 +534,7 @@ const A_ORG={
 'legal.all':{l:["Block, Inc.", "Cash App US", "Square AU Pty. Ltd.", "Square Capital, LLC", "Afterpay Canada Ltd", "Squareup International Ltd.", "Clearpay Finance Limited", "Squareup Europe Ltd.", "Other"],d:[44, 24, 18, 11, 10, 9, 8, 6, 26],m:44},
 'region.all':{l:["US", "Global", "AU", "UK", "CA", "EU", "JP", "NZ", "Other"],d:[57, 31, 21, 16, 14, 9, 5, 2, 1],m:57},
 'business.policy':{l:["Square", "Block", "Cash App", "Afterpay", "Clearpay", "Emerging Businesses", "Afterpay, Square"],d:[33, 25, 9, 6, 2, 1, 1],m:33},
-'legal.policy':{l:["Block, Inc.", "Square Capital, LLC", "Cash App US", "Square AU Pty. Ltd.", "Squareup International Ltd.", "Squareup Europe Ltd.", "Afterpay Canada Ltd", "Square K.K.", "Other"],d:[26, 10, 8, 6, 6, 5, 5, 3, 8],m:26},
+'legal.policy':{l:["Block, Inc.", "Square Capital, LLC", "Cash App US", "Squareup International Ltd.", "Square AU Pty. Ltd.", "Squareup Europe Ltd.", "Afterpay Canada Ltd", "Square K.K.", "Other"],d:[26, 10, 8, 6, 6, 5, 5, 3, 8],m:26},
 'region.policy':{l:["US", "Global", "CA", "UK", "AU", "EU", "JP"],d:[32, 13, 8, 8, 7, 6, 3],m:32},
 'business.standard':{l:["Square", "Block", "Cash App", "Afterpay", "Clearpay"],d:[23, 19, 18, 13, 6],m:23},
 'legal.standard':{l:["Block, Inc.", "Cash App US", "Square AU Pty. Ltd.", "Clearpay Finance Limited", "Afterpay Canada Ltd", "Squareup International Ltd.", "Afterpay US Services", "Square US", "Other"],d:[18, 16, 12, 6, 5, 3, 3, 3, 13],m:18},
@@ -547,20 +547,20 @@ const I_DIM1={
 'domain.policy':{l:["Consumer Protection", "Governance", "Ethics and Employee Conduct"],d:[10, 5, 4],t:19},
 'tier.policy':{l:["Tier 2", "Tier 3"],d:[18, 1],t:19},
 'doctype.policy':{l:["Policy"],d:[19],t:19},
-'domain.standard':{l:["Consumer Protection", "Financial Crimes", "Governance"],d:[2, 2, 2],t:6},
+'domain.standard':{l:["Consumer Protection", "Governance", "Financial Crimes"],d:[2, 2, 2],t:6},
 'tier.standard':{l:["Tier 3", "Tier 2"],d:[5, 1],t:6},
 'doctype.standard':{l:["Standard"],d:[6],t:6}
 };
 const I_ORG={
-'business.all':{l:["Clearpay", "Block", "Afterpay", "Cash App"],d:[19, 4, 1, 1],m:19},
+'business.all':{l:["Clearpay", "Block", "Cash App", "Afterpay"],d:[19, 4, 1, 1],m:19},
 'legal.all':{l:["Clearpay Finance Limited", "Block, Inc.", "Afterpay Australia Pty Ltd - Afterpay NZ Limited", "Cash App US"],d:[19, 4, 1, 1],m:19},
-'region.all':{l:["UK", "Global", "US", "AU, NZ"],d:[19, 4, 1, 1],m:19},
+'region.all':{l:["UK", "Global", "AU, NZ", "US"],d:[19, 4, 1, 1],m:19},
 'business.policy':{l:["Clearpay", "Afterpay"],d:[18, 1],m:18},
 'legal.policy':{l:["Clearpay Finance Limited", "Afterpay Australia Pty Ltd - Afterpay NZ Limited"],d:[18, 1],m:18},
 'region.policy':{l:["UK", "AU, NZ"],d:[18, 1],m:18},
 'business.standard':{l:["Block", "Clearpay", "Cash App"],d:[4, 1, 1],m:4},
-'legal.standard':{l:["Block, Inc.", "Cash App US", "Clearpay Finance Limited"],d:[4, 1, 1],m:4},
-'region.standard':{l:["Global", "UK", "US"],d:[4, 1, 1],m:4}
+'legal.standard':{l:["Block, Inc.", "Clearpay Finance Limited", "Cash App US"],d:[4, 1, 1],m:4},
+'region.standard':{l:["Global", "US", "UK"],d:[4, 1, 1],m:4}
 };
 
 /* ---- State ---- */
@@ -634,7 +634,7 @@ else{updateIDim1();updateIOrg()}
 function buildLcCharts(tab){
 if(!tab){tab=document.getElementById('lc-pill-active').classList.contains('active')?'active':'intake'}
 if(tab==='active'){
-makeDueBar('lc-a-due',["Current", "Coming Due", "Pending Review", "Extended"],[114, 17, 17, 8],114,["#7a9e7a", "#b8b070", "#b07070", "#c4a55a"]);
+makeDueBar('lc-a-due',["Current", "Coming Due", "Pending Review", "Extended"],[114, 17, 16, 9],114,["#7a9e7a", "#b8b070", "#b07070", "#c4a55a"]);
 closeDueDrilldown();
 }else{
 }
