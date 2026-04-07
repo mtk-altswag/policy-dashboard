@@ -115,7 +115,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <span class="logo-text">block</span>
 <div class="header-divider"></div>
 <span class="header-title">Policy Governance Reporting</span>
-<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 07, 2026 at 10:03 AM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div><div style="color:#555;font-size:10px;margin-top:2px">Dashboard refreshed twice daily</div></div>
+<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 07, 2026 at 04:03 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div><div style="color:#555;font-size:10px;margin-top:2px">Dashboard refreshed twice daily</div></div>
 </header>
 <div class="container">
 <div class="main-tab-bar">
@@ -720,15 +720,15 @@ const A_DIM1={
 'doctype.standard':{l:["Standard"],d:[79],t:79}
 };
 const A_ORG={
-'business.all':{l:["Square", "Block", "Cash App", "Afterpay", "Clearpay", "Emerging Businesses", "Afterpay, Square"],d:[56, 44, 27, 19, 8, 1, 1],m:56},
+'business.all':{l:["Square", "Block", "Cash App", "Afterpay", "Clearpay", "Afterpay, Square", "Emerging Businesses"],d:[56, 44, 27, 19, 8, 1, 1],m:56},
 'legal.all':{l:["Block, Inc.", "Cash App US", "Square AU Pty. Ltd.", "Square Capital, LLC", "Afterpay Canada Ltd", "Squareup International Ltd.", "Clearpay Finance Limited", "Squareup Europe Ltd.", "Other"],d:[44, 24, 18, 11, 10, 9, 8, 6, 26],m:44},
 'region.all':{l:["US", "Global", "AU", "UK", "CA", "EU", "JP", "NZ", "Other"],d:[57, 31, 21, 16, 14, 9, 5, 2, 1],m:57},
 'business.policy':{l:["Square", "Block", "Cash App", "Afterpay", "Clearpay", "Afterpay, Square", "Emerging Businesses"],d:[33, 25, 9, 6, 2, 1, 1],m:33},
 'legal.policy':{l:["Block, Inc.", "Square Capital, LLC", "Cash App US", "Square AU Pty. Ltd.", "Squareup International Ltd.", "Afterpay Canada Ltd", "Squareup Europe Ltd.", "Square K.K.", "Other"],d:[26, 10, 8, 6, 6, 5, 5, 3, 8],m:26},
 'region.policy':{l:["US", "Global", "UK", "CA", "AU", "EU", "JP"],d:[32, 13, 8, 8, 7, 6, 3],m:32},
 'business.standard':{l:["Square", "Block", "Cash App", "Afterpay", "Clearpay"],d:[23, 19, 18, 13, 6],m:23},
-'legal.standard':{l:["Block, Inc.", "Cash App US", "Square AU Pty. Ltd.", "Clearpay Finance Limited", "Afterpay Canada Ltd", "Afterpay US Services", "Squareup International Ltd.", "Square US", "Other"],d:[18, 16, 12, 6, 5, 3, 3, 3, 13],m:18},
-'region.standard':{l:["US", "Global", "AU", "UK", "CA", "EU", "JP", "NZ", "Other"],d:[25, 18, 14, 8, 6, 3, 2, 2, 1],m:25}
+'legal.standard':{l:["Block, Inc.", "Cash App US", "Square AU Pty. Ltd.", "Clearpay Finance Limited", "Afterpay Canada Ltd", "Square US", "Squareup International Ltd.", "Afterpay US Services", "Other"],d:[18, 16, 12, 6, 5, 3, 3, 3, 13],m:18},
+'region.standard':{l:["US", "Global", "AU", "UK", "CA", "EU", "NZ", "JP", "Other"],d:[25, 18, 14, 8, 6, 3, 2, 2, 1],m:25}
 };
 const I_DIM1={
 'domain.all':{l:["Consumer Protection", "Governance", "Financial Crimes", "Ethics and Employee Conduct"],d:[5, 4, 2, 1],t:12},
@@ -737,20 +737,20 @@ const I_DIM1={
 'domain.policy':{l:["Consumer Protection", "Ethics and Employee Conduct", "Governance"],d:[3, 1, 1],t:5},
 'tier.policy':{l:["Tier 2"],d:[5],t:5},
 'doctype.policy':{l:["Policy"],d:[5],t:5},
-'domain.standard':{l:["Governance", "Consumer Protection", "Financial Crimes"],d:[3, 2, 2],t:7},
+'domain.standard':{l:["Governance", "Financial Crimes", "Consumer Protection"],d:[3, 2, 2],t:7},
 'tier.standard':{l:["Tier 3", "Tier 2"],d:[5, 2],t:7},
 'doctype.standard':{l:["Standard"],d:[7],t:7}
 };
 const I_ORG={
-'business.all':{l:["Block", "Clearpay", "Cash App", "Afterpay"],d:[5, 5, 1, 1],m:5},
-'legal.all':{l:["Block, Inc.", "Clearpay Finance Limited", "Afterpay Australia Pty Ltd - Afterpay NZ Limited", "Cash App US"],d:[5, 5, 1, 1],m:5},
+'business.all':{l:["Clearpay", "Block", "Cash App", "Afterpay"],d:[5, 5, 1, 1],m:5},
+'legal.all':{l:["Block, Inc.", "Clearpay Finance Limited", "Cash App US", "Afterpay Australia Pty Ltd - Afterpay NZ Limited"],d:[5, 5, 1, 1],m:5},
 'region.all':{l:["UK", "Global", "AU, NZ", "US"],d:[5, 5, 1, 1],m:5},
 'business.policy':{l:["Clearpay", "Afterpay"],d:[4, 1],m:4},
 'legal.policy':{l:["Clearpay Finance Limited", "Afterpay Australia Pty Ltd - Afterpay NZ Limited"],d:[4, 1],m:4},
 'region.policy':{l:["UK", "AU, NZ"],d:[4, 1],m:4},
 'business.standard':{l:["Block", "Clearpay", "Cash App"],d:[5, 1, 1],m:5},
-'legal.standard':{l:["Block, Inc.", "Clearpay Finance Limited", "Cash App US"],d:[5, 1, 1],m:5},
-'region.standard':{l:["Global", "UK", "US"],d:[5, 1, 1],m:5}
+'legal.standard':{l:["Block, Inc.", "Cash App US", "Clearpay Finance Limited"],d:[5, 1, 1],m:5},
+'region.standard':{l:["Global", "US", "UK"],d:[5, 1, 1],m:5}
 };
 
 /* ---- State ---- */
