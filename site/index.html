@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Policy Governance Reporting</title>
+<title>Compliance Policy Governance Reporting</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#000;color:#fff;font-family:'Inter',sans-serif;min-height:100vh}
-header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:flex;align-items:center;gap:14px}
+header{background:#000;border-bottom:1px solid #222;padding:20px 32px;display:flex;align-items:center;gap:14px}
 .logo-svg{width:32px;height:32px}
 .logo-text{font-size:20px;font-weight:700;letter-spacing:1px}
 .header-divider{width:1px;height:28px;background:#333;margin:0 8px}
 .header-title{font-size:20px;font-weight:700;color:#fff}
 .header-subtitle{font-size:13px;color:#999;margin-left:auto}
-.container{max-width:1200px;margin:0 auto;padding:24px 32px 48px}
+.container{max-width:1200px;margin:0 auto;padding:32px 32px 48px}
 .main-tab-bar{display:flex;gap:8px;margin-bottom:20px}
 .main-tab-btn{padding:10px 24px;border-radius:24px;border:1px solid #444;background:#111;color:#aaa;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s}
 .main-tab-btn.active{background:#333;color:#fff;border-color:#555}
@@ -45,14 +45,17 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 .status-table{width:100%;border-collapse:collapse;font-size:13px}
 .status-table th{text-align:left;padding:10px 12px;color:#aaa;font-weight:500;border-bottom:1px solid #222;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
 .status-table td{padding:10px 12px;border-bottom:1px solid #222;color:#ddd}
+#lc-intake .status-table th{padding-top:16px;padding-bottom:16px}
+#lc-intake .status-table td{padding-top:11px;padding-bottom:11px}
+#lc-intake .status-table tbody tr:last-child td{border-bottom:none}
 .status-table .total-row td{border-top:2px solid #333;font-weight:700;color:#fff}
 .due-layout{display:flex;gap:0;flex:1;min-height:0;overflow:hidden}
 .due-chart{flex:1;min-width:0;min-height:0;display:flex;align-items:stretch}
 .due-key{width:320px;flex-shrink:0;border-left:1px solid #333;padding:10px 16px;display:flex;flex-direction:column;justify-content:center;gap:6px}
-.due-item{display:flex;align-items:center;gap:6px;font-size:11px}
+.due-item{display:flex;align-items:center;gap:6px;font-size:12px}
 .due-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .due-term{font-weight:600;color:#ccc;min-width:110px;white-space:nowrap}
-.due-desc{color:#999;font-size:11px}
+.due-desc{color:#999;font-size:12px}
 .hidden{display:none!important}
 
 .approved-tile{display:flex;align-items:center;gap:10px;background:#111;border:1px solid #222;border-radius:10px;padding:12px 18px;margin-top:16px;cursor:pointer;transition:all .2s;user-select:none}
@@ -95,6 +98,30 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 .due-drilldown th{text-align:left;padding:8px 12px;color:#999;font-weight:500;border-bottom:1px solid #222;font-size:12px;text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;background:#111}
 .due-drilldown td{padding:8px 12px;border-bottom:1px solid #222;color:#ddd}
 .due-drilldown td:first-child{color:#fff;font-weight:500;word-wrap:break-word}
+#sched-drilldown table{table-layout:fixed;width:100%}
+#sched-drilldown th:nth-child(1),#sched-drilldown td:nth-child(1){width:28%}
+#sched-drilldown th:nth-child(2),#sched-drilldown td:nth-child(2){width:15%}
+#sched-drilldown th:nth-child(3),#sched-drilldown td:nth-child(3){width:12%}
+#sched-drilldown th:nth-child(4),#sched-drilldown td:nth-child(4){width:12%;white-space:nowrap}
+#sched-drilldown th:nth-child(5),#sched-drilldown td:nth-child(5){width:11%;white-space:nowrap}
+#sched-drilldown th:nth-child(6),#sched-drilldown td:nth-child(6){width:22%}
+.status-table thead th{background:#111;padding-top:10px;padding-bottom:10px}
+.lifecycle-table{table-layout:fixed}
+.lifecycle-table th,.lifecycle-table td{word-break:break-word;overflow-wrap:anywhere;vertical-align:top}
+.lifecycle-table th:nth-child(1),.lifecycle-table td:nth-child(1){width:30%}
+.lifecycle-table th:nth-child(2),.lifecycle-table td:nth-child(2){width:15%}
+.lifecycle-table th:nth-child(3),.lifecycle-table td:nth-child(3){width:18%}
+.lifecycle-table th:nth-child(4),.lifecycle-table td:nth-child(4){width:15%}
+.lifecycle-table th:nth-child(5),.lifecycle-table td:nth-child(5){width:22%}
+.lifecycle-intake-table{table-layout:fixed}
+.lifecycle-intake-table th,.lifecycle-intake-table td{word-break:break-word;overflow-wrap:anywhere;vertical-align:top}
+.lifecycle-intake-table th:nth-child(1),.lifecycle-intake-table td:nth-child(1){width:35%}
+.lifecycle-intake-table th:nth-child(2),.lifecycle-intake-table td:nth-child(2){width:18%}
+.lifecycle-intake-table th:nth-child(3),.lifecycle-intake-table td:nth-child(3){width:22%}
+.lifecycle-intake-table th:nth-child(4),.lifecycle-intake-table td:nth-child(4){width:25%}
+
+.card.full-width{padding:0}
+#pdf-search-table thead th{background:#111;padding-top:10px;padding-bottom:10px}
 .due-drilldown-label{font-size:13px;color:#aaa;margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .due-drilldown-label .dd-status{color:#fff;font-weight:600}
 .due-drilldown-label .dd-close{cursor:pointer;margin-left:auto;color:#aaa;font-size:14px}
@@ -106,6 +133,36 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 .repo-link:hover{color:#9ec5fe;text-decoration:underline}
 #repo-table thead th{position:sticky;top:0;background:#111;z-index:1;box-shadow:0 1px 0 #333}
 .repo-filter-select{background:#000;color:#ccc;border:1px solid #444;border-radius:8px;padding:6px 12px;font-size:13px;font-family:'Inter',sans-serif;min-width:160px;height:38px}
+.lifecycle-shell{max-width:1080px;margin:0 auto}
+.table-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.table-toolbar .dd-search{margin-left:0;width:280px;height:38px;border-radius:8px;border:1px solid #333;background:#111;padding:0 12px;font-size:13px}
+.repo-toolbar{display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.repo-toolbar-main{display:flex;align-items:center;gap:12px;flex:1}
+.repo-filter-bar{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.repo-count-chip{display:inline-flex;align-items:center;gap:8px;background:#111;border:1px solid #333;border-radius:8px;padding:0 14px;height:38px;font-size:13px;color:#ccc;white-space:nowrap}
+.repo-search-input{width:280px;height:38px;border-radius:8px;border:1px solid #333;background:#111;padding:0 12px;font-size:13px}
+.card-h-360{height:360px}
+.card-h-320{height:320px}
+.card-h-300{height:300px}
+.scroll-table-card{margin-bottom:16px;padding:0;max-height:400px;overflow-y:auto}
+.sticky-head-row{position:sticky;top:0;background:#111;z-index:2;box-shadow:0 2px 4px rgba(0,0,0,0.8)}
+.scroll-table-card-sm{margin-bottom:16px;padding:0;max-height:320px;overflow-y:auto}
+.scroll-table-card-lg{padding:0;max-height:calc(100vh - 220px);overflow-y:auto}
+.scroll-table-card-xl{padding:0;max-height:calc(100vh - 440px);overflow-y:auto;border-radius:0 0 8px 8px;margin-top:0}
+
+@media (max-width: 980px){
+.container{padding:20px 20px 40px}
+.grid-2{grid-template-columns:1fr}
+.kpi-row{grid-template-columns:1fr}
+#lc-intake .grid-2{grid-template-columns:1fr!important}
+.due-layout{flex-direction:column}
+.due-key{width:auto;border-left:none;border-top:1px solid #333;padding:16px 0 0}
+.table-toolbar{align-items:stretch}
+.table-toolbar .dd-search,.repo-filter-select{width:100%;min-width:0}
+header{padding:16px 20px;flex-wrap:wrap}
+.header-subtitle{margin-left:0;width:100%}
+}
+
 
 </style>
 </head>
@@ -114,8 +171,11 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <svg class="logo-svg" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="8" height="8" rx="2" fill="#fff"/><rect x="12" y="1" width="8" height="8" rx="2" fill="#fff"/><rect x="23" y="1" width="8" height="8" rx="2" fill="#fff"/><rect x="1" y="12" width="8" height="8" rx="2" fill="#fff"/><rect x="12" y="12" width="8" height="8" rx="2" fill="#fff"/><rect x="23" y="12" width="8" height="8" rx="2" fill="#fff"/><rect x="1" y="23" width="8" height="8" rx="2" fill="#fff"/><rect x="12" y="23" width="8" height="8" rx="2" fill="#fff"/><rect x="23" y="23" width="8" height="8" rx="2" fill="#fff"/></svg>
 <span class="logo-text">block</span>
 <div class="header-divider"></div>
-<span class="header-title">Policy Governance Reporting</span>
-<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 20, 2026 at 02:54 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div><div style="color:#555;font-size:10px;margin-top:2px">Dashboard refreshed twice daily</div></div>
+<div style="display:flex;flex:1;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:0 24px">
+<span class="header-title" style="font-size:26px">Compliance Policy Governance Reporting</span>
+<div style="font-size:13px;line-height:1.5;color:#888;max-width:720px">This dashboard tracks and reports on the inventory and lifecycle status of compliance policies and standards.</div>
+</div>
+<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 20, 2026 at 03:56 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div><div style="color:#555;font-size:10px;margin-top:2px">Dashboard refreshed twice daily</div></div>
 </header>
 <div class="container">
 <div class="main-tab-bar">
@@ -133,18 +193,20 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <div class="kpi-info"><span class="kpi-value">160</span><span class="kpi-label">Active</span></div>
 </div>
 <div class="kpi-card clickable" id="kpi-intake" onclick="showIntakeTab()">
-<svg class="kpi-icon" viewBox="0 0 36 36" fill="none"><path d="M18 4v18m0 0l-6-6m6 6l6-6" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 26c0 2 2 4 4 4h16c2 0 4-2 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+<svg class="kpi-icon" viewBox="0 0 36 36" fill="none"><path d="M8 6h14l6 6v18a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2z" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6v6h6" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
 <div class="kpi-info"><span class="kpi-value">12</span><span class="kpi-label">Intake</span></div>
 </div>
-<div class="kpi-card retired">
+<div class="kpi-card clickable" id="kpi-retired" onclick="showRetiredTab()">
 <svg class="kpi-icon" viewBox="0 0 36 36" fill="none"><rect x="5" y="8" width="26" height="22" rx="3" stroke="#777" stroke-width="2"/><path d="M5 14h26" stroke="#777" stroke-width="2"/><path d="M14 19h8" stroke="#777" stroke-width="2" stroke-linecap="round"/></svg>
 <div class="kpi-info"><span class="kpi-value" style="color:#777">25</span><span class="kpi-label">Retired</span></div>
 </div>
 </div>
 
+
 <div class="pill-group" id="inv-pill-group" style="margin-bottom:20px;display:inline-flex">
 <button class="pill-btn active" id="inv-pill-active" onclick="showActiveTab()">Active</button>
 <button class="pill-btn" id="inv-pill-intake" onclick="showIntakeTab()">Intake</button>
+<button class="pill-btn" id="inv-pill-retired" onclick="showRetiredTab()">Retired</button>
 </div>
 
 <!-- Active sub-tab -->
@@ -152,7 +214,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <div class="section-title">Active Documents Breakdown</div>
 
 <div class="grid-2">
-<div class="card" style="height:360px">
+<div class="card card-h-360">
 <div class="card-header">
 <span class="card-title">Distribution</span>
 <div class="card-controls">
@@ -166,7 +228,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </div>
 <canvas id="a-dim1" class="cc" style="flex:1;min-height:0"></canvas>
 </div>
-<div class="card" style="height:360px">
+<div class="card card-h-360">
 <div class="card-header">
 <span class="card-title">Organization</span>
 <div class="card-controls">
@@ -191,7 +253,8 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <table>
 <thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th></tr></thead>
 <tbody>
-<tr><td>Afterpay Australia Pty Ltd Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies</td><td>Afterpay Australia Pty Ltd</td><td>Financial Crimes</td></tr><tr><td>Afterpay Canada Australian Anti-Money Laundering / Counter-Terrorism Financing (AML/CTF) Program</td><td>Afterpay Canada Ltd</td><td>Financial Crimes</td></tr><tr><td>Afterpay NZ Anti-Money Laundering &amp; Counter-Terrorism Financing  (AML &amp; CTF) Program Policies</td><td>Afterpay NZ Limited</td><td>Financial Crimes</td></tr><tr><td>Block Inc. Block Academy System Administration Standard</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block Inc. Compliance Committee &amp; Forum Oversight Standard</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block Inc. Compliance Mandatory Training Standard</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block Inc. Custody &amp; Liquidity Management Policy</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block Inc. Escalation Framework for Non-Completion of Compliance Training (Employees)</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block Inc. Escalation Framework for Non-Completion of Compliance Training (External Workers)</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block Inc. Global Compliance Monitoring &amp; Testing Program</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block Inc. Service Level Agreement and Backlog Management Program</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block, Inc. Gifts &amp; Entertainment Policy</td><td>Block, Inc.</td><td>Ethics and Employee Conduct</td></tr><tr><td>Block, Inc. Global Conflicts of Interest Policy</td><td>Block, Inc.</td><td>Ethics and Employee Conduct</td></tr><tr><td>Block, Inc. Governance Quality Assurance Standard</td><td>Block, Inc.</td><td>Governance</td></tr><tr><td>Block, Inc. Speak Up Policy</td><td>Block, Inc.</td><td>Ethics and Employee Conduct</td></tr><tr><td>Cash App AU Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies</td><td>Afterpay Australia Pty Ltd</td><td>Financial Crimes</td></tr><tr><td>Cash App Investing LLC Anti-Money Laundering &amp; Countering the Financing of Terrorism (AML &amp; CFT) Standard</td><td>Cash App Investing LLC</td><td>Financial Crimes</td></tr><tr><td>Cash App US Customer Conduct &amp; Staff Protection Policy</td><td>Cash App US</td><td>Consumer Protection</td></tr><tr><td>Cash App US Loan Loss and Charge Off Policy (Lending)</td><td>Cash App US</td><td>Consumer Protection</td></tr><tr><td>Cash App US Peer-to-Peer (P2P) Scam Policy</td><td>Cash App US</td><td>Consumer Protection</td></tr><tr><td>Clearpay Fitness and Propriety Standard</td><td>Clearpay Finance Limited</td><td>Governance</td></tr><tr><td>Clearpay UK - Senior Managers Certification Regime &amp; Conduct Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td></tr><tr><td>Clearpay UK - Training and Competence Standard</td><td>Clearpay Finance Limited</td><td>Governance</td></tr><tr><td>Clearpay UK Vulnerable Customer Standard</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td></tr><tr><td>SEL Electronic Money Directive (EMD) Policy</td><td>Squareup Europe Ltd.</td><td>Governance</td></tr><tr><td>SEL Speak Up Policy</td><td>Squareup Europe Ltd.</td><td>Ethics and Employee Conduct</td></tr><tr><td>SIL Conduct Standards Policy</td><td>Squareup International Ltd.</td><td>Ethics and Employee Conduct</td></tr><tr><td>SIL Conflicts of Interest Policy</td><td>Squareup International Ltd.</td><td>Ethics and Employee Conduct</td></tr><tr><td>SIL Consumer Protection Policy</td><td>Squareup International Ltd.</td><td>Consumer Protection</td></tr><tr><td>SIL Fitness &amp; Probity Policy</td><td>Squareup International Ltd.</td><td>Ethics and Employee Conduct</td></tr><tr><td>Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CTF) Risk Awareness Training Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Employee and Personnel Due Diligence Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Enhanced Customer Due Diligence Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Politically Exposed Person (PEP) Watchlist Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square AU Pty. Ltd. Regulatory Change Management Program</td><td>Square AU Pty. Ltd.</td><td>Governance</td></tr><tr><td>Square AU Pty. Ltd. Suspicious Matter Report Program</td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td>Square U.S. Transaction Monitoring Program Standard</td><td>Square US</td><td>Financial Crimes</td></tr></tbody>
+<tr><td><a class="repo-link" href="https://drive.google.com/file/d/1fxk_tnhCeOGRBCNc9ZvLIKZJUrpBF_mS/view?usp=drive_link" target="_blank">Afterpay Australia Pty Ltd Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies</a></td><td>Afterpay Australia Pty Ltd</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1jE_FgwFatRlHOpv7nz__WRhP4sryK7RX/view?usp=sharing" target="_blank">Afterpay Canada Australian Anti-Money Laundering / Counter-Terrorism Financing (AML/CTF) Program</a></td><td>Afterpay Canada Ltd</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1H6NYzxYHJHYTIT0R-zDOcCIM9Yn9LNNK/view?usp=sharing" target="_blank">Afterpay NZ Anti-Money Laundering &amp; Counter-Terrorism Financing  (AML &amp; CTF) Program Policies</a></td><td>Afterpay NZ Limited</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/14JTGKeZSv5F1t8rZfXw0ec2xtQl5PzE4/view?usp=sharing" target="_blank">Block Inc. Block Academy System Administration Standard</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1r6g6mcjtYtos7m4eHxlEmxaAt71iJhNa/view?usp=sharing" target="_blank">Block Inc. Compliance Committee &amp; Forum Oversight Standard</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1kwmAiYq-R5xcOsfowlCdHpyQTRU4fw9p/view?usp=sharing" target="_blank">Block Inc. Compliance Mandatory Training Standard</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1NQwmPWx5KQq8aTUogBorumyqVoyJNk61/view?usp=sharing" target="_blank">Block Inc. Custody &amp; Liquidity Management Policy</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/10X_qYvPrLpY5Uo-AvwA8mP29bG5jbqQb/view?usp=sharing" target="_blank">Block Inc. Escalation Framework for Non-Completion of Compliance Training (Employees)</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Xr63Xm6iKW5e2yT_La59gjUiV8L_iQsJ/view?usp=sharing" target="_blank">Block Inc. Escalation Framework for Non-Completion of Compliance Training (External Workers)</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1MPiNEOqauSkQMCU_W6NQT79iFqe9B2Up/view?usp=sharing" target="_blank">Block Inc. Global Compliance Monitoring &amp; Testing Program</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1zWb-AxK6FsEbiBK-egN6pKO_z6QbBrXx/view?usp=sharing" target="_blank">Block Inc. Service Level Agreement and Backlog Management Program</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1Xwum1kg-eXc9MgezG444ZYHbnNtFqxWq/view?usp=sharing" target="_blank">Block, Inc. Gifts &amp; Entertainment Policy</a></td><td>Block, Inc.</td><td>Ethics and Employee Conduct</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1pRWYLlq7JQMvMd-D-z8jeW0V3Uk3MqGE/view?usp=sharing" target="_blank">Block, Inc. Global Conflicts of Interest Policy</a></td><td>Block, Inc.</td><td>Ethics and Employee Conduct</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/17FGeeO3anQuSHmGIhEoDyjHPNJIP9O30/view?usp=sharing" target="_blank">Block, Inc. Governance Quality Assurance Standard</a></td><td>Block, Inc.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1VfNf0NBg-s18YlBQinK10cKu3KO76H83/view?usp=sharing" target="_blank">Block, Inc. Speak Up Policy</a></td><td>Block, Inc.</td><td>Ethics and Employee Conduct</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1c--X1zBIGLRlPXdbmnoBnRPqSS4zoTwp/view?usp=sharing" target="_blank">Cash App AU Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies</a></td><td>Afterpay Australia Pty Ltd</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1dtE9z5FlOOfU634LbPCwPGRu4vgYZZEq/view?usp=sharing" target="_blank">Cash App Investing LLC Anti-Money Laundering &amp; Countering the Financing of Terrorism (AML &amp; CFT) Standard</a></td><td>Cash App Investing LLC</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1VkRm4ejVC40S21a4VbmTKQX3V99IVtkr/view?usp=sharing" target="_blank">Cash App US Customer Conduct &amp; Staff Protection Policy</a></td><td>Cash App US</td><td>Consumer Protection</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1eIytVubc5pKQGRumMr3xpL3DQFK5YXdF/view?usp=sharing" target="_blank">Cash App US Loan Loss and Charge Off Policy (Lending)</a></td><td>Cash App US</td><td>Consumer Protection</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1InahAFzpg0zTiZiB-4ytptq3r4Zw26bu/view?usp=drive_link" target="_blank">Cash App US Peer-to-Peer (P2P) Scam Policy</a></td><td>Cash App US</td><td>Consumer Protection</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1zP4EQBWxaoGmDIuGmv9kq2RVQ7LfjvzA/view?usp=sharing" target="_blank">Clearpay Fitness and Propriety Standard</a></td><td>Clearpay Finance Limited</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/13PJg1oGqroTvTWY5XaKI9e6mMp8WtDc3/view?usp=sharing" target="_blank">Clearpay UK - Senior Managers Certification Regime &amp; Conduct Policy</a></td><td>Clearpay Finance Limited</td><td>Consumer Protection</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1yn0JHDf-pODYLHlXPvpkgNUjzaA5BbTb/view?usp=sharing" target="_blank">Clearpay UK - Training and Competence Standard</a></td><td>Clearpay Finance Limited</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1czKlHFQxs6iCdT1bDxgNdnbuqGNK4xLh/view?usp=sharing" target="_blank">Clearpay UK Vulnerable Customer Standard</a></td><td>Clearpay Finance Limited</td><td>Consumer Protection</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1d1dw_68iIX3NwJ3KufbA5iRhIU-kFiS8/view?usp=sharing" target="_blank">SEL Electronic Money Directive (EMD) Policy</a></td><td>Squareup Europe Ltd.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1xewIB_KIMjRQ7Nuocbs-SQ94FT7eFIOT/view?usp=sharing" target="_blank">SEL Speak Up Policy</a></td><td>Squareup Europe Ltd.</td><td>Ethics and Employee Conduct</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1SCbJtjGY01OGdn38f26ZpJJkJSNysmzI/view?usp=sharing" target="_blank">SIL Conduct Standards Policy</a></td><td>Squareup International Ltd.</td><td>Ethics and Employee Conduct</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1M_TQonWxBgXZXQWRvpmT_EraPGacpMYs/view?usp=sharing" target="_blank">SIL Conflicts of Interest Policy</a></td><td>Squareup International Ltd.</td><td>Ethics and Employee Conduct</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1-pwVFoEWvHYlyS_sYKvps6jCnuAiyumr/view?usp=sharing" target="_blank">SIL Consumer Protection Policy</a></td><td>Squareup International Ltd.</td><td>Consumer Protection</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1CaKMJ1VrA2yfW4JuqDOCBBKbwlpANqWr/view?usp=sharing" target="_blank">SIL Fitness &amp; Probity Policy</a></td><td>Squareup International Ltd.</td><td>Ethics and Employee Conduct</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1qqUuXJk0X_YGk9jE9mxIkXzcKoeE820i/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program</a></td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1RsSiNiSdCQZKFtRmgAr7BvfuzcVxuP5Z/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CTF) Risk Awareness Training Program</a></td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1-JUjddDJ9THyyh1gRm4acTGbwyfOFpqi/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Employee and Personnel Due Diligence Program</a></td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1AIiYdZ1W9dTzn0MU9Bu7inn47KM4K-oS/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Enhanced Customer Due Diligence Program</a></td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1uo4EuuffGzJSTDUmkIkXg-drWHrwgfq0/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program</a></td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1AwaazRaobApCjjVWnJsPcx1xF6kBy0i1/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Politically Exposed Person (PEP) Watchlist Program</a></td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1-RqCyqBBPLpXaV9cfee7TUsy2ncQK595/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Regulatory Change Management Program</a></td><td>Square AU Pty. Ltd.</td><td>Governance</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1mFBEPFDQK36mrgyiIFYHtAYzmTB8D0ID/view?usp=sharing" target="_blank">Square AU Pty. Ltd. Suspicious Matter Report Program</a></td><td>Square AU Pty. Ltd.</td><td>Financial Crimes</td></tr><tr><td><a class="repo-link" href="https://drive.google.com/file/d/1BuVqRkBVDjVngEAMYURenxu1r-xkqOBO/view?usp=sharing" target="_blank">Square U.S. Transaction Monitoring Program Standard</a></td><td>Square US</td><td>Financial Crimes</td></tr>
+</tbody>
 </table>
 </div>
 <div class="approved-tile" id="exception-toggle" onclick="toggleExceptions()">
@@ -210,13 +273,13 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </div>
 <div class="section-title">Document Review Schedule</div><div style="font-size:12px;color:#999;margin:-10px 0 12px">Documents awaiting review, grouped by due month</div>
 <div class="card full-width" style="height:250px">
-<div style="font-size:12px;color:#bbb;margin-bottom:8px;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1a6 6 0 100 12A6 6 0 007 1z" stroke="#bbb" stroke-width="1.2"/><path d="M6 5.5h2v4H6z" fill="#bbb"/><circle cx="7" cy="4" r=".8" fill="#bbb"/></svg>Select a bar to explore details</div>
+
 <canvas id="a-schedule" class="cc" style="flex:1;min-height:0"></canvas>
 </div>
 <div class="due-drilldown" id="sched-drilldown">
 <div class="due-drilldown-label"><span>Showing: </span><span class="dd-status" id="sched-status-label"></span><input class="dd-search" id="sched-search" type="text" placeholder="Search documents..." oninput="filterSchedDrilldown()"><span class="dd-close" onclick="closeSchedDrilldown()">&#10005;</span></div>
 <table>
-<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th><th>Due Date</th><th>Days Until Due</th></tr></thead>
+<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th><th>Due Date</th><th>Days Until Due</th><th>Current Step</th></tr></thead>
 <tbody id="sched-tbody"></tbody>
 </table>
 </div>
@@ -226,7 +289,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <div id="tab-intake" class="hidden">
 <div class="section-title">Intake Documents Breakdown</div>
 <div class="grid-2">
-<div class="card" style="height:360px">
+<div class="card card-h-360">
 <div class="card-header">
 <span class="card-title">Distribution</span>
 <div class="card-controls">
@@ -240,7 +303,7 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </div>
 <canvas id="i-dim1" class="cc" style="flex:1;min-height:0"></canvas>
 </div>
-<div class="card" style="height:360px">
+<div class="card card-h-360">
 <div class="card-header">
 <span class="card-title">Organization</span>
 <div class="card-controls">
@@ -255,20 +318,57 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <canvas id="i-org" class="cc" style="flex:1;min-height:0"></canvas>
 </div>
 </div>
-<div class="section-title">Incoming Documents</div>
-<div class="card full-width" style="margin-bottom:16px;max-height:400px;overflow-y:auto">
+
+<div class="section-title">Incoming Documents (12)</div>
+<div class="card full-width scroll-table-card">
 <table class="status-table">
-<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th><th>Target Approval Date</th></tr></thead>
+<thead><tr class="sticky-head-row"><th>Document Name</th><th>Legal Entity</th><th>Domain</th><th>Target Approval Date</th></tr></thead>
 <tbody>
-<tr><td>Afterpay Fit and Proper Policy</td><td>Afterpay Australia Pty Ltd - Afterpay NZ Limited</td><td>Governance</td><td>Dec 31, 2026</td></tr><tr><td>Block Compliance University Standard</td><td>Block, Inc.</td><td>Governance</td><td>May 01, 2026</td></tr><tr><td>Block Inc. Identity Theft Prevention Standard</td><td>Block, Inc.</td><td>Consumer Protection</td><td>Jun 30, 2026</td></tr><tr><td>Block, Inc. Compliance Detections Program Standard</td><td>Block, Inc.</td><td>Financial Crimes</td><td>Nov 30, 2025</td></tr><tr><td>Cash App US Drugs Standard</td><td>Cash App US</td><td>Financial Crimes</td><td>May 31, 2026</td></tr><tr><td>Clearpay UK - Consumer Duty Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Vulnerable Customer Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Whistleblowing Policy</td><td>Clearpay Finance Limited</td><td>Ethics and Employee Conduct</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK Customer Communications Standard </td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Feb 28, 2026</td></tr><tr><td>Clearpay UK Marketing &amp; Financial Promotions Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Compliance Issue Management Oversight Framework</td><td>Block, Inc.</td><td>Governance</td><td>May 30, 2026</td></tr><tr><td>Red Flags/Identity Theft Risk Assessment Standard</td><td>Block, Inc.</td><td>Consumer Protection</td><td>Sep 30, 2026</td></tr>
+<tr><td>Afterpay Fit and Proper Policy</td><td>Afterpay Australia Pty Ltd - Afterpay NZ Limited</td><td>Governance</td><td>Dec 31, 2026</td></tr><tr><td>Block Compliance University Standard</td><td>Block, Inc.</td><td>Governance</td><td>May 01, 2026</td></tr><tr><td>Block Inc. Identity Theft Prevention Standard</td><td>Block, Inc.</td><td>Consumer Protection</td><td>Jun 30, 2026</td></tr><tr><td>Block, Inc. Compliance Detections Program Standard</td><td>Block, Inc.</td><td>Financial Crimes</td><td>Nov 30, 2025</td></tr><tr><td>Cash App US Drugs Standard</td><td>Cash App US</td><td>Financial Crimes</td><td>May 31, 2026</td></tr><tr><td>Clearpay UK - Consumer Duty Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Vulnerable Customer Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK - Whistleblowing Policy</td><td>Clearpay Finance Limited</td><td>Ethics and Employee Conduct</td><td>Dec 31, 2026</td></tr><tr><td>Clearpay UK Customer Communications Standard</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Feb 28, 2026</td></tr><tr><td>Clearpay UK Marketing &amp; Financial Promotions Policy</td><td>Clearpay Finance Limited</td><td>Consumer Protection</td><td>Dec 31, 2026</td></tr><tr><td>Compliance Issue Management Oversight Framework</td><td>Block, Inc.</td><td>Governance</td><td>May 30, 2026</td></tr><tr><td>Red Flags/Identity Theft Risk Assessment Standard</td><td>Block, Inc.</td><td>Consumer Protection</td><td>Sep 30, 2026</td></tr>
 </tbody>
 </table>
 </div>
 </div>
+
+<div id="tab-retired" class="hidden">
+<div class="section-title">Retired Documents Breakdown</div>
+<div class="grid-2">
+<div class="card card-h-360">
+<div class="card-header">
+<span class="card-title">Distribution</span>
+<div class="card-controls">
+<select class="dim-select" id="r-dim1-sel" onchange="updateRDim1()"><option value="domain">By Domain</option><option value="tier">By Tier</option><option value="doctype">By Document Type</option></select>
+<div class="pill-group" id="r-dim1-pills">
+<button class="pill-btn active" onclick="setRPill('dim1','all',this)">All</button>
+<button class="pill-btn" onclick="setRPill('dim1','policy',this)">Policy</button>
+<button class="pill-btn" onclick="setRPill('dim1','standard',this)">Standard</button>
+</div></div></div>
+<canvas id="r-dim1" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+<div class="card card-h-360">
+<div class="card-header">
+<span class="card-title">Organization</span>
+<div class="card-controls">
+<select class="dim-select" id="r-org-sel" onchange="updateROrg()"><option value="business">By Business</option><option value="legal">By Legal Entity</option><option value="region">By Region</option></select>
+<div class="pill-group" id="r-org-pills">
+<button class="pill-btn active" onclick="setRPill('org','all',this)">All</button>
+<button class="pill-btn" onclick="setRPill('org','policy',this)">Policy</button>
+<button class="pill-btn" onclick="setRPill('org','standard',this)">Standard</button>
+</div></div></div>
+<canvas id="r-org" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+</div>
+<div class="section-title">Retired Documents</div>
+<div class="card full-width" style="margin-bottom:16px;max-height:400px;overflow-y:auto">
+<table class="status-table">
+<thead><tr class="sticky-head-row"><th style="width:40%">Document Name</th><th style="width:20%">Domain</th><th style="width:25%">Legal Entity</th><th style="width:15%">Retirement Date</th></tr></thead>
+<tbody><tr><td>Afterpay US, Inc. Compliance Management System (CMS) Policy</td><td>Governance</td><td>Afterpay US Services</td><td>2026-03-31</td></tr><tr><td>Afterpay US, Inc. Equal Credit Opportunity Act (ECOA) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2026-03-04</td></tr><tr><td>Afterpay US, Inc. Fair Debt Collection Practices Act (FDCPA) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2026-03-04</td></tr><tr><td>Afterpay US, Inc. Gramm-Leach-Bliley Act (GLBA) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2026-03-04</td></tr><tr><td>Afterpay US, Inc. Servicemembers Civil Relief Act (SCRA) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2026-03-04</td></tr><tr><td>Afterpay US, Inc. Electronic Signatures in Global and National Commerce Act (E-SIGN) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2026-02-10</td></tr><tr><td>Afterpay US, Inc. Controlling the Assault of Non-Solicited Pornography and Marketing Act (CAN-SPAM) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2025-12-10</td></tr><tr><td>Afterpay US, Inc. Unfair, Deceptive, or Abusive Acts or Practices Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2025-12-10</td></tr><tr><td>Cash App US CAN-SPAM Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-12-10</td></tr><tr><td>Cash App US Cash App UDAAP Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-12-10</td></tr><tr><td>Afterpay US, Inc. Electronic Funds Transfer Act (EFTA) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2025-12-08</td></tr><tr><td>Cash App US Electronic Fund Transfer Act (Regulation E) Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-12-08</td></tr><tr><td>Cash App US Electronic Signature (E-Sign) Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-12-08</td></tr><tr><td>Afterpay US, Inc. Telephone Consumer Protection Act (TCPA) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2025-12-02</td></tr><tr><td>Afterpay US, Inc. Military Lending Act (MLA) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2025-11-11</td></tr><tr><td>Afterpay US, Inc. Truth in Lending Act (TILA) Policy (Regulation Z)</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2025-11-10</td></tr><tr><td>Cash App US Fair Debt Collection Practices Act (FDCPA) Policy (Cash-App)</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-11-10</td></tr><tr><td>Cash App US Military Lending Act Policy (Lending)</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-11-10</td></tr><tr><td>Afterpay US, Inc. Fair Credit Reporting Act (FCRA) Policy</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>2025-11-07</td></tr><tr><td>Cash App US Equal Credit Opportunity Act (ECOA) Policy (Lending)</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-11-07</td></tr><tr><td>Cash App US Fair Credit Reporting Act (FCRA) Policy (Lending)</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-11-07</td></tr><tr><td>Cash App US Service Members Civil Relief (SCRA) - Lending Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-11-07</td></tr><tr><td>Cash App US Truth in Lending Act Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-11-07</td></tr><tr><td>Cash App US Gramm-Leach-Bliley Act (GLBA) Privacy Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>2025-11-06</td></tr><tr><td>Block Inc. 2025 Compliance Training Calendar</td><td>Governance</td><td>Block, Inc.</td><td></td></tr></tbody>
+</table></div></div>
 </div>
 
 <!-- ===== MAIN TAB 2: DOCUMENT LIFECYCLE STATUS ===== -->
 <div id="main-tab-lifecycle" class="hidden">
+<div class="lifecycle-shell">
 <div class="pill-group" style="margin-bottom:20px;display:inline-flex">
 <button class="pill-btn active" id="lc-pill-active" onclick="switchLcTab('active')">Active</button>
 <button class="pill-btn" id="lc-pill-intake" onclick="switchLcTab('intake')">Intake</button>
@@ -276,45 +376,59 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 
 <!-- Lifecycle Active -->
 <div id="lc-active">
-<div class="section-title">Document Lifecycle Tracking</div>
-<div class="card full-width" style="margin-bottom:16px">
-<table class="status-table">
-<thead><tr><th>Domain</th><th>Current</th><th>Under QC</th><th>In Approvals</th><th>Total</th></tr></thead>
-<tbody>
-<tr><td>Consumer Protection</td><td>55</td><td>0</td><td>0</td><td><strong>55</strong></td></tr><tr><td>Governance</td><td>44</td><td>2</td><td>0</td><td><strong>46</strong></td></tr><tr><td>Financial Crimes</td><td>41</td><td>2</td><td>2</td><td><strong>45</strong></td></tr><tr><td>Ethics and Employee Conduct</td><td>14</td><td>0</td><td>0</td><td><strong>14</strong></td></tr><tr style="font-weight:700;border-top:2px solid #333"><td>Total</td><td>154</td><td>4</td><td>2</td><td>160</td></tr>
-</tbody>
-</table>
-</div>
-<div class="card full-width" style="height:300px;margin-bottom:16px">
-<div class="card-header"><span class="card-title">By Due Date Status</span></div>
-<div style="font-size:12px;color:#bbb;margin-bottom:8px;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1a6 6 0 100 12A6 6 0 007 1z" stroke="#bbb" stroke-width="1.2"/><path d="M6 5.5h2v4H6z" fill="#bbb"/><circle cx="7" cy="4" r=".8" fill="#bbb"/></svg>Select a bar to explore details</div>
+
+<div class="section-title">Due Date Status Overview</div>
+<div class="card full-width card-h-320" style="padding:10px 20px 20px 20px;margin-bottom:16px">
+<div class="card-header" style="margin-bottom:4px"><span class="card-title">By Due Date Status</span></div>
 <div class="due-layout">
 <div class="due-chart"><canvas id="lc-a-due" class="cc" style="flex:1;min-height:0"></canvas></div>
 <div class="due-key">
 <div class="due-item"><span class="due-dot" style="background:#7a9e7a"></span><span class="due-term">Current</span><span class="due-desc">Up to date</span></div>
 <div class="due-item"><span class="due-dot" style="background:#b8b070"></span><span class="due-term">Coming Due</span><span class="due-desc">Due within 90 days</span></div>
 <div class="due-item"><span class="due-dot" style="background:#c4a55a"></span><span class="due-term">Extended</span><span class="due-desc">Extension granted</span></div>
-<div class="due-item"><span class="due-dot" style="background:#b89060"></span><span class="due-term">Ext. Coming Due</span><span class="due-desc">Within 30 days of extended deadline</span></div>
-<div class="due-item"><span class="due-dot" style="background:#b07070"></span><span class="due-term">Pending Review</span><span class="due-desc">Past review date; within 30-day grace period</span></div>
-<div class="due-item"><span class="due-dot" style="background:#a05555"></span><span class="due-term">Overdue</span><span class="due-desc">More than 30 days past due</span></div>
-<div class="due-item"><span class="due-dot" style="background:#884040"></span><span class="due-term">Overdue Past Ext.</span><span class="due-desc">Beyond extended deadline</span></div>
+<div class="due-item"><span class="due-dot" style="background:#b07070"></span><span class="due-term">Overdue</span><span class="due-desc">Past review date</span></div>
 </div>
 </div>
 </div>
-<div class="due-drilldown" id="due-drilldown">
-<div class="due-drilldown-label"><span>Showing: </span><span class="dd-status" id="dd-status-label"></span><input class="dd-search" id="dd-search" type="text" placeholder="Search documents..." oninput="filterDueDrilldown()"><span class="dd-close" onclick="closeDueDrilldown()">&#10005;</span></div>
-<table>
-<thead><tr><th>Document Name</th><th>Legal Entity</th><th>Domain</th></tr></thead>
-<tbody id="dd-tbody"></tbody>
+
+<div class="section-title">By Domain Breakdown</div>
+<div class="card full-width scroll-table-card-sm">
+<table class="status-table">
+<thead><tr><th>Domain</th><th>Current</th><th>Coming Due</th><th>Extended</th><th>Overdue</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Consumer Protection</td><td>39</td><td>5</td><td>7</td><td>4</td><td><strong>55</strong></td></tr><tr><td>Governance</td><td>28</td><td>10</td><td>2</td><td>7</td><td><strong>47</strong></td></tr><tr><td>Financial Crimes</td><td>29</td><td>10</td><td>4</td><td>2</td><td><strong>45</strong></td></tr><tr><td>Ethics and Employee Conduct</td><td>13</td><td>0</td><td>1</td><td>0</td><td><strong>14</strong></td></tr><tr style="font-weight:700;border-top:2px solid #333"><td>Total</td><td>109</td><td>25</td><td>14</td><td>13</td><td>161</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section-title">Documents Needing Attention (<span id="attention-count">52</span>)</div>
+<div class="table-toolbar">
+<input class="dd-search" id="attention-search" type="text" placeholder="Search documents..." oninput="applyAttentionFilters()">
+<select class="repo-filter-select" id="attention-filter1-col" onchange="updateAttentionFilterOptions('filter1')"><option value="">Primary Filter...</option><option value="1">Domain</option><option value="2">Legal Entity</option><option value="3">Status</option><option value="4">Current Step</option></select>
+<select class="repo-filter-select" id="attention-filter1-val" onchange="applyAttentionFilters()" disabled><option value="">Select value...</option></select>
+<select class="repo-filter-select" id="attention-filter2-col" onchange="updateAttentionFilterOptions('filter2')"><option value="">Secondary Filter...</option><option value="1">Domain</option><option value="2">Legal Entity</option><option value="3">Status</option><option value="4">Current Step</option></select>
+<select class="repo-filter-select" id="attention-filter2-val" onchange="applyAttentionFilters()" disabled><option value="">Select value...</option></select>
+<button class="pill-btn" onclick="clearAttentionFilters()" style="height:38px;padding:0 16px;border-radius:8px">Clear Filters</button>
+</div>
+<div class="card full-width scroll-table-card">
+<table class="status-table lifecycle-table">
+<thead><tr class="sticky-head-row"><th>Document Name</th><th>Domain</th><th>Legal Entity</th><th>Status</th><th>Current Step</th></tr></thead>
+<tbody id="attention-tbody">
+<tr><td>Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part B - Customer Identification and Verification</td><td>Financial Crimes</td><td>Afterpay Australia Pty Ltd</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Afterpay Canada Limited Canada Complaints Policy</td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Afterpay Canada Limited Canada Consumer Protection Policy</td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Afterpay Canada Limited Canada Marketing Standard</td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Afterpay Canada Limited French Language Standard</td><td>Consumer Protection</td><td>Afterpay Canada Ltd</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Afterpay New Zealand Australian Anti-Money Laundering / Countering Financing of Terrorism (AML/CFT) Program</td><td>Financial Crimes</td><td>Afterpay NZ Limited</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Afterpay US Inc Third Party Risk Management (TPRM) Standard</td><td>Governance</td><td>Afterpay US Services</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Afterpay US Inc US Complaint Standard</td><td>Consumer Protection</td><td>Afterpay US Services</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Afterpay US Inc. Regulatory Change Management Standard</td><td>Governance</td><td>Afterpay US Services</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Activation Customer Risk Rating Program</td><td>Governance</td><td>Block, Inc.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Anti-Money Laundering (AML), Counter-Terrorist Financing (CFT) &amp; Sanctions Product Risk Assessment Program</td><td>Governance</td><td>Block, Inc.</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT) &amp; Sanctions Annual Risk Assessment Standard</td><td>Governance</td><td>Block, Inc.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Block Compliance Risk and Control Standard</td><td>Governance</td><td>Block, Inc.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Compliance Audit, Exam &amp; Independent Assessment Management Program</td><td>Governance</td><td>Block, Inc.</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Global Complaint Program Standard</td><td>Consumer Protection</td><td>Block, Inc.</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Global Compliance Monitoring &amp; Testing Program</td><td>Governance</td><td>Block, Inc.</td><td>Extended</td><td>Active Version</td></tr><tr><td>Block Inc. Global Geographic Risk Ratings Methodology &amp; Program</td><td>Governance</td><td>Block, Inc.</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Global Sanctions Compliance Program Standard</td><td>Financial Crimes</td><td>Block, Inc.</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block, Inc. Anti-Bribery &amp; Anti-Corruption Policy</td><td>Ethics and Employee Conduct</td><td>Block, Inc.</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block, Inc. Compliance Policy on Policies</td><td>Governance</td><td>Block, Inc.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block, Inc. Controlling the Assault of Non-Solicited Pornography &amp; Marketing Act (CAN-SPAM) Policy</td><td>Consumer Protection</td><td>Block, Inc.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block, Inc. Model Governance Policy</td><td>Governance</td><td>Block, Inc.</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App Global Cash App Sanctions Compliance Standard</td><td>Financial Crimes</td><td>Cash App US</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App UK SEL Financial Crimes Program</td><td>Financial Crimes</td><td>Cash App UK</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Bitcoin (BTC) Travel Rule Program</td><td>Financial Crimes</td><td>Cash App US</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Cash App Continuous Customer Risk Rating Program</td><td>Governance</td><td>Cash App US</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Complaints Standard Cash</td><td>Consumer Protection</td><td>Cash App US</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Consumer Protection Program Standard</td><td>Consumer Protection</td><td>Cash App US</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Denylist Appeals Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Disputes Standard</td><td>Consumer Protection</td><td>Cash App US</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Elder Financial Exploitation Policy</td><td>Consumer Protection</td><td>Cash App US</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Fraud Risk Management Standard</td><td>Consumer Protection</td><td>Cash App US</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Know Your Business Program for Cash for Business Customers</td><td>Financial Crimes</td><td>Cash App US</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Lending Operations Complaints Standard</td><td>Consumer Protection</td><td>Cash App US</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Transaction Monitoring Modeling Program</td><td>Governance</td><td>Cash App US</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Cash App US Unacceptable Use Monitoring Standard</td><td>Financial Crimes</td><td>Cash App US</td><td>Extended</td><td>QC / Assign Reviewers</td></tr><tr><td>Cash App, US Business Activity Monitoring (BAM) Policy</td><td>Governance</td><td>Cash App US</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Clearpay Finance Limited Consumer Due Diligence Standard</td><td>Financial Crimes</td><td>Clearpay Finance Limited</td><td>Coming Due</td><td>Draft Review (Leadership)</td></tr><tr><td>Clearpay Finance Limited Merchant Due Diligence Standard</td><td>Financial Crimes</td><td>Clearpay Finance Limited</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Compliance Incident Management Reporting Standard</td><td>Governance</td><td>Block, Inc.</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>SEL Consumer Protection Policy</td><td>Consumer Protection</td><td>Squareup Europe Ltd.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>SEL Financial Crimes Program</td><td>Financial Crimes</td><td>Squareup Europe Ltd.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>SIL Financial Crimes Program</td><td>Financial Crimes</td><td>Squareup International Ltd.</td><td>Coming Due</td><td>QC / Assign Reviewers</td></tr><tr><td>SIL Regulatory Compliance Monitoring Program</td><td>Governance</td><td>Squareup International Ltd.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Square AU Pty. Ltd. Vulnerable Customers Standard</td><td>Consumer Protection</td><td>Square AU Pty. Ltd.</td><td>Overdue</td><td>Document Drafting (Submitter)</td></tr><tr><td>Square Capital LLC. Credit Card Bank Secrecy Act &amp; Anti-Money Laundering (BSA &amp; AML) Square Capital Program</td><td>Financial Crimes</td><td>Square Capital, LLC</td><td>Extended</td><td>Document Drafting (Submitter)</td></tr><tr><td>Square K.K. Anti-Money Laundering (AML), Counter Terrorist Financing (CTF) &amp; Financial Sanctions Program</td><td>Financial Crimes</td><td>Square K.K.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Square K.K. Anti-Social Forces Management Policy</td><td>Financial Crimes</td><td>Square K.K.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Square K.K. Anti-Social Forces Management Program</td><td>Financial Crimes</td><td>Square K.K.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Square K.K. Compliance Management System Policy</td><td>Governance</td><td>Square K.K.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Square K.K. Outsourcing Management Policy</td><td>Governance</td><td>Square K.K.</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr><tr><td>Square U.S. Continuous Customer Risk Rating Program</td><td>Governance</td><td>Square US</td><td>Coming Due</td><td>Document Drafting (Submitter)</td></tr>
+</tbody>
 </table>
 </div>
 
 </div>
-
 <!-- Lifecycle Intake -->
 <div id="lc-intake" class="hidden">
 <div class="section-title">Document Lifecycle Tracking</div>
-<div class="card full-width" style="margin-bottom:16px">
+<div class="grid-2" style="grid-template-columns:0.88fr 1.12fr;margin-bottom:16px">
+<div class="card card-h-300">
+<div class="card-header"><span class="card-title">By Current Step</span></div>
+<canvas id="lc-i-stage" class="cc" style="flex:1;min-height:0"></canvas>
+</div>
+<div class="card card-h-300" style="padding:0;overflow-y:auto">
 <table class="status-table">
 <thead><tr><th>Domain</th><th>New Drafting</th><th>Under QC</th><th>In Approvals</th><th>Total</th></tr></thead>
 <tbody>
@@ -323,19 +437,30 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 </table>
 </div>
 </div>
-</div>
 
+<div class="section-title">Incoming Documents (12)</div>
+<div class="card full-width scroll-table-card">
+<table class="status-table lifecycle-intake-table">
+<thead><tr class="sticky-head-row"><th>Document Name</th><th>Domain</th><th>Legal Entity</th><th>Current Step</th></tr></thead>
+<tbody>
+<tr><td>Afterpay Fit and Proper Policy</td><td>Governance</td><td>Afterpay Australia Pty Ltd - Afterpay NZ Limited</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Compliance University Standard</td><td>Governance</td><td>Block, Inc.</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block Inc. Identity Theft Prevention Standard</td><td>Consumer Protection</td><td>Block, Inc.</td><td>Document Drafting (Submitter)</td></tr><tr><td>Block, Inc. Compliance Detections Program Standard</td><td>Financial Crimes</td><td>Block, Inc.</td><td>Stakeholder Review + QC </td></tr><tr><td>Cash App US Drugs Standard</td><td>Financial Crimes</td><td>Cash App US</td><td>Document Drafting (Submitter)</td></tr><tr><td>Clearpay UK - Consumer Duty Policy</td><td>Consumer Protection</td><td>Clearpay Finance Limited</td><td>Draft Review (Board)</td></tr><tr><td>Clearpay UK - Vulnerable Customer Policy</td><td>Consumer Protection</td><td>Clearpay Finance Limited</td><td>Stakeholder Review + QC </td></tr><tr><td>Clearpay UK - Whistleblowing Policy</td><td>Ethics and Employee Conduct</td><td>Clearpay Finance Limited</td><td>Document Drafting (Submitter)</td></tr><tr><td>Clearpay UK Customer Communications Standard</td><td>Consumer Protection</td><td>Clearpay Finance Limited</td><td>Document Drafting (Submitter)</td></tr><tr><td>Clearpay UK Marketing &amp; Financial Promotions Policy</td><td>Consumer Protection</td><td>Clearpay Finance Limited</td><td>QC / Assign Reviewers</td></tr><tr><td>Compliance Issue Management Oversight Framework</td><td>Governance</td><td>Block, Inc.</td><td>Document Drafting (Submitter)</td></tr><tr><td>Red Flags/Identity Theft Risk Assessment Standard</td><td>Consumer Protection</td><td>Block, Inc.</td><td>Document Drafting (Submitter)</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 
 <!-- ===== MAIN TAB 3: DOCUMENT REPOSITORY ===== -->
 <div id="main-tab-repo" class="hidden">
 <div class="section-title">Document Repository</div>
-<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap">
-<div style="display:flex;align-items:center;gap:12px;flex:1">
-<div style="display:inline-flex;align-items:center;gap:8px;background:#111;border:1px solid #333;border-radius:8px;padding:0 14px;height:38px;font-size:13px;color:#ccc;white-space:nowrap"><span style="font-weight:700;color:#fff;font-size:16px" id="repo-count">160</span>&nbsp;Published Documents</div>
-<input class="dd-search" id="repo-search" type="text" placeholder="Search documents..." oninput="filterRepo()" style="width:280px;height:38px;border-radius:8px;border:1px solid #333;background:#111;padding:0 12px;font-size:13px">
+<div class="repo-toolbar">
+<div class="repo-toolbar-main">
+<div class="repo-count-chip"><span style="font-weight:700;color:#fff;font-size:16px" id="repo-count">160</span>&nbsp;Published Documents</div>
+<input class="dd-search repo-search-input" id="repo-search" type="text" placeholder="Search documents & PDF content..." oninput="filterRepo()">
 </div>
 </div>
-<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+<div class="repo-filter-bar">
 <span style="font-size:12px;color:#777">Filters:</span>
 <select class="repo-filter-select" id="repo-filter1-col" onchange="updateRepoFilterOptions('filter1')"><option value="">Primary Filter...</option><option value="1">Domain</option><option value="2">Legal Entity</option><option value="3">Document Owner</option><option value="4">Tier</option></select>
 <select class="repo-filter-select" id="repo-filter1-val" onchange="applyRepoFilters()" disabled><option value="">Select value...</option></select>
@@ -343,9 +468,9 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <select class="repo-filter-select" id="repo-filter2-val" onchange="applyRepoFilters()" disabled><option value="">Select value...</option></select>
 <button class="pill-btn" onclick="clearRepoFilters()" style="height:38px;padding:0 16px;border-radius:8px">Clear Filters</button>
 </div>
-<div class="card full-width" style="max-height:calc(100vh - 220px);overflow-y:auto">
+<div class="card full-width scroll-table-card-lg">
 <table class="status-table" id="repo-table">
-<thead><tr><th style="width:35%">Document Name</th><th style="width:18%">Domain</th><th style="width:20%">Legal Entity</th><th style="width:17%">Document Owner</th><th style="width:10%">Tier</th></tr></thead>
+<thead><tr class="sticky-head-row"><th style="width:35%">Document Name</th><th style="width:18%">Domain</th><th style="width:20%">Legal Entity</th><th style="width:17%">Document Owner</th><th style="width:10%">Tier</th></tr></thead>
 <tbody id="repo-tbody">
 <tr><td><a class="repo-link" href="https://drive.google.com/file/d/1fxk_tnhCeOGRBCNc9ZvLIKZJUrpBF_mS/view?usp=drive_link" target="_blank">Afterpay Australia Pty Ltd Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies</a></td><td>Financial Crimes</td><td>Afterpay Australia Pty Ltd</td><td>Eve Ishak</td><td>Tier 2</td></tr>
 <tr><td><a class="repo-link" href="https://drive.google.com/file/d/1_UF-7jujmnBZ3ZaveKoLAQBMCs7WvpvD/view?usp=drive_link" target="_blank">Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part A</a></td><td>Financial Crimes</td><td>Afterpay Australia Pty Ltd</td><td>Martina Kann</td><td>Tier 2</td></tr>
@@ -507,187 +632,26 @@ header{background:#000;border-bottom:1px solid #222;padding:16px 32px;display:fl
 <tr><td><a class="repo-link" href="https://drive.google.com/file/d/1yBJyo9iZXzTtrSv6z7qJ6GfxO7VaOWDs/view?usp=sharing" target="_blank">Square U.S. Identity Verification Policy</a></td><td>Financial Crimes</td><td>Square US</td><td>—</td><td>Tier 2</td></tr>
 <tr><td><a class="repo-link" href="https://drive.google.com/file/d/15TWdk8ns_9pn6jYxd7GZPi4N1jVtd6-r/view?usp=sharing" target="_blank">Square U.S. Know Your Customer (KYC) Program</a></td><td>Financial Crimes</td><td>Square US</td><td>—</td><td>Tier 3</td></tr>
 <tr><td><a class="repo-link" href="https://drive.google.com/file/d/1BuVqRkBVDjVngEAMYURenxu1r-xkqOBO/view?usp=sharing" target="_blank">Square U.S. Transaction Monitoring Program Standard</a></td><td>Financial Crimes</td><td>Square US</td><td>Audra McKay</td><td>Tier 3</td></tr>
+
 </tbody>
 </table>
 </div>
+<div id="pdf-search-results" style="display:none;margin-top:16px">
+<div class="card-header" style="background:#111;padding:12px 16px;border:1px solid #222;border-bottom:none;border-radius:8px 8px 0 0"><span class="card-title" id="pdf-search-title">Keyword Search</span></div>
+<div class="card full-width scroll-table-card-xl">
+<table class="status-table" id="pdf-search-table">
+<thead><tr class="sticky-head-row"><th style="width:30%">Document</th><th style="width:12%">Domain</th><th style="width:18%">Legal Entity</th><th style="width:40%">Matching Excerpt</th></tr></thead>
+<tbody id="pdf-search-tbody"></tbody>
+</table></div></div>
+
+</div>
 </div>
 
-
 <script>
-const DC=['#e8e8e8','#666666','#c0c0c0','#444444','#a0a0a0','#333333','#d4d4d4','#555555','#888888'];
+const DC=['#f1dca7','#d9ae94','#9b9b7a','#ffcb69','#d08c60','#797d62','#997b66','#d9ae94','#9b9b7a'];
+const BRAND_COLORS={'Square':'#797d62','Block':'#f1dca7','Cash App':'#ffcb69','Afterpay':'#d9ae94','Clearpay':'#9b9b7a','Afterpay, Square':'#d9ae94','Emerging Businesses':'#d08c60','Other':'#997b66','Unknown':'#997b66'};
+function brandColor(label){var c=BRAND_COLORS[label];if(c)return c;for(var k in BRAND_COLORS){if(label.toLowerCase().indexOf(k.toLowerCase())!==-1)return BRAND_COLORS[k]};return '#b0a080'}
 const charts={};
-const DUE_DRILL={
-'Coming Due':[
-{n:'Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part B - Customer Identification and Verification',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes'},
-{n:'Block Inc. Activation Customer Risk Rating Program',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT) &amp; Sanctions Annual Risk Assessment Standard',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Block Compliance Risk and Control Standard',le:'Block, Inc.',d:'Governance'},
-{n:'Block, Inc. Compliance Policy on Policies',le:'Block, Inc.',d:'Governance'},
-{n:'Block, Inc. Controlling the Assault of Non-Solicited Pornography &amp; Marketing Act (CAN-SPAM) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Cash App Global Cash App Sanctions Compliance Standard',le:'Cash App US',d:'Financial Crimes'},
-{n:'Cash App UK SEL Financial Crimes Program',le:'Cash App UK',d:'Financial Crimes'},
-{n:'Cash App US Cash App Continuous Customer Risk Rating Program',le:'Cash App US',d:'Governance'},
-{n:'Cash App US Denylist Appeals Policy',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Disputes Standard',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Elder Financial Exploitation Policy',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App, US Business Activity Monitoring (BAM) Policy',le:'Cash App US',d:'Governance'},
-{n:'Clearpay Finance Limited Consumer Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes'},
-{n:'Clearpay Finance Limited Merchant Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes'},
-{n:'SEL Consumer Protection Policy',le:'Squareup Europe Ltd.',d:'Consumer Protection'},
-{n:'SEL Financial Crimes Program',le:'Squareup Europe Ltd.',d:'Financial Crimes'},
-{n:'SIL Financial Crimes Program',le:'Squareup International Ltd.',d:'Financial Crimes'},
-{n:'SIL Regulatory Compliance Monitoring Program',le:'Squareup International Ltd.',d:'Governance'},
-{n:'Square K.K. Anti-Money Laundering (AML), Counter Terrorist Financing (CTF) &amp; Financial Sanctions Program',le:'Square K.K.',d:'Financial Crimes'},
-{n:'Square K.K. Anti-Social Forces Management Policy',le:'Square K.K.',d:'Financial Crimes'},
-{n:'Square K.K. Anti-Social Forces Management Program',le:'Square K.K.',d:'Financial Crimes'},
-{n:'Square K.K. Compliance Management System Policy',le:'Square K.K.',d:'Governance'},
-{n:'Square K.K. Outsourcing Management Policy',le:'Square K.K.',d:'Governance'},
-{n:'Square U.S. Continuous Customer Risk Rating Program',le:'Square US',d:'Governance'}
-],
-'Current':[
-{n:'Afterpay Australia Pty Ltd Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes'},
-{n:'Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part A',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes'},
-{n:'Afterpay Australia Pty. Ltd. Unsuitability Assessment Policy',le:'Afterpay Australia Pty Ltd',d:'Governance'},
-{n:'Afterpay Australia and New Zealand Complaints Standard ',le:'Afterpay Australia Pty Ltd - Afterpay NZ Limited',d:'Consumer Protection'},
-{n:'Afterpay Canada Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Standard',le:'Afterpay Canada Ltd',d:'Financial Crimes'},
-{n:'Afterpay Canada Australian Anti-Money Laundering / Counter-Terrorism Financing (AML/CTF) Program',le:'Afterpay Canada Ltd',d:'Financial Crimes'},
-{n:'Afterpay Canada Limited Canada Accessibility Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
-{n:'Afterpay Canada Limited Canada’s Anti-Spam Legislation (CASL) Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
-{n:'Afterpay Canada Ltd Incident Management Response Plan',le:'Afterpay Canada Ltd',d:'Governance'},
-{n:'Afterpay Canada Ltd. Afterpay Third Party Risk Management (TPRM) Policy',le:'Afterpay Canada Ltd',d:'Governance'},
-{n:'Afterpay Canada and Square Canada Record Retention Policy',le:'Afterpay Canada Ltd - Square Canada, Inc.',d:'Governance'},
-{n:'Afterpay NZ Anti-Money Laundering &amp; Counter-Terrorism Financing  (AML &amp; CTF) Program Policies',le:'Afterpay NZ Limited',d:'Financial Crimes'},
-{n:'Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme',le:'Afterpay NZ Limited',d:'Financial Crimes'},
-{n:'Block Inc. Bank Secrecy Act / Anti-Money Laundering &amp; Counter-Terrorist Financing (BSA / AML &amp; CFT) Program (US)',le:'Block, Inc.',d:'Financial Crimes'},
-{n:'Block Inc. Block Academy System Administration Standard',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Compliance Committee &amp; Forum Oversight Standard',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Compliance Mandatory Training Standard',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Custody &amp; Liquidity Management Policy',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Escalation Framework for Non-Completion of Compliance Training (Employees)',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Escalation Framework for Non-Completion of Compliance Training (External Workers)',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Global Compliance Monitoring &amp; Testing Program',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Global Modern Slavery Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
-{n:'Block Inc. Regulatory Change Management ',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Service Level Agreement and Backlog Management Program',le:'Block, Inc.',d:'Governance'},
-{n:'Block, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy',le:'Block, Inc.',d:'Financial Crimes'},
-{n:'Block, Inc. Code of Business Conduct &amp; Ethics',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
-{n:'Block, Inc. Compliance Management System (CMS) Policy',le:'Block, Inc.',d:'Governance'},
-{n:'Block, Inc. Electronic Funds Transfer Act (EFTA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Electronic Signatures in Global and National Commerce Act (E-SIGN) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Equal Credit Opportunity Act (ECOA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Fair &amp; Responsible Lending Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Fair Credit Reporting Act (FCRA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Fair Debt Collection Practices Act (FDCPA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Gifts &amp; Entertainment Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
-{n:'Block, Inc. Global Complaint Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Global Conflicts of Interest Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
-{n:'Block, Inc. Global Sanctions Policy',le:'Block, Inc.',d:'Financial Crimes'},
-{n:'Block, Inc. Governance Quality Assurance Standard',le:'Block, Inc.',d:'Governance'},
-{n:'Block, Inc. Gramm-Leach-Bliley Act (GLBA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Military Lending Act (MLA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Servicemember Civil Relief Act (SCRA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Speak Up Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
-{n:'Block, Inc. Telephone Consumer Protection Act (TCPA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Truth in Lending Act (TILA) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block, Inc. Unfair, Deceptive, or Abusive Acts or Practices / Unfair or Deceptive Acts or Practices (UDAAP/UDAP) Policy',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Cash App AU Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes'},
-{n:'Cash App Investing LLC Anti-Money Laundering &amp; Countering the Financing of Terrorism (AML &amp; CFT) Standard',le:'Cash App Investing LLC',d:'Financial Crimes'},
-{n:'Cash App Investing LLC Investing Communications Requirements Standard',le:'Cash App Investing LLC',d:'Ethics and Employee Conduct'},
-{n:'Cash App Lending Identity Theft Prevention/Red Flags Standard',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App Risk and Compliance Adverse Actions Policy',le:'Cash App US',d:'Financial Crimes'},
-{n:'Cash App US Acquiring Chargebacks Standard',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Compliance Real Time Transaction Blocking Program',le:'Cash App US',d:'Financial Crimes'},
-{n:'Cash App US Customer Conduct &amp; Staff Protection Policy',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Identity Verification Standard',le:'Cash App US',d:'Financial Crimes'},
-{n:'Cash App US Know Your Customer (KYC) Policy',le:'Cash App US',d:'Financial Crimes'},
-{n:'Cash App US Know Your Customer (KYC) Standard',le:'Cash App US',d:'Financial Crimes'},
-{n:'Cash App US Loan Loss and Charge Off Policy (Lending)',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Peer-to-Peer (P2P) Scam Policy',le:'Cash App US',d:'Consumer Protection'},
-{n:'Clearpay Fitness and Propriety Standard',le:'Clearpay Finance Limited',d:'Governance'},
-{n:'Clearpay UK - Senior Managers Certification Regime &amp; Conduct Policy',le:'Clearpay Finance Limited',d:'Consumer Protection'},
-{n:'Clearpay UK - Training and Competence Standard',le:'Clearpay Finance Limited',d:'Governance'},
-{n:'Clearpay UK Anti-Money Laundering and Counter Terrorist Financing (AML &amp; CFT) Policy',le:'Clearpay Finance Limited',d:'Financial Crimes'},
-{n:'Clearpay UK Payment Service Provider Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes'},
-{n:'Clearpay UK Vulnerable Customer Standard',le:'Clearpay Finance Limited',d:'Consumer Protection'},
-{n:'SEL Conflicts of Interest Policy',le:'Squareup Europe Ltd.',d:'Ethics and Employee Conduct'},
-{n:'SEL Electronic Money Directive (EMD) Policy',le:'Squareup Europe Ltd.',d:'Governance'},
-{n:'SEL Outsourcing Policy',le:'Squareup Europe Ltd.',d:'Governance'},
-{n:'SEL Speak Up Policy',le:'Squareup Europe Ltd.',d:'Ethics and Employee Conduct'},
-{n:'SEL Vulnerable Customer Policy',le:'Cash App UK',d:'Consumer Protection'},
-{n:'SIL Conduct Standards Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct'},
-{n:'SIL Conflicts of Interest Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct'},
-{n:'SIL Consumer Protection Policy',le:'Squareup International Ltd.',d:'Consumer Protection'},
-{n:'SIL Customer Communication Standard ',le:'Squareup International Ltd.',d:'Consumer Protection'},
-{n:'SIL Fitness &amp; Probity Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct'},
-{n:'SIL Outsourcing Policy',le:'Squareup International Ltd.',d:'Governance'},
-{n:'SIL Speak Up Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct'},
-{n:'Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
-{n:'Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CTF) Risk Awareness Training Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
-{n:'Square AU Pty. Ltd. Australian Financial Services License (AFSL) Representatives Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection'},
-{n:'Square AU Pty. Ltd. Breach Reporting Policy',le:'Square AU Pty. Ltd.',d:'Governance'},
-{n:'Square AU Pty. Ltd. Complaints Policy',le:'Square AU Pty. Ltd.',d:'Governance'},
-{n:'Square AU Pty. Ltd. Compliance Management Policy (CMS) Policy',le:'Square AU Pty. Ltd.',d:'Governance'},
-{n:'Square AU Pty. Ltd. Conflicts of Interest Policy',le:'Square AU Pty. Ltd.',d:'Ethics and Employee Conduct'},
-{n:'Square AU Pty. Ltd. Consumer Protection Policy',le:'Square AU Pty. Ltd.',d:'Consumer Protection'},
-{n:'Square AU Pty. Ltd. Employee and Personnel Due Diligence Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
-{n:'Square AU Pty. Ltd. Enhanced Customer Due Diligence Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
-{n:'Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
-{n:'Square AU Pty. Ltd. Hardship Support Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection'},
-{n:'Square AU Pty. Ltd. Politically Exposed Person (PEP) Watchlist Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
-{n:'Square AU Pty. Ltd. Regulatory Change Management Program',le:'Square AU Pty. Ltd.',d:'Governance'},
-{n:'Square AU Pty. Ltd. Responsible Managers Standards',le:'Square AU Pty. Ltd.',d:'Consumer Protection'},
-{n:'Square AU Pty. Ltd. Suspicious Matter Report Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes'},
-{n:'Square AU Pty. Ltd. Third Party Risk Management (TPRM) Policy',le:'Square AU Pty. Ltd.',d:'Governance'},
-{n:'Square Canada Incident Response Plan',le:'Square Canada, Inc.',d:'Governance'},
-{n:'Square Canada Third Party Risk Management (TPRM) Policy',le:'Square Canada, Inc.',d:'Governance'},
-{n:'Square Canada, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy',le:'Square Canada, Inc.',d:'Financial Crimes'},
-{n:'Square Capital, LLC Commercial Telemarketing Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square Capital, LLC Compliance Management Policy',le:'Square Capital, LLC',d:'Governance'},
-{n:'Square Capital, LLC Controlling the Assault of Non-Solicited Pornography and Marketing Act (CAN-SPAM) Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square Capital, LLC Credit Card Privacy Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square Capital, LLC Electronic Signature (E-SIGN) Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square Capital, LLC Equal Credit Opportunity Act (ECOA) Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square Capital, LLC Fair and Accurate Credit Transactions Act Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square Capital, LLC Red Flags Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square Capital, LLC Servicemembers Civil Relief Act (SCRA) Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square Capital, LLC Unfair or Deceptive Acts Policy',le:'Square Capital, LLC',d:'Consumer Protection'},
-{n:'Square U.S. Identity Verification Policy',le:'Square US',d:'Financial Crimes'},
-{n:'Square U.S. Know Your Customer (KYC) Program',le:'Square US',d:'Financial Crimes'},
-{n:'Square U.S. Transaction Monitoring Program Standard',le:'Square US',d:'Financial Crimes'}
-],
-'Extended':[
-{n:'Afterpay Canada Limited Canada Complaints Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
-{n:'Afterpay Canada Limited Canada Consumer Protection Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
-{n:'Afterpay Canada Limited Canada Marketing Standard',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
-{n:'Afterpay Canada Limited French Language Standard',le:'Afterpay Canada Ltd',d:'Consumer Protection'},
-{n:'Afterpay US Inc US Complaint Standard',le:'Afterpay US Services',d:'Consumer Protection'},
-{n:'Block Inc. Global Complaint Program Standard',le:'Block, Inc.',d:'Consumer Protection'},
-{n:'Block Inc. Global Sanctions Compliance Program Standard',le:'Block, Inc.',d:'Financial Crimes'},
-{n:'Block, Inc. Anti-Bribery &amp; Anti-Corruption Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct'},
-{n:'Cash App US Bitcoin (BTC) Travel Rule Program',le:'Cash App US',d:'Financial Crimes'},
-{n:'Cash App US Consumer Protection Program Standard',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Unacceptable Use Monitoring Standard',le:'Cash App US',d:'Financial Crimes'},
-{n:'Compliance Incident Management Reporting Standard ',le:'Block, Inc.',d:'Governance'},
-{n:'Square Capital LLC. Credit Card Bank Secrecy Act &amp; Anti-Money Laundering (BSA &amp; AML) Square Capital Program',le:'Square Capital, LLC',d:'Financial Crimes'}
-],
-'Pending Review':[
-{n:'Afterpay New Zealand Australian Anti-Money Laundering / Countering Financing of Terrorism (AML/CFT) Program',le:'Afterpay NZ Limited',d:'Financial Crimes'},
-{n:'Afterpay US Inc Third Party Risk Management (TPRM) Standard',le:'Afterpay US Services',d:'Governance'},
-{n:'Afterpay US Inc. Regulatory Change Management Standard',le:'Afterpay US Services',d:'Governance'},
-{n:'Block Inc. Anti-Money Laundering (AML), Counter-Terrorist Financing (CFT) &amp; Sanctions Product Risk Assessment Program',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Compliance Audit, Exam &amp; Independent Assessment Management Program',le:'Block, Inc.',d:'Governance'},
-{n:'Block Inc. Global Geographic Risk Ratings Methodology &amp; Program',le:'Block, Inc.',d:'Governance'},
-{n:'Block, Inc. Model Governance Policy',le:'Block, Inc.',d:'Governance'},
-{n:'Cash App US Complaints Standard Cash',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Fraud Risk Management Standard',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Know Your Business Program for Cash for Business Customers',le:'Cash App US',d:'Financial Crimes'},
-{n:'Cash App US Lending Operations Complaints Standard',le:'Cash App US',d:'Consumer Protection'},
-{n:'Cash App US Transaction Monitoring Modeling Program',le:'Cash App US',d:'Governance'},
-{n:'Square AU Pty. Ltd. Vulnerable Customers Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection'}
-]
-};
-const SCHED_DRILL={"Mar": [{"n": "Afterpay US Inc Third Party Risk Management (TPRM) Standard", "le": "Afterpay US Services", "d": "Governance", "due": "Mar 31, 2026", "days": -20}, {"n": "Afterpay US Inc. Regulatory Change Management Standard", "le": "Afterpay US Services", "d": "Governance", "due": "Mar 31, 2026", "days": -20}, {"n": "Block Inc. Anti-Money Laundering (AML), Counter-Terrorist Financing (CFT) &amp; Sanctions Product Risk Assessment Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20}, {"n": "Block Inc. Compliance Audit, Exam &amp; Independent Assessment Management Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20}, {"n": "Block Inc. Global Geographic Risk Ratings Methodology &amp; Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20}, {"n": "Block, Inc. Model Governance Policy", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20}, {"n": "Cash App US Complaints Standard Cash", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": -20}, {"n": "Cash App US Know Your Business Program for Cash for Business Customers", "le": "Cash App US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20}, {"n": "Cash App US Lending Operations Complaints Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": -20}, {"n": "Cash App US Transaction Monitoring Modeling Program", "le": "Cash App US", "d": "Governance", "due": "Mar 31, 2026", "days": -20}], "Apr": [{"n": "SIL Regulatory Compliance Monitoring Program", "le": "Squareup International Ltd.", "d": "Governance", "due": "Apr 30, 2026", "days": 10}], "May": [{"n": "Block Inc. Activation Customer Risk Rating Program", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 41}, {"n": "Block Inc. Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT) &amp; Sanctions Annual Risk Assessment Standard", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 41}, {"n": "Block Inc. Block Compliance Risk and Control Standard", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 41}, {"n": "Cash App Global Cash App Sanctions Compliance Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "May 31, 2026", "days": 41}, {"n": "SEL Financial Crimes Program", "le": "Squareup Europe Ltd.", "d": "Financial Crimes", "due": "May 31, 2026", "days": 41}, {"n": "Square U.S. Continuous Customer Risk Rating Program", "le": "Square US", "d": "Governance", "due": "May 31, 2026", "days": 41}], "Jun": [{"n": "Square K.K. Anti-Money Laundering (AML), Counter Terrorist Financing (CTF) &amp; Financial Sanctions Program", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 01, 2026", "days": 42}, {"n": "Block, Inc. Compliance Policy on Policies", "le": "Block, Inc.", "d": "Governance", "due": "Jun 06, 2026", "days": 47}, {"n": "Cash App US Disputes Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 13, 2026", "days": 54}, {"n": "Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part B - Customer Identification and Verification", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "Jun 26, 2026", "days": 67}, {"n": "Cash App US Cash App Continuous Customer Risk Rating Program", "le": "Cash App US", "d": "Governance", "due": "Jun 30, 2026", "days": 71}, {"n": "Cash App US Denylist Appeals Policy", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 71}, {"n": "Cash App US Elder Financial Exploitation Policy", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 71}, {"n": "Cash App, US Business Activity Monitoring (BAM) Policy", "le": "Cash App US", "d": "Governance", "due": "Jun 30, 2026", "days": 71}, {"n": "SEL Consumer Protection Policy", "le": "Squareup Europe Ltd.", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 71}, {"n": "Square K.K. Anti-Social Forces Management Policy", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 30, 2026", "days": 71}, {"n": "Square K.K. Anti-Social Forces Management Program", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 30, 2026", "days": 71}, {"n": "Square K.K. Compliance Management System Policy", "le": "Square K.K.", "d": "Governance", "due": "Jun 30, 2026", "days": 71}, {"n": "Square K.K. Outsourcing Management Policy", "le": "Square K.K.", "d": "Governance", "due": "Jun 30, 2026", "days": 71}], "Jul": [{"n": "Clearpay Finance Limited Consumer Due Diligence Standard", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Jul 15, 2026", "days": 86}, {"n": "Clearpay Finance Limited Merchant Due Diligence Standard", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Jul 16, 2026", "days": 87}, {"n": "Square U.S. Know Your Customer (KYC) Program", "le": "Square US", "d": "Financial Crimes", "due": "Jul 23, 2026", "days": 94}, {"n": "Afterpay Australia Pty. Ltd. Unsuitability Assessment Policy", "le": "Afterpay Australia Pty Ltd", "d": "Governance", "due": "Jul 31, 2026", "days": 102}, {"n": "SEL Vulnerable Customer Policy", "le": "Cash App UK", "d": "Consumer Protection", "due": "Jul 31, 2026", "days": 102}], "Aug": [{"n": "Square U.S. Identity Verification Policy", "le": "Square US", "d": "Financial Crimes", "due": "Aug 12, 2026", "days": 114}, {"n": "Afterpay Canada Ltd Incident Management Response Plan", "le": "Afterpay Canada Ltd", "d": "Governance", "due": "Aug 31, 2026", "days": 133}, {"n": "Afterpay Canada Ltd. Afterpay Third Party Risk Management (TPRM) Policy", "le": "Afterpay Canada Ltd", "d": "Governance", "due": "Aug 31, 2026", "days": 133}, {"n": "Block Inc. Bank Secrecy Act / Anti-Money Laundering &amp; Counter-Terrorist Financing (BSA / AML &amp; CFT) Program (US)", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 133}, {"n": "Cash App Investing LLC Investing Communications Requirements Standard", "le": "Cash App Investing LLC", "d": "Ethics and Employee Conduct", "due": "Aug 31, 2026", "days": 133}, {"n": "Cash App US Acquiring Chargebacks Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Aug 31, 2026", "days": 133}, {"n": "Cash App US Compliance Real Time Transaction Blocking Program", "le": "Cash App US", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 133}, {"n": "Clearpay UK Anti-Money Laundering and Counter Terrorist Financing (AML &amp; CFT) Policy", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 133}], "Sep": [{"n": "Afterpay Canada and Square Canada Record Retention Policy", "le": "Afterpay Canada Ltd - Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 141}, {"n": "Square Canada Incident Response Plan", "le": "Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 141}, {"n": "Square Canada Third Party Risk Management (TPRM) Policy", "le": "Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 141}, {"n": "Afterpay Canada Limited Canada Complaints Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163}, {"n": "Afterpay Canada Limited Canada Consumer Protection Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163}, {"n": "Afterpay US Inc US Complaint Standard", "le": "Afterpay US Services", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163}, {"n": "Block Inc. Global Complaint Program Standard", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163}, {"n": "Block Inc. Global Sanctions Compliance Program Standard", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Sep 30, 2026", "days": 163}, {"n": "Block, Inc. Anti-Bribery &amp; Anti-Corruption Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Sep 30, 2026", "days": 163}, {"n": "Cash App US Consumer Protection Program Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163}, {"n": "SEL Conflicts of Interest Policy", "le": "Squareup Europe Ltd.", "d": "Ethics and Employee Conduct", "due": "Sep 30, 2026", "days": 163}, {"n": "SEL Outsourcing Policy", "le": "Squareup Europe Ltd.", "d": "Governance", "due": "Sep 30, 2026", "days": 163}, {"n": "SIL Financial Crimes Program", "le": "Squareup International Ltd.", "d": "Financial Crimes", "due": "Sep 30, 2026", "days": 163}, {"n": "SIL Outsourcing Policy", "le": "Squareup International Ltd.", "d": "Governance", "due": "Sep 30, 2026", "days": 163}, {"n": "Square Capital LLC. Credit Card Bank Secrecy Act &amp; Anti-Money Laundering (BSA &amp; AML) Square Capital Program", "le": "Square Capital, LLC", "d": "Financial Crimes", "due": "Sep 30, 2026", "days": 163}], "Oct": [{"n": "Cash App US Unacceptable Use Monitoring Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Oct 01, 2026", "days": 164}, {"n": "Block Inc. Global Modern Slavery Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Oct 03, 2026", "days": 166}, {"n": "Cash App Risk and Compliance Adverse Actions Policy", "le": "Cash App US", "d": "Financial Crimes", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Commercial Telemarketing Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Compliance Management Policy", "le": "Square Capital, LLC", "d": "Governance", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Controlling the Assault of Non-Solicited Pornography and Marketing Act (CAN-SPAM) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Credit Card Privacy Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Electronic Signature (E-SIGN) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Equal Credit Opportunity Act (ECOA) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Fair and Accurate Credit Transactions Act Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Red Flags Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166}, {"n": "Square Capital, LLC Servicemembers Civil Relief Act (SCRA) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166}, {"n": "Afterpay Canada Limited Canada Marketing Standard", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Oct 09, 2026", "days": 172}, {"n": "Afterpay Canada Limited French Language Standard", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Oct 09, 2026", "days": 172}, {"n": "Block, Inc. Controlling the Assault of Non-Solicited Pornography &amp; Marketing Act (CAN-SPAM) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 30, 2026", "days": 193}, {"n": "Block, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Code of Business Conduct &amp; Ethics", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Compliance Management System (CMS) Policy", "le": "Block, Inc.", "d": "Governance", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Electronic Funds Transfer Act (EFTA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Electronic Signatures in Global and National Commerce Act (E-SIGN) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Equal Credit Opportunity Act (ECOA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Fair &amp; Responsible Lending Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Fair Credit Reporting Act (FCRA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Fair Debt Collection Practices Act (FDCPA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Global Sanctions Policy", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Gramm-Leach-Bliley Act (GLBA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Military Lending Act (MLA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Servicemember Civil Relief Act (SCRA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Telephone Consumer Protection Act (TCPA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Truth in Lending Act (TILA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Block, Inc. Unfair, Deceptive, or Abusive Acts or Practices / Unfair or Deceptive Acts or Practices (UDAAP/UDAP) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}, {"n": "Cash App Lending Identity Theft Prevention/Red Flags Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194}], "Nov": [{"n": "Compliance Incident Management Reporting Standard ", "le": "Block, Inc.", "d": "Governance", "due": "Nov 30, 2026", "days": 224}], "Dec": [{"n": "SIL Speak Up Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Dec 08, 2026", "days": 232}, {"n": "Cash App US Identity Verification Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Dec 15, 2026", "days": 239}, {"n": "Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part A", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "Dec 16, 2026", "days": 240}, {"n": "Cash App US Know Your Customer (KYC) Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Dec 23, 2026", "days": 247}, {"n": "Afterpay Australia and New Zealand Complaints Standard ", "le": "Afterpay Australia Pty Ltd - Afterpay NZ Limited", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255}, {"n": "Afterpay Canada Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Standard", "le": "Afterpay Canada Ltd", "d": "Financial Crimes", "due": "Dec 31, 2026", "days": 255}, {"n": "Afterpay Canada Limited Canada Accessibility Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255}, {"n": "Afterpay Canada Limited Canada\u2019s Anti-Spam Legislation (CASL) Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255}, {"n": "Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme", "le": "Afterpay NZ Limited", "d": "Financial Crimes", "due": "Dec 31, 2026", "days": 255}, {"n": "Cash App US Bitcoin (BTC) Travel Rule Program", "le": "Cash App US", "d": "Financial Crimes", "due": "Dec 31, 2026", "days": 255}, {"n": "SIL Customer Communication Standard ", "le": "Squareup International Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255}, {"n": "Square AU Pty. Ltd. Australian Financial Services License (AFSL) Representatives Standard", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255}, {"n": "Square AU Pty. Ltd. Breach Reporting Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255}, {"n": "Square AU Pty. Ltd. Complaints Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255}, {"n": "Square AU Pty. Ltd. Compliance Management Policy (CMS) Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255}, {"n": "Square AU Pty. Ltd. Conflicts of Interest Policy", "le": "Square AU Pty. Ltd.", "d": "Ethics and Employee Conduct", "due": "Dec 31, 2026", "days": 255}, {"n": "Square AU Pty. Ltd. Consumer Protection Policy", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255}, {"n": "Square AU Pty. Ltd. Responsible Managers Standards", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255}, {"n": "Square AU Pty. Ltd. Third Party Risk Management (TPRM) Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255}]};
-
 /* ---- Bar value label plugin ---- */
 const barPlugin={id:'barLabels',afterDatasetsDraw(chart){const ctx=chart.ctx;ctx.save();ctx.font='400 12px Inter';ctx.fillStyle='#aaa';chart.data.datasets.forEach((ds,di)=>{const meta=chart.getDatasetMeta(di);meta.data.forEach((bar,i)=>{const v=ds.data[i];if(chart.config.type==='bar'&&chart.options.indexAxis==='y'){ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(v,bar.x+6,bar.y)}else if(chart.config.type==='bar'){ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText(v,bar.x,bar.y-4)}})}); ctx.restore()}};
 Chart.register(barPlugin);
@@ -701,12 +665,29 @@ charts[id]=new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroun
 function makeBar(id,labels,data,maxVal){
 if(charts[id]){charts[id].destroy();delete charts[id]}
 const ctx=document.getElementById(id);if(!ctx)return;
-charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#fff',borderRadius:3,barThickness:18}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{display:false,max:maxVal*1.25},y:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{display:false},border:{display:false}}},plugins:{legend:{display:false}}}})
+charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:labels.map(brandColor),borderRadius:3,barThickness:18}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{display:false,max:maxVal*1.25},y:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{display:false},border:{display:false}}},plugins:{legend:{display:false}}}})
 }
-function makeVertBar(id,labels,data){
+
+function makeBarClick(id,labels,data,mx,colors){
+if(charts[id]){charts[id].destroy();delete charts[id]}
+var bgColors=colors||labels.map(function(){return '#fff'});
+var ctx=document.getElementById(id);if(!ctx)return;
+charts[id]=new Chart(ctx,{type:'bar',data:{labels:labels,datasets:[{data:data,backgroundColor:bgColors,borderRadius:3,barThickness:18}]},
+options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+onHover:function(e){e.native.target.style.cursor='pointer'},
+onClick:function(e,els){
+if(els.length>0){var idx=els[0].index;showStageDrilldown(labels[idx])}
+else{var chart=this;var rect=chart.canvas.getBoundingClientRect();var y=e.native.clientY-rect.top;var yScale=chart.scales.y;for(var i=0;i<labels.length;i++){var yPos=yScale.getPixelForValue(i);if(Math.abs(y-yPos)<20){showStageDrilldown(labels[i]);break}}}
+},
+scales:{x:{display:false,max:mx*1.25},y:{ticks:{color:'#aaa',font:{size:13,family:'Inter'}},grid:{display:false},border:{display:false}}},
+plugins:{legend:{display:false}}
+}});
+}
+
+function makeVertBar(id,labels,data,colors){
 if(charts[id]){charts[id].destroy();delete charts[id]}
 const ctx=document.getElementById(id);if(!ctx)return;
-charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#fff',borderRadius:3,barThickness:28}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:22}},onHover:function(e,els){e.native.target.style.cursor=els.length>0?'pointer':'default'},onClick:function(e,els){if(els.length>0){var idx=els[0].index;showSchedDrilldown(labels[idx])}},scales:{x:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{display:false},border:{display:false}},y:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{color:'#333'},border:{display:false}}},plugins:{legend:{display:false}}}});
+charts[id]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors||['#fff'],borderRadius:3,barThickness:28,minBarLength:12}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:22}},onHover:function(e,els){e.native.target.style.cursor='pointer'},onClick:function(e,els){if(els.length>0){var idx=els[0].index;showSchedDrilldown(labels[idx])}else{var xScale=charts[id].scales.x;var rect=e.native.target.getBoundingClientRect();var x=e.native.clientX-rect.left;for(var i=0;i<labels.length;i++){var px=xScale.getPixelForValue(i);if(Math.abs(x-px)<20){showSchedDrilldown(labels[i]);break}}}},scales:{x:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{display:false},border:{display:false}},y:{ticks:{color:'#aaa',font:{size:12,family:'Inter'}},grid:{color:'#333'},border:{display:false}}},plugins:{legend:{display:false}}}});
 }
 function makeDueBar(id,labels,data,maxVal,colors){
 if(charts[id]){charts[id].destroy();delete charts[id]}
@@ -714,6 +695,7 @@ var bgColors=colors||labels.map(function(){return '#fff'});
 var ctx=document.getElementById(id);if(!ctx)return;
 charts[id]=new Chart(ctx,{type:'bar',data:{labels:labels,datasets:[{data:data,backgroundColor:bgColors,borderRadius:3,barThickness:18}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',onHover:function(e,els){e.native.target.style.cursor=els.length>0?'pointer':'default'},onClick:function(e,els){if(els.length>0){var idx=els[0].index;showDueDrilldown(labels[idx])}},scales:{x:{display:false,max:maxVal*1.25},y:{ticks:{color:'#aaa',font:{size:13,family:'Inter'}},grid:{display:false},border:{display:false}}},plugins:{legend:{display:false}}}})
 }
+
 
 /* ---- DATA ---- */
 const A_DIM1={
@@ -760,10 +742,223 @@ const I_ORG={
 'legal.standard':{l:["Block, Inc.", "Cash App US", "Clearpay Finance Limited"],d:[5, 1, 1],m:5},
 'region.standard':{l:["Global", "US", "UK"],d:[4, 2, 1],m:4}
 };
+const R_DIM1={
+'domain.all':{l:["Consumer Protection", "Governance"],d:[23, 2],t:25},
+'tier.all':{l:["Tier 1", "Tier 2", "Tier 3"],d:[13, 11, 1],t:25},
+'doctype.all':{l:["Policy", "Standard"],d:[24, 1],t:25},
+'domain.policy':{l:["Consumer Protection", "Governance"],d:[23, 1],t:24},
+'tier.policy':{l:["Tier 1", "Tier 2"],d:[13, 11],t:24},
+'doctype.policy':{l:["Policy"],d:[24],t:24},
+'domain.standard':{l:["Governance"],d:[1],t:1},
+'tier.standard':{l:["Tier 3"],d:[1],t:1},
+'doctype.standard':{l:["Standard"],d:[1],t:1}
+};
+const R_ORG={
+'business.all':{l:["Afterpay", "Cash App", "Block"],d:[13, 11, 1],m:13},
+'legal.all':{l:["Afterpay US Services", "Cash App US", "Block, Inc."],d:[13, 11, 1],m:13},
+'region.all':{l:["US", "Global"],d:[24, 1],m:24},
+'business.policy':{l:["Afterpay", "Cash App"],d:[13, 11],m:13},
+'legal.policy':{l:["Afterpay US Services", "Cash App US"],d:[13, 11],m:13},
+'region.policy':{l:["US"],d:[24],m:24},
+'business.standard':{l:["Block"],d:[1],m:1},
+'legal.standard':{l:["Block, Inc."],d:[1],m:1},
+'region.standard':{l:["Global"],d:[1],m:1}
+};
+const DUE_DRILL={
+'Current':[
+{n:'Afterpay Australia Pty Ltd Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part A',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Australia Pty. Ltd. Unsuitability Assessment Policy',le:'Afterpay Australia Pty Ltd',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Australia and New Zealand Complaints Standard',le:'Afterpay Australia Pty Ltd - Afterpay NZ Limited',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Standard',le:'Afterpay Canada Ltd',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Australian Anti-Money Laundering / Counter-Terrorism Financing (AML/CTF) Program',le:'Afterpay Canada Ltd',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Limited Canada Accessibility Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Limited Canada’s Anti-Spam Legislation (CASL) Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Ltd Incident Management Response Plan',le:'Afterpay Canada Ltd',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Ltd. Afterpay Third Party Risk Management (TPRM) Policy',le:'Afterpay Canada Ltd',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada and Square Canada Record Retention Policy',le:'Afterpay Canada Ltd - Square Canada, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Afterpay NZ Anti-Money Laundering &amp; Counter-Terrorism Financing  (AML &amp; CTF) Program Policies',le:'Afterpay NZ Limited',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme',le:'Afterpay NZ Limited',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Bank Secrecy Act / Anti-Money Laundering &amp; Counter-Terrorist Financing (BSA / AML &amp; CFT) Program (US)',le:'Block, Inc.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Block Academy System Administration Standard',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Compliance Committee &amp; Forum Oversight Standard',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Compliance Mandatory Training Standard',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Custody &amp; Liquidity Management Policy',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Escalation Framework for Non-Completion of Compliance Training (Employees)',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Escalation Framework for Non-Completion of Compliance Training (External Workers)',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Global Compliance Monitoring &amp; Testing Program',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Global Modern Slavery Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Regulatory Change Management',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Service Level Agreement and Backlog Management Program',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy',le:'Block, Inc.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Code of Business Conduct &amp; Ethics',le:'Block, Inc.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Compliance Management System (CMS) Policy',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Electronic Funds Transfer Act (EFTA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Electronic Signatures in Global and National Commerce Act (E-SIGN) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Equal Credit Opportunity Act (ECOA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Fair &amp; Responsible Lending Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Fair Credit Reporting Act (FCRA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Fair Debt Collection Practices Act (FDCPA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Gifts &amp; Entertainment Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Global Complaint Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Global Conflicts of Interest Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Global Sanctions Policy',le:'Block, Inc.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Governance Quality Assurance Standard',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Gramm-Leach-Bliley Act (GLBA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Military Lending Act (MLA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Servicemember Civil Relief Act (SCRA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Speak Up Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Telephone Consumer Protection Act (TCPA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Truth in Lending Act (TILA) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Unfair, Deceptive, or Abusive Acts or Practices / Unfair or Deceptive Acts or Practices (UDAAP/UDAP) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App AU Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App Investing LLC Anti-Money Laundering &amp; Countering the Financing of Terrorism (AML &amp; CFT) Standard',le:'Cash App Investing LLC',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App Investing LLC Investing Communications Requirements Standard',le:'Cash App Investing LLC',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Cash App Lending Identity Theft Prevention/Red Flags Standard',le:'Cash App US',d:'Consumer Protection',step:'Active Version'},
+{n:'Cash App Lending Identity Theft Prevention/Red Flags Standard',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App Risk and Compliance Adverse Actions Policy',le:'Cash App US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Acquiring Chargebacks Standard',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Compliance Real Time Transaction Blocking Program',le:'Cash App US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Customer Conduct &amp; Staff Protection Policy',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Identity Verification Standard',le:'Cash App US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Know Your Customer (KYC) Policy',le:'Cash App US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Know Your Customer (KYC) Standard',le:'Cash App US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Loan Loss and Charge Off Policy (Lending)',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Peer-to-Peer (P2P) Scam Policy',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Clearpay Fitness and Propriety Standard',le:'Clearpay Finance Limited',d:'Governance',step:'QC / Assign Reviewers'},
+{n:'Clearpay UK - Senior Managers Certification Regime &amp; Conduct Policy',le:'Clearpay Finance Limited',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Clearpay UK - Training and Competence Standard',le:'Clearpay Finance Limited',d:'Governance',step:'QC / Assign Reviewers'},
+{n:'Clearpay UK Anti-Money Laundering and Counter Terrorist Financing (AML &amp; CFT) Policy',le:'Clearpay Finance Limited',d:'Financial Crimes',step:'Draft Review (Board)'},
+{n:'Clearpay UK Payment Service Provider Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Clearpay UK Vulnerable Customer Standard',le:'Clearpay Finance Limited',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'SEL Conflicts of Interest Policy',le:'Squareup Europe Ltd.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'SEL Electronic Money Directive (EMD) Policy',le:'Squareup Europe Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'SEL Outsourcing Policy',le:'Squareup Europe Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'SEL Speak Up Policy',le:'Squareup Europe Ltd.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'SEL Vulnerable Customer Policy',le:'Cash App UK',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'SIL Conduct Standards Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'SIL Conflicts of Interest Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'SIL Consumer Protection Policy',le:'Squareup International Ltd.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'SIL Customer Communication Standard',le:'Squareup International Ltd.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'SIL Fitness &amp; Probity Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'SIL Outsourcing Policy',le:'Squareup International Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'SIL Speak Up Policy',le:'Squareup International Ltd.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CTF) Risk Awareness Training Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Australian Financial Services License (AFSL) Representatives Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Breach Reporting Policy',le:'Square AU Pty. Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Complaints Policy',le:'Square AU Pty. Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Compliance Management Policy (CMS) Policy',le:'Square AU Pty. Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Conflicts of Interest Policy',le:'Square AU Pty. Ltd.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Consumer Protection Policy',le:'Square AU Pty. Ltd.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Employee and Personnel Due Diligence Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Enhanced Customer Due Diligence Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Hardship Support Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Politically Exposed Person (PEP) Watchlist Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Regulatory Change Management Program',le:'Square AU Pty. Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Responsible Managers Standards',le:'Square AU Pty. Ltd.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Suspicious Matter Report Program',le:'Square AU Pty. Ltd.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Third Party Risk Management (TPRM) Policy',le:'Square AU Pty. Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square Canada Incident Response Plan',le:'Square Canada, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square Canada Third Party Risk Management (TPRM) Policy',le:'Square Canada, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square Canada, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy',le:'Square Canada, Inc.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Commercial Telemarketing Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Compliance Management Policy',le:'Square Capital, LLC',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Controlling the Assault of Non-Solicited Pornography and Marketing Act (CAN-SPAM) Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Credit Card Privacy Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Electronic Signature (E-SIGN) Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Equal Credit Opportunity Act (ECOA) Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Fair and Accurate Credit Transactions Act Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Red Flags Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Servicemembers Civil Relief Act (SCRA) Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square Capital, LLC Unfair or Deceptive Acts Policy',le:'Square Capital, LLC',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Square U.S. Identity Verification Policy',le:'Square US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square U.S. Know Your Customer (KYC) Program',le:'Square US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square U.S. Transaction Monitoring Program Standard',le:'Square US',d:'Financial Crimes',step:'Document Drafting (Submitter)'}
+],
+'Coming Due':[
+{n:'Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part B - Customer Identification and Verification',le:'Afterpay Australia Pty Ltd',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Activation Customer Risk Rating Program',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT) &amp; Sanctions Annual Risk Assessment Standard',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Block Compliance Risk and Control Standard',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Compliance Policy on Policies',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Controlling the Assault of Non-Solicited Pornography &amp; Marketing Act (CAN-SPAM) Policy',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App Global Cash App Sanctions Compliance Standard',le:'Cash App US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App UK SEL Financial Crimes Program',le:'Cash App UK',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Cash App Continuous Customer Risk Rating Program',le:'Cash App US',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Denylist Appeals Policy',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Disputes Standard',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Elder Financial Exploitation Policy',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App, US Business Activity Monitoring (BAM) Policy',le:'Cash App US',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Clearpay Finance Limited Consumer Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes',step:'Draft Review (Leadership)'},
+{n:'Clearpay Finance Limited Merchant Due Diligence Standard',le:'Clearpay Finance Limited',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'SEL Consumer Protection Policy',le:'Squareup Europe Ltd.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'SEL Financial Crimes Program',le:'Squareup Europe Ltd.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'SIL Financial Crimes Program',le:'Squareup International Ltd.',d:'Financial Crimes',step:'QC / Assign Reviewers'},
+{n:'SIL Regulatory Compliance Monitoring Program',le:'Squareup International Ltd.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square K.K. Anti-Money Laundering (AML), Counter Terrorist Financing (CTF) &amp; Financial Sanctions Program',le:'Square K.K.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square K.K. Anti-Social Forces Management Policy',le:'Square K.K.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square K.K. Anti-Social Forces Management Program',le:'Square K.K.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Square K.K. Compliance Management System Policy',le:'Square K.K.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square K.K. Outsourcing Management Policy',le:'Square K.K.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square U.S. Continuous Customer Risk Rating Program',le:'Square US',d:'Governance',step:'Document Drafting (Submitter)'}
+],
+'Extended':[
+{n:'Afterpay Canada Limited Canada Complaints Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Limited Canada Consumer Protection Policy',le:'Afterpay Canada Ltd',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Limited Canada Marketing Standard',le:'Afterpay Canada Ltd',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Afterpay Canada Limited French Language Standard',le:'Afterpay Canada Ltd',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Afterpay US Inc US Complaint Standard',le:'Afterpay US Services',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Global Complaint Program Standard',le:'Block, Inc.',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Global Sanctions Compliance Program Standard',le:'Block, Inc.',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Anti-Bribery &amp; Anti-Corruption Policy',le:'Block, Inc.',d:'Ethics and Employee Conduct',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Bitcoin (BTC) Travel Rule Program',le:'Cash App US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Consumer Protection Program Standard',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Unacceptable Use Monitoring Standard',le:'Cash App US',d:'Financial Crimes',step:'QC / Assign Reviewers'},
+{n:'Compliance Incident Management Reporting Standard',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square Capital LLC. Credit Card Bank Secrecy Act &amp; Anti-Money Laundering (BSA &amp; AML) Square Capital Program',le:'Square Capital, LLC',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Global Compliance Monitoring &amp; Testing Program',le:'Block, Inc.',d:'Governance',step:'Active Version'}
+],
+'Overdue':[
+{n:'Afterpay New Zealand Australian Anti-Money Laundering / Countering Financing of Terrorism (AML/CFT) Program',le:'Afterpay NZ Limited',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Afterpay US Inc Third Party Risk Management (TPRM) Standard',le:'Afterpay US Services',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Afterpay US Inc. Regulatory Change Management Standard',le:'Afterpay US Services',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Anti-Money Laundering (AML), Counter-Terrorist Financing (CFT) &amp; Sanctions Product Risk Assessment Program',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Compliance Audit, Exam &amp; Independent Assessment Management Program',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block Inc. Global Geographic Risk Ratings Methodology &amp; Program',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Block, Inc. Model Governance Policy',le:'Block, Inc.',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Complaints Standard Cash',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Fraud Risk Management Standard',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Know Your Business Program for Cash for Business Customers',le:'Cash App US',d:'Financial Crimes',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Lending Operations Complaints Standard',le:'Cash App US',d:'Consumer Protection',step:'Document Drafting (Submitter)'},
+{n:'Cash App US Transaction Monitoring Modeling Program',le:'Cash App US',d:'Governance',step:'Document Drafting (Submitter)'},
+{n:'Square AU Pty. Ltd. Vulnerable Customers Standard',le:'Square AU Pty. Ltd.',d:'Consumer Protection',step:'Document Drafting (Submitter)'}
+]
+};
+const SCHED_DRILL={"Jan": [{"n": "SIL Customer Communication Standard", "le": "Squareup International Ltd.", "d": "Consumer Protection", "due": "Jan 30, 2026", "days": -80, "step": "Active Version"}], "Feb": [{"n": "Block Inc. Regulatory Change Management", "le": "Block, Inc.", "d": "Governance", "due": "Feb 02, 2026", "days": -77, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Hardship Support Standard", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Feb 27, 2026", "days": -52, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Vulnerable Customers Standard", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Feb 27, 2026", "days": -52, "step": "Active Version"}], "Mar": [{"n": "Cash App US Customer Conduct &amp; Staff Protection Policy", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 01, 2026", "days": -50, "step": "Active Version"}, {"n": "Cash App US Loan Loss and Charge Off Policy (Lending)", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 01, 2026", "days": -50, "step": "Active Version"}, {"n": "SIL Consumer Protection Policy", "le": "Squareup International Ltd.", "d": "Consumer Protection", "due": "Mar 01, 2026", "days": -50, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Breach Reporting Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Mar 01, 2026", "days": -50, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Complaints Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Mar 01, 2026", "days": -50, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Third Party Risk Management (TPRM) Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Mar 01, 2026", "days": -50, "step": "Active Version"}, {"n": "Clearpay UK Payment Service Provider Due Diligence Standard", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Mar 27, 2026", "days": -24, "step": "Active Version"}, {"n": "Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part A", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Afterpay Canada Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Standard", "le": "Afterpay Canada Ltd", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Afterpay Canada Australian Anti-Money Laundering / Counter-Terrorism Financing (AML/CTF) Program", "le": "Afterpay Canada Ltd", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Afterpay US Inc Third Party Risk Management (TPRM) Standard", "le": "Afterpay US Services", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay US Inc. Regulatory Change Management Standard", "le": "Afterpay US Services", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Anti-Money Laundering (AML), Counter-Terrorist Financing (CFT) &amp; Sanctions Product Risk Assessment Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Compliance Audit, Exam &amp; Independent Assessment Management Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Custody &amp; Liquidity Management Policy", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Block Inc. Escalation Framework for Non-Completion of Compliance Training (External Workers)", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Block Inc. Global Geographic Risk Ratings Methodology &amp; Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Service Level Agreement and Backlog Management Program", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Block, Inc. Gifts &amp; Entertainment Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Block, Inc. Global Conflicts of Interest Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Block, Inc. Model Governance Policy", "le": "Block, Inc.", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Speak Up Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Cash App Investing LLC Anti-Money Laundering &amp; Countering the Financing of Terrorism (AML &amp; CFT) Standard", "le": "Cash App Investing LLC", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Cash App US Complaints Standard Cash", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Fraud Risk Management Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Cash App US Identity Verification Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Cash App US Know Your Business Program for Cash for Business Customers", "le": "Cash App US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Know Your Customer (KYC) Policy", "le": "Cash App US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Cash App US Know Your Customer (KYC) Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Cash App US Lending Operations Complaints Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Transaction Monitoring Modeling Program", "le": "Cash App US", "d": "Governance", "due": "Mar 31, 2026", "days": -20, "step": "Document Drafting (Submitter)"}, {"n": "SIL Conduct Standards Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "SIL Fitness &amp; Probity Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program", "le": "Square AU Pty. Ltd.", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CTF) Risk Awareness Training Program", "le": "Square AU Pty. Ltd.", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Australian Financial Services License (AFSL) Representatives Standard", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Employee and Personnel Due Diligence Program", "le": "Square AU Pty. Ltd.", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Enhanced Customer Due Diligence Program", "le": "Square AU Pty. Ltd.", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Politically Exposed Person (PEP) Watchlist Program", "le": "Square AU Pty. Ltd.", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Responsible Managers Standards", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Suspicious Matter Report Program", "le": "Square AU Pty. Ltd.", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square Canada, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy", "le": "Square Canada, Inc.", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square Capital, LLC Unfair or Deceptive Acts Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}, {"n": "Square U.S. Transaction Monitoring Program Standard", "le": "Square US", "d": "Financial Crimes", "due": "Mar 31, 2026", "days": -20, "step": "Active Version"}], "Apr": [{"n": "Block Inc. Compliance Mandatory Training Standard", "le": "Block, Inc.", "d": "Governance", "due": "Apr 01, 2026", "days": -19, "step": "Active Version"}, {"n": "Block Inc. Escalation Framework for Non-Completion of Compliance Training (Employees)", "le": "Block, Inc.", "d": "Governance", "due": "Apr 01, 2026", "days": -19, "step": "Active Version"}, {"n": "Afterpay NZ Anti-Money Laundering &amp; Counter-Terrorism Financing  (AML &amp; CTF) Program Policies", "le": "Afterpay NZ Limited", "d": "Financial Crimes", "due": "Apr 30, 2026", "days": 10, "step": "Active Version"}, {"n": "Cash App US Disputes Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Apr 30, 2026", "days": 10, "step": "Active Version"}, {"n": "SEL Electronic Money Directive (EMD) Policy", "le": "Squareup Europe Ltd.", "d": "Governance", "due": "Apr 30, 2026", "days": 10, "step": "Active Version"}, {"n": "SEL Speak Up Policy", "le": "Squareup Europe Ltd.", "d": "Ethics and Employee Conduct", "due": "Apr 30, 2026", "days": 10, "step": "Active Version"}, {"n": "SIL Regulatory Compliance Monitoring Program", "le": "Squareup International Ltd.", "d": "Governance", "due": "Apr 30, 2026", "days": 10, "step": "Document Drafting (Submitter)"}], "May": [{"n": "Afterpay Australia Pty Ltd Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "May 01, 2026", "days": 11, "step": "Active Version"}, {"n": "Block Inc. Block Academy System Administration Standard", "le": "Block, Inc.", "d": "Governance", "due": "May 01, 2026", "days": 11, "step": "Active Version"}, {"n": "Block Inc. Global Compliance Monitoring &amp; Testing Program", "le": "Block, Inc.", "d": "Governance", "due": "May 01, 2026", "days": 11, "step": "Active Version"}, {"n": "Cash App AU Anti-Money Laundering &amp; Counter-Terrorism Financing (AML &amp; CTF) Program Policies", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "May 01, 2026", "days": 11, "step": "Active Version"}, {"n": "Compliance Incident Management Reporting Standard", "le": "Block, Inc.", "d": "Governance", "due": "May 30, 2026", "days": 40, "step": "Active Version"}, {"n": "Block Inc. Activation Customer Risk Rating Program", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 41, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT) &amp; Sanctions Annual Risk Assessment Standard", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 41, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Block Compliance Risk and Control Standard", "le": "Block, Inc.", "d": "Governance", "due": "May 31, 2026", "days": 41, "step": "Document Drafting (Submitter)"}, {"n": "Cash App Global Cash App Sanctions Compliance Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "May 31, 2026", "days": 41, "step": "Document Drafting (Submitter)"}, {"n": "Clearpay UK Vulnerable Customer Standard", "le": "Clearpay Finance Limited", "d": "Consumer Protection", "due": "May 31, 2026", "days": 41, "step": "Active Version"}, {"n": "SEL Financial Crimes Program", "le": "Squareup Europe Ltd.", "d": "Financial Crimes", "due": "May 31, 2026", "days": 41, "step": "Document Drafting (Submitter)"}, {"n": "Square U.S. Continuous Customer Risk Rating Program", "le": "Square US", "d": "Governance", "due": "May 31, 2026", "days": 41, "step": "Document Drafting (Submitter)"}], "Jun": [{"n": "Square K.K. Anti-Money Laundering (AML), Counter Terrorist Financing (CTF) &amp; Financial Sanctions Program", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 01, 2026", "days": 42, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Compliance Policy on Policies", "le": "Block, Inc.", "d": "Governance", "due": "Jun 06, 2026", "days": 47, "step": "Active Version"}, {"n": "Block, Inc. Compliance Policy on Policies", "le": "Block, Inc.", "d": "Governance", "due": "Jun 06, 2026", "days": 47, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Disputes Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 13, 2026", "days": 54, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part B - Customer Identification and Verification", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "Jun 26, 2026", "days": 67, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Global Complaint Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 71, "step": "Active Version"}, {"n": "Cash App US Cash App Continuous Customer Risk Rating Program", "le": "Cash App US", "d": "Governance", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Denylist Appeals Policy", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Elder Financial Exploitation Policy", "le": "Cash App US", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}, {"n": "Cash App, US Business Activity Monitoring (BAM) Policy", "le": "Cash App US", "d": "Governance", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}, {"n": "Clearpay Fitness and Propriety Standard", "le": "Clearpay Finance Limited", "d": "Governance", "due": "Jun 30, 2026", "days": 71, "step": "Active Version"}, {"n": "Clearpay UK - Training and Competence Standard", "le": "Clearpay Finance Limited", "d": "Governance", "due": "Jun 30, 2026", "days": 71, "step": "Active Version"}, {"n": "SEL Consumer Protection Policy", "le": "Squareup Europe Ltd.", "d": "Consumer Protection", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}, {"n": "Square K.K. Anti-Social Forces Management Policy", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}, {"n": "Square K.K. Anti-Social Forces Management Program", "le": "Square K.K.", "d": "Financial Crimes", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}, {"n": "Square K.K. Compliance Management System Policy", "le": "Square K.K.", "d": "Governance", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}, {"n": "Square K.K. Outsourcing Management Policy", "le": "Square K.K.", "d": "Governance", "due": "Jun 30, 2026", "days": 71, "step": "Document Drafting (Submitter)"}], "Jul": [{"n": "Clearpay Finance Limited Consumer Due Diligence Standard", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Jul 15, 2026", "days": 86, "step": "Draft Review (Leadership)"}, {"n": "Clearpay Finance Limited Merchant Due Diligence Standard", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Jul 16, 2026", "days": 87, "step": "Document Drafting (Submitter)"}, {"n": "Square U.S. Know Your Customer (KYC) Program", "le": "Square US", "d": "Financial Crimes", "due": "Jul 23, 2026", "days": 94, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Australia Pty. Ltd. Unsuitability Assessment Policy", "le": "Afterpay Australia Pty Ltd", "d": "Governance", "due": "Jul 31, 2026", "days": 102, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme", "le": "Afterpay NZ Limited", "d": "Financial Crimes", "due": "Jul 31, 2026", "days": 102, "step": "Active Version"}, {"n": "Clearpay Finance Limited Consumer Due Diligence Standard", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Jul 31, 2026", "days": 102, "step": "Active Version"}, {"n": "SEL Vulnerable Customer Policy", "le": "Cash App UK", "d": "Consumer Protection", "due": "Jul 31, 2026", "days": 102, "step": "Document Drafting (Submitter)"}, {"n": "Square U.S. Know Your Customer (KYC) Program", "le": "Square US", "d": "Financial Crimes", "due": "Jul 31, 2026", "days": 102, "step": "Active Version"}], "Aug": [{"n": "Square U.S. Identity Verification Policy", "le": "Square US", "d": "Financial Crimes", "due": "Aug 12, 2026", "days": 114, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Ltd Incident Management Response Plan", "le": "Afterpay Canada Ltd", "d": "Governance", "due": "Aug 31, 2026", "days": 133, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Ltd. Afterpay Third Party Risk Management (TPRM) Policy", "le": "Afterpay Canada Ltd", "d": "Governance", "due": "Aug 31, 2026", "days": 133, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Bank Secrecy Act / Anti-Money Laundering &amp; Counter-Terrorist Financing (BSA / AML &amp; CFT) Program (US)", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 133, "step": "Document Drafting (Submitter)"}, {"n": "Cash App Investing LLC Investing Communications Requirements Standard", "le": "Cash App Investing LLC", "d": "Ethics and Employee Conduct", "due": "Aug 31, 2026", "days": 133, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Acquiring Chargebacks Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Aug 31, 2026", "days": 133, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Compliance Real Time Transaction Blocking Program", "le": "Cash App US", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 133, "step": "Document Drafting (Submitter)"}, {"n": "Clearpay UK Anti-Money Laundering and Counter Terrorist Financing (AML &amp; CFT) Policy", "le": "Clearpay Finance Limited", "d": "Financial Crimes", "due": "Aug 31, 2026", "days": 133, "step": "Draft Review (Board)"}], "Sep": [{"n": "Afterpay Canada and Square Canada Record Retention Policy", "le": "Afterpay Canada Ltd - Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 141, "step": "Document Drafting (Submitter)"}, {"n": "Square Canada Incident Response Plan", "le": "Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 141, "step": "Document Drafting (Submitter)"}, {"n": "Square Canada Third Party Risk Management (TPRM) Policy", "le": "Square Canada, Inc.", "d": "Governance", "due": "Sep 08, 2026", "days": 141, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Limited Canada Complaints Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Limited Canada Consumer Protection Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay US Inc US Complaint Standard", "le": "Afterpay US Services", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Global Complaint Program Standard", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "Block Inc. Global Sanctions Compliance Program Standard", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Anti-Bribery &amp; Anti-Corruption Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Consumer Protection Program Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "SEL Conflicts of Interest Policy", "le": "Squareup Europe Ltd.", "d": "Ethics and Employee Conduct", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "SEL Outsourcing Policy", "le": "Squareup Europe Ltd.", "d": "Governance", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "SIL Conflicts of Interest Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Sep 30, 2026", "days": 163, "step": "Active Version"}, {"n": "SIL Financial Crimes Program", "le": "Squareup International Ltd.", "d": "Financial Crimes", "due": "Sep 30, 2026", "days": 163, "step": "QC / Assign Reviewers"}, {"n": "SIL Outsourcing Policy", "le": "Squareup International Ltd.", "d": "Governance", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital LLC. Credit Card Bank Secrecy Act &amp; Anti-Money Laundering (BSA &amp; AML) Square Capital Program", "le": "Square Capital, LLC", "d": "Financial Crimes", "due": "Sep 30, 2026", "days": 163, "step": "Document Drafting (Submitter)"}, {"n": "Square U.S. Identity Verification Policy", "le": "Square US", "d": "Financial Crimes", "due": "Sep 30, 2026", "days": 163, "step": "Active Version"}], "Oct": [{"n": "Cash App US Unacceptable Use Monitoring Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Oct 01, 2026", "days": 164, "step": "QC / Assign Reviewers"}, {"n": "Block Inc. Global Modern Slavery Policy", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Cash App Risk and Compliance Adverse Actions Policy", "le": "Cash App US", "d": "Financial Crimes", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Cash App Risk and Compliance Adverse Actions Policy", "le": "Cash App US", "d": "Financial Crimes", "due": "Oct 03, 2026", "days": 166, "step": "Active Version"}, {"n": "Square Capital, LLC Commercial Telemarketing Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital, LLC Compliance Management Policy", "le": "Square Capital, LLC", "d": "Governance", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital, LLC Controlling the Assault of Non-Solicited Pornography and Marketing Act (CAN-SPAM) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital, LLC Credit Card Privacy Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital, LLC Electronic Signature (E-SIGN) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital, LLC Equal Credit Opportunity Act (ECOA) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital, LLC Fair and Accurate Credit Transactions Act Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital, LLC Red Flags Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Square Capital, LLC Servicemembers Civil Relief Act (SCRA) Policy", "le": "Square Capital, LLC", "d": "Consumer Protection", "due": "Oct 03, 2026", "days": 166, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Limited Canada Marketing Standard", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Oct 09, 2026", "days": 172, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Limited French Language Standard", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Oct 09, 2026", "days": 172, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Controlling the Assault of Non-Solicited Pornography &amp; Marketing Act (CAN-SPAM) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 30, 2026", "days": 193, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Limited Canada Accessibility Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Active Version"}, {"n": "Afterpay Canada Limited Canada\u2019s Anti-Spam Legislation (CASL) Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Active Version"}, {"n": "Block, Inc. Anti-Money Laundering &amp; Counter-Terrorist Financing (AML &amp; CFT) Policy", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Code of Business Conduct &amp; Ethics", "le": "Block, Inc.", "d": "Ethics and Employee Conduct", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Compliance Management System (CMS) Policy", "le": "Block, Inc.", "d": "Governance", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Electronic Funds Transfer Act (EFTA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Electronic Signatures in Global and National Commerce Act (E-SIGN) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Equal Credit Opportunity Act (ECOA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Fair &amp; Responsible Lending Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Fair Credit Reporting Act (FCRA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Fair Debt Collection Practices Act (FDCPA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Global Sanctions Policy", "le": "Block, Inc.", "d": "Financial Crimes", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Gramm-Leach-Bliley Act (GLBA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Military Lending Act (MLA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Servicemember Civil Relief Act (SCRA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Telephone Consumer Protection Act (TCPA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Truth in Lending Act (TILA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Active Version"}, {"n": "Block, Inc. Truth in Lending Act (TILA) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Block, Inc. Unfair, Deceptive, or Abusive Acts or Practices / Unfair or Deceptive Acts or Practices (UDAAP/UDAP) Policy", "le": "Block, Inc.", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Cash App Lending Identity Theft Prevention/Red Flags Standard", "le": "Cash App US", "d": "Consumer Protection", "due": "Oct 31, 2026", "days": 194, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Conflicts of Interest Policy", "le": "Square AU Pty. Ltd.", "d": "Ethics and Employee Conduct", "due": "Oct 31, 2026", "days": 194, "step": "Active Version"}], "Nov": [{"n": "Compliance Incident Management Reporting Standard", "le": "Block, Inc.", "d": "Governance", "due": "Nov 30, 2026", "days": 224, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Financial Crimes Transaction Monitoring Program", "le": "Square AU Pty. Ltd.", "d": "Financial Crimes", "due": "Nov 30, 2026", "days": 224, "step": "Active Version"}], "Dec": [{"n": "SIL Speak Up Policy", "le": "Squareup International Ltd.", "d": "Ethics and Employee Conduct", "due": "Dec 08, 2026", "days": 232, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Identity Verification Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Dec 15, 2026", "days": 239, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Australia Pty Ltd Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Program - Part A", "le": "Afterpay Australia Pty Ltd", "d": "Financial Crimes", "due": "Dec 16, 2026", "days": 240, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Know Your Customer (KYC) Standard", "le": "Cash App US", "d": "Financial Crimes", "due": "Dec 23, 2026", "days": 247, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Australia and New Zealand Complaints Standard", "le": "Afterpay Australia Pty Ltd - Afterpay NZ Limited", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Anti-Money Laundering and Counter-Terrorism Financing (AML &amp; CTF) Standard", "le": "Afterpay Canada Ltd", "d": "Financial Crimes", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Limited Canada Accessibility Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay Canada Limited Canada\u2019s Anti-Spam Legislation (CASL) Policy", "le": "Afterpay Canada Ltd", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Afterpay NZ Limited Anti-Money Laundering / Counter-Terrorist Financing (AML/CTF) Programme", "le": "Afterpay NZ Limited", "d": "Financial Crimes", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Cash App US Bitcoin (BTC) Travel Rule Program", "le": "Cash App US", "d": "Financial Crimes", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Clearpay UK - Senior Managers Certification Regime &amp; Conduct Policy", "le": "Clearpay Finance Limited", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255, "step": "Active Version"}, {"n": "SIL Customer Communication Standard", "le": "Squareup International Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Australian Financial Services License (AFSL) Representatives Standard", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Breach Reporting Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Complaints Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Compliance Management Policy (CMS) Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Conflicts of Interest Policy", "le": "Square AU Pty. Ltd.", "d": "Ethics and Employee Conduct", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Consumer Protection Policy", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Regulatory Change Management Program", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255, "step": "Active Version"}, {"n": "Square AU Pty. Ltd. Responsible Managers Standards", "le": "Square AU Pty. Ltd.", "d": "Consumer Protection", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}, {"n": "Square AU Pty. Ltd. Third Party Risk Management (TPRM) Policy", "le": "Square AU Pty. Ltd.", "d": "Governance", "due": "Dec 31, 2026", "days": 255, "step": "Document Drafting (Submitter)"}]};
+const STAGE_DRILL={
+'In-Progress':[
+{n:'Afterpay Fit and Proper Policy',le:'Afterpay Australia Pty Ltd - Afterpay NZ Limited',d:'Governance',step:''},
+{n:'Block Compliance University Standard',le:'Block, Inc.',d:'Governance',step:''},
+{n:'Block Inc. Identity Theft Prevention Standard',le:'Block, Inc.',d:'Consumer Protection',step:''},
+{n:'Block, Inc. Compliance Detections Program Standard',le:'Block, Inc.',d:'Financial Crimes',step:''},
+{n:'Cash App US Drugs Standard',le:'Cash App US',d:'Financial Crimes',step:''},
+{n:'Clearpay UK - Consumer Duty Policy',le:'Clearpay Finance Limited',d:'Consumer Protection',step:''},
+{n:'Clearpay UK - Vulnerable Customer Policy',le:'Clearpay Finance Limited',d:'Consumer Protection',step:''},
+{n:'Clearpay UK - Whistleblowing Policy',le:'Clearpay Finance Limited',d:'Ethics and Employee Conduct',step:''},
+{n:'Clearpay UK Customer Communications Standard',le:'Clearpay Finance Limited',d:'Consumer Protection',step:''},
+{n:'Clearpay UK Marketing &amp; Financial Promotions Policy',le:'Clearpay Finance Limited',d:'Consumer Protection',step:''},
+{n:'Compliance Issue Management Oversight Framework',le:'Block, Inc.',d:'Governance',step:''},
+{n:'Red Flags/Identity Theft Risk Assessment Standard',le:'Block, Inc.',d:'Consumer Protection',step:''}
+]
+};
+
 
 /* ---- State ---- */
 let aFilter={dim1:'all',org:'all'};
 let iFilter={dim1:'all',org:'all'};
+let rFilter={dim1:'all',org:'all'};
 
 function getKey(sel,filter){return sel+'.'+filter}
 
@@ -778,6 +973,10 @@ btn.parentElement.querySelectorAll('.pill-btn').forEach(b=>b.classList.remove('a
 btn.classList.add('active');
 if(chart==='dim1')updateADim1();else updateAOrg();
 }
+function updateRDim1(){const s=document.getElementById('r-dim1-sel').value;const k=getKey(s,rFilter.dim1);const d=R_DIM1[k];if(d)makeDonut('r-dim1',d.l,d.d,d.t)}
+function updateROrg(){const s=document.getElementById('r-org-sel').value;const k=getKey(s,rFilter.org);const d=R_ORG[k];if(d)makeBar('r-org',d.l,d.d,d.m)}
+function setRPill(chart,val,btn){rFilter[chart]=val;var grp=document.getElementById('r-'+chart+'-pills');grp.querySelectorAll('.pill-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');if(chart==='dim1')updateRDim1();else updateROrg()}
+
 function setIPill(chart,val,btn){
 iFilter[chart]=val;
 btn.parentElement.querySelectorAll('.pill-btn').forEach(b=>b.classList.remove('active'));
@@ -794,26 +993,32 @@ document.getElementById('main-tab-inventory').classList.toggle('hidden',tab!=='i
 document.getElementById('main-tab-lifecycle').classList.toggle('hidden',tab!=='lifecycle');
 document.getElementById('main-tab-repo').classList.toggle('hidden',tab!=='repo');
 if(tab==='inventory'){buildInventoryCharts()}
-if(tab==='lifecycle'){buildLcCharts()}
+if(tab==='lifecycle'){var lcTab=document.getElementById('lc-active').classList.contains('hidden')?'intake':'active';buildLcCharts(lcTab)}
 }
 
 function showActiveTab(){
 document.getElementById('tab-active').classList.remove('hidden');
 document.getElementById('tab-intake').classList.add('hidden');
+document.getElementById('tab-retired').classList.add('hidden');
 document.getElementById('kpi-active').classList.add('active-sel');
 document.getElementById('kpi-intake').classList.remove('active-sel');
+document.getElementById('kpi-retired').classList.remove('active-sel');
 document.getElementById('inv-pill-active').classList.add('active');
 document.getElementById('inv-pill-intake').classList.remove('active');
-updateADim1();updateAOrg();makeVertBar('a-schedule',["Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],[10, 1, 6, 13, 5, 8, 15, 32, 1, 19]);
+document.getElementById('inv-pill-retired').classList.remove('active');
+updateADim1();updateAOrg();makeVertBar('a-schedule',["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],[1, 3, 44, 7, 12, 16, 6, 8, 17, 35, 2, 21],["#b07070", "#b07070", "#b07070", "#b8b070", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"]);
 closeSchedDrilldown();
 }
 function showIntakeTab(){
 document.getElementById('tab-intake').classList.remove('hidden');
 document.getElementById('tab-active').classList.add('hidden');
+document.getElementById('tab-retired').classList.add('hidden');
 document.getElementById('kpi-intake').classList.add('active-sel');
 document.getElementById('kpi-active').classList.remove('active-sel');
+document.getElementById('kpi-retired').classList.remove('active-sel');
 document.getElementById('inv-pill-intake').classList.add('active');
 document.getElementById('inv-pill-active').classList.remove('active');
+document.getElementById('inv-pill-retired').classList.remove('active');
 updateIDim1();updateIOrg();
 }
 
@@ -832,14 +1037,41 @@ else{updateIDim1();updateIOrg()}
 }
 
 function buildLcCharts(tab){
-if(!tab){tab=document.getElementById('lc-pill-active').classList.contains('active')?'active':'intake'}
 if(tab==='active'){
-makeDueBar('lc-a-due',["Current", "Coming Due", "Extended", "Pending Review"],[109, 25, 13, 13],109,["#7a9e7a", "#b8b070", "#c4a55a", "#b07070"]);
+makeDueBar('lc-a-due',["Current", "Coming Due", "Extended", "Overdue"],[109, 25, 14, 13],109,["#7a9e7a", "#b8b070", "#c4a55a", "#b07070"]);
 closeDueDrilldown();
-}else{
+}
+if(tab==='intake'){
+makeDonut('lc-i-stage',["New Drafting", "Under QC", "In Approvals"],[8, 1, 1],12);
 }
 }
 
+var stageCurrentStage='';
+function showStageDrilldown(stage){
+var rows=STAGE_DRILL[stage];
+if(!rows)return;
+stageCurrentStage=stage;
+var search=document.getElementById('stage-search');
+if(search)search.value='';
+renderStageDrillRows(rows,stage);
+var el=document.getElementById('stage-drilldown');
+if(el){el.classList.add('open');el.scrollIntoView({behavior:'smooth',block:'nearest'})}
+}
+function renderStageDrillRows(rows,stage){
+var tbody=document.getElementById('stage-tbody');
+var label=document.getElementById('stage-status-label');
+if(!tbody||!label)return;
+label.textContent=stage+' ('+rows.length+')';
+tbody.innerHTML=rows.map(function(r){return '<tr><td>'+r.n+'</td><td>'+r.le+'</td><td>'+r.d+'</td></tr>'}).join('');
+}
+function filterStageDrilldown(){
+var q=document.getElementById('stage-search').value.toLowerCase();
+var rows=STAGE_DRILL[stageCurrentStage];
+if(!rows)return;
+var filtered=rows.filter(function(r){return r.n.toLowerCase().indexOf(q)!==-1||r.le.toLowerCase().indexOf(q)!==-1||r.d.toLowerCase().indexOf(q)!==-1});
+renderStageDrillRows(filtered,stageCurrentStage);
+}
+function closeStageDrilldown(){var el=document.getElementById('stage-drilldown');if(el)el.classList.remove('open')}
 
 function toggleApproved(){
 var tile=document.getElementById('approved-toggle');
@@ -853,8 +1085,22 @@ var dd=document.getElementById('exception-drilldown');
 tile.classList.toggle('open');
 dd.classList.toggle('open');
 }
+function showRetiredTab(){
+document.getElementById('tab-active').classList.add('hidden');
+document.getElementById('tab-intake').classList.add('hidden');
+document.getElementById('tab-retired').classList.remove('hidden');
+document.getElementById('kpi-active').classList.remove('active-sel');
+document.getElementById('kpi-intake').classList.remove('active-sel');
+document.getElementById('kpi-retired').classList.add('active-sel');
+document.getElementById('inv-pill-active').classList.remove('active');
+document.getElementById('inv-pill-intake').classList.remove('active');
+document.getElementById('inv-pill-retired').classList.add('active');
+updateRDim1();updateROrg();
+}
+var ddShowStep=true;
 var ddCurrentStatus='';
 function showDueDrilldown(status){
+var stepTh=document.getElementById('dd-step-th');if(stepTh)stepTh.style.display=status==='Current'?'none':'';ddShowStep=status!=='Current';
 var rows=DUE_DRILL[status];
 if(!rows)return;
 ddCurrentStatus=status;
@@ -868,13 +1114,13 @@ function renderDueDrillRows(rows,status){
 var tbody=document.getElementById('dd-tbody');
 var label=document.getElementById('dd-status-label');
 label.textContent=status+' ('+rows.length+')';
-tbody.innerHTML=rows.map(function(r){return '<tr><td>'+r.n+'</td><td>'+r.le+'</td><td>'+r.d+'</td></tr>'}).join('');
+tbody.innerHTML=rows.map(function(r){var s=ddShowStep?'<td>'+(r.step||'')+'</td>':'';return '<tr><td>'+r.n+'</td><td>'+r.le+'</td><td>'+r.d+'</td>'+s+'</tr>'}).join('');
 }
 function filterDueDrilldown(){
 var q=document.getElementById('dd-search').value.toLowerCase();
 var rows=DUE_DRILL[ddCurrentStatus];
 if(!rows)return;
-var filtered=rows.filter(function(r){return r.n.toLowerCase().indexOf(q)!==-1||r.le.toLowerCase().indexOf(q)!==-1||r.d.toLowerCase().indexOf(q)!==-1});
+var filtered=rows.filter(function(r){return r.n.toLowerCase().indexOf(q)!==-1||r.le.toLowerCase().indexOf(q)!==-1||r.d.toLowerCase().indexOf(q)!==-1||(r.step||'').toLowerCase().indexOf(q)!==-1});
 renderDueDrillRows(filtered,ddCurrentStatus);
 }
 var schedCurrentMonth='';
@@ -892,13 +1138,13 @@ function renderSchedDrillRows(rows,month){
 var tbody=document.getElementById('sched-tbody');
 var label=document.getElementById('sched-status-label');
 label.textContent=month+' ('+rows.length+')';
-tbody.innerHTML=rows.map(function(r){var dc=r.days<0?'#a05555':r.days<=30?'#b8b070':'#ccc';var dl=Math.abs(r.days)===1?' day':' days';var td5='<td style="color:'+dc+'">';return '<tr><td>'+r.n+'</td><td>'+r.le+'</td><td>'+r.d+'</td><td>'+r.due+'</td>'+td5+r.days+dl+'</td></tr>'}).join('');
+tbody.innerHTML=rows.map(function(r){var dc=r.days<0?'#a05555':r.days<=30?'#b8b070':'#ccc';var dl=Math.abs(r.days)===1?' day':' days';var td5='<td style="color:'+dc+'">';return '<tr><td>'+r.n+'</td><td>'+r.le+'</td><td>'+r.d+'</td><td>'+r.due+'</td>'+td5+r.days+dl+'</td><td>'+(r.step||'')+'</td></tr>'}).join('');
 }
 function filterSchedDrilldown(){
 var q=document.getElementById('sched-search').value.toLowerCase();
 var rows=SCHED_DRILL[schedCurrentMonth];
 if(!rows)return;
-var filtered=rows.filter(function(r){return r.n.toLowerCase().indexOf(q)!==-1||r.le.toLowerCase().indexOf(q)!==-1||r.d.toLowerCase().indexOf(q)!==-1});
+var filtered=rows.filter(function(r){return r.n.toLowerCase().indexOf(q)!==-1||r.le.toLowerCase().indexOf(q)!==-1||r.d.toLowerCase().indexOf(q)!==-1||(r.step||'').toLowerCase().indexOf(q)!==-1});
 renderSchedDrillRows(filtered,schedCurrentMonth);
 }
 function closeSchedDrilldown(){
@@ -911,20 +1157,22 @@ document.getElementById('dd-search').value='';
 }
 function filterRepo(){
 var q=document.getElementById('repo-search').value.toLowerCase();
-applyRepoFilters();
+var rows=document.getElementById('repo-tbody').getElementsByTagName('tr');
+for(var i=0;i<rows.length;i++){var match=rows[i].textContent.toLowerCase().indexOf(q)!==-1;rows[i].style.display=match?'':'none'}
+if(q.length>=3){searchPDFs(q)}else{hidePDFResults()}
 }
 function updateRepoFilterOptions(filterId){
 var colSel=document.getElementById('repo-'+filterId+'-col');
 var valSel=document.getElementById('repo-'+filterId+'-val');
-var colIdx=parseInt(colSel.value);
+var colIdx=parseInt(colSel.value)||0;
 valSel.innerHTML='<option value="">Select value...</option>';
-if(!colIdx){valSel.disabled=true;applyRepoFilters();return;}
+if(!colIdx){valSel.disabled=true;applyRepoFilters();return}
 valSel.disabled=false;
 var rows=document.getElementById('repo-tbody').getElementsByTagName('tr');
 var vals={};
 for(var i=0;i<rows.length;i++){
 var cells=rows[i].getElementsByTagName('td');
-if(cells.length>colIdx){var v=cells[colIdx].textContent.trim();if(v&&v!=='—')vals[v]=true;}
+if(cells.length>colIdx){var v=cells[colIdx].textContent.trim();if(v&&v!=='\u2014')vals[v]=true;}
 }
 var sorted=Object.keys(vals).sort();
 for(var i=0;i<sorted.length;i++){
@@ -967,11 +1215,94 @@ for(var i=0;i<rows.length;i++)rows[i].style.display='';
 var countEl=document.getElementById('repo-count');
 if(countEl)countEl.textContent=160;
 }
+function updateAttentionFilterOptions(filterId){
+var colSel=document.getElementById('attention-'+filterId+'-col');
+var valSel=document.getElementById('attention-'+filterId+'-val');
+var colIdx=parseInt(colSel.value)||0;
+valSel.innerHTML='<option value="">Select value...</option>';
+if(!colIdx){valSel.disabled=true;applyAttentionFilters();return}
+valSel.disabled=false;
+var rows=document.getElementById('attention-tbody').getElementsByTagName('tr');
+var vals={};
+for(var i=0;i<rows.length;i++){
+var cells=rows[i].getElementsByTagName('td');
+if(cells.length>colIdx){var v=cells[colIdx].textContent.trim();if(v&&v!=='\u2014')vals[v]=true;}
+}
+var sorted=Object.keys(vals).sort();
+for(var i=0;i<sorted.length;i++){
+var opt=document.createElement('option');
+opt.value=sorted[i];opt.textContent=sorted[i];
+valSel.appendChild(opt);
+}
+applyAttentionFilters();
+}
+function applyAttentionFilters(){
+var f1col=parseInt(document.getElementById('attention-filter1-col').value)||0;
+var f1val=document.getElementById('attention-filter1-val').value;
+var f2col=parseInt(document.getElementById('attention-filter2-col').value)||0;
+var f2val=document.getElementById('attention-filter2-val').value;
+var q=document.getElementById('attention-search').value.toLowerCase();
+var rows=document.getElementById('attention-tbody').getElementsByTagName('tr');
+var visCount=0;
+for(var i=0;i<rows.length;i++){
+var cells=rows[i].getElementsByTagName('td');
+var show=true;
+if(q){var textMatch=false;for(var j=0;j<cells.length;j++){if(cells[j].textContent.toLowerCase().indexOf(q)!==-1){textMatch=true;break}}if(!textMatch)show=false;}
+if(show&&f1col&&f1val){if(cells[f1col].textContent.trim()!==f1val)show=false;}
+if(show&&f2col&&f2val){if(cells[f2col].textContent.trim()!==f2val)show=false;}
+rows[i].style.display=show?'':'none';
+if(show)visCount++;
+}
+var countEl=document.getElementById('attention-count');
+if(countEl)countEl.textContent=visCount;
+}
+function clearAttentionFilters(){
+document.getElementById('attention-filter1-col').value='';
+document.getElementById('attention-filter1-val').innerHTML='<option value="">Select value...</option>';
+document.getElementById('attention-filter1-val').disabled=true;
+document.getElementById('attention-filter2-col').value='';
+document.getElementById('attention-filter2-val').innerHTML='<option value="">Select value...</option>';
+document.getElementById('attention-filter2-val').disabled=true;
+document.getElementById('attention-search').value='';
+var rows=document.getElementById('attention-tbody').getElementsByTagName('tr');
+for(var i=0;i<rows.length;i++)rows[i].style.display='';
+var countEl=document.getElementById('attention-count');
+if(countEl)countEl.textContent=rows.length;
+}
+function refreshVisibleCharts(){
+var inventoryVisible=!document.getElementById('main-tab-inventory').classList.contains('hidden');
+var lifecycleVisible=!document.getElementById('main-tab-lifecycle').classList.contains('hidden');
+if(inventoryVisible){
+buildInventoryCharts();
+if(!document.getElementById('tab-active').classList.contains('hidden')){
+makeVertBar('a-schedule',["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],[1, 3, 44, 7, 12, 16, 6, 8, 17, 35, 2, 21],["#b07070", "#b07070", "#b07070", "#b8b070", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"]);
+}
+if(!document.getElementById('tab-retired').classList.contains('hidden')){
+updateRDim1();
+updateROrg();
+}
+}
+if(lifecycleVisible){
+var lcTab=document.getElementById('lc-active').classList.contains('hidden')?'intake':'active';
+buildLcCharts(lcTab);
+}
+}
 /* ---- Init ---- */
 document.addEventListener('DOMContentLoaded',function(){
 switchMainTab('inventory');
 showActiveTab();
+clearAttentionFilters();
+requestAnimationFrame(function(){
+requestAnimationFrame(refreshVisibleCharts);
 });
+if(document.fonts&&document.fonts.ready){
+document.fonts.ready.then(function(){
+refreshVisibleCharts();
+});
+}
+});
+window.addEventListener('load',refreshVisibleCharts);
 </script>
+<script src="pdf_search.js"></script>
 </body>
 </html>
