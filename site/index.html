@@ -30,7 +30,7 @@ header{background:#000;border-bottom:1px solid #222;padding:20px 32px;display:fl
 .kpi-value{font-size:28px;font-weight:700}
 .kpi-label{font-size:13px;color:#aaa;font-weight:500}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.card{background:#111;border:1px solid #333;border-radius:12px;padding:20px;display:flex;flex-direction:column}
+.card{background:#111;border:1px solid #333;border-radius:12px;padding:20px;display:flex;flex-direction:column;position:relative}
 .card.full-width{grid-column:1/-1}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;flex-wrap:wrap}
 .card-title{font-size:14px;font-weight:600;color:#ccc}
@@ -164,6 +164,14 @@ header{padding:16px 20px;flex-wrap:wrap}
 }
 
 
+
+.dl-btn{position:absolute;top:8px;right:8px;background:#222;border:1px solid #444;color:#aaa;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;opacity:0;transition:opacity .2s;z-index:5}
+.card:hover .dl-btn,.card-header:hover~.dl-btn,.dl-btn:hover{opacity:1}
+.dl-btn:hover{background:#333;color:#fff;border-color:#555}
+.dl-btn-row{display:flex;gap:6px;position:absolute;top:8px;right:8px;opacity:0;transition:opacity .2s;z-index:5}
+.card:hover .dl-btn-row{opacity:1}
+.table-dl-btn{background:#222;border:1px solid #444;color:#aaa;border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s}
+.table-dl-btn:hover{background:#333;color:#fff;border-color:#555}
 </style>
 </head>
 <body>
@@ -175,7 +183,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 <span class="header-title" style="font-size:26px">Compliance Policy Governance Reporting</span>
 <div style="font-size:13px;line-height:1.5;color:#888;max-width:720px">This dashboard tracks and reports on the inventory and lifecycle status of compliance policies and standards.</div>
 </div>
-<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 20, 2026 at 05:10 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div><div style="color:#555;font-size:10px;margin-top:2px">Dashboard refreshed twice daily</div></div>
+<div class="header-subtitle" style="text-align:right;line-height:1.5"><div>Last updated: Apr 20, 2026 at 05:21 PM ET</div><div style="color:#666;font-size:11px">Source: LogicGate via Snowflake</div><div style="color:#555;font-size:10px;margin-top:2px">Dashboard refreshed twice daily</div></div>
 </header>
 <div class="container">
 <div class="main-tab-bar">
@@ -216,7 +224,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 <div class="grid-2">
 <div class="card card-h-360">
 <div class="card-header">
-<span class="card-title">Distribution</span>
+<span class="card-title">Distribution</span><button class="dl-btn" onclick="downloadChartPNG(this.closest('.card').querySelector('canvas').id,'distribution-chart')">⬇ PNG</button>
 <div class="card-controls">
 <select class="dim-select" id="a-dim1-sel" onchange="updateADim1()"><option value="domain">By Domain</option><option value="tier">By Tier</option><option value="doctype">By Document Type</option></select>
 <div class="pill-group" id="a-dim1-pills">
@@ -230,7 +238,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 </div>
 <div class="card card-h-360">
 <div class="card-header">
-<span class="card-title">Organization</span>
+<span class="card-title">Organization</span><button class="dl-btn" onclick="downloadChartPNG(this.closest('.card').querySelector('canvas').id,'organization-chart')">⬇ PNG</button>
 <div class="card-controls">
 <select class="dim-select" id="a-org-sel" onchange="updateAOrg()"><option value="business">By Business</option><option value="legal">By Legal Entity</option><option value="region">By Region</option></select>
 <div class="pill-group" id="a-org-pills">
@@ -271,7 +279,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 </tbody>
 </table>
 </div>
-<div class="section-title">Document Review Schedule</div><div style="font-size:12px;color:#999;margin:-10px 0 12px">Documents awaiting review, grouped by due month</div>
+<div class="section-title">Document Review Schedule</div><div style="font-size:12px;color:#999;margin:-10px 0 12px">Documents awaiting review, grouped by due month</div><button class="table-dl-btn" style="float:right;margin-top:-24px" onclick="downloadVisibleTableCSV('sched-tbody',['Document','Legal Entity','Domain','Due Date','Days','Step'],'review-schedule')">⬇ CSV</button>
 <div class="card full-width" style="height:250px">
 
 <canvas id="a-schedule" class="cc" style="flex:1;min-height:0"></canvas>
@@ -291,7 +299,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 <div class="grid-2">
 <div class="card card-h-360">
 <div class="card-header">
-<span class="card-title">Distribution</span>
+<span class="card-title">Distribution</span><button class="dl-btn" onclick="downloadChartPNG(this.closest('.card').querySelector('canvas').id,'distribution-chart')">⬇ PNG</button>
 <div class="card-controls">
 <select class="dim-select" id="i-dim1-sel" onchange="updateIDim1()"><option value="domain">By Domain</option><option value="tier">By Tier</option><option value="doctype">By Document Type</option></select>
 <div class="pill-group" id="i-dim1-pills">
@@ -305,7 +313,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 </div>
 <div class="card card-h-360">
 <div class="card-header">
-<span class="card-title">Organization</span>
+<span class="card-title">Organization</span><button class="dl-btn" onclick="downloadChartPNG(this.closest('.card').querySelector('canvas').id,'organization-chart')">⬇ PNG</button>
 <div class="card-controls">
 <select class="dim-select" id="i-org-sel" onchange="updateIOrg()"><option value="business">By Business</option><option value="legal">By Legal Entity</option><option value="region">By Region</option></select>
 <div class="pill-group" id="i-org-pills">
@@ -335,7 +343,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 <div class="grid-2">
 <div class="card card-h-360">
 <div class="card-header">
-<span class="card-title">Distribution</span>
+<span class="card-title">Distribution</span><button class="dl-btn" onclick="downloadChartPNG(this.closest('.card').querySelector('canvas').id,'distribution-chart')">⬇ PNG</button>
 <div class="card-controls">
 <select class="dim-select" id="r-dim1-sel" onchange="updateRDim1()"><option value="domain">By Domain</option><option value="tier">By Tier</option><option value="doctype">By Document Type</option></select>
 <div class="pill-group" id="r-dim1-pills">
@@ -347,7 +355,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 </div>
 <div class="card card-h-360">
 <div class="card-header">
-<span class="card-title">Organization</span>
+<span class="card-title">Organization</span><button class="dl-btn" onclick="downloadChartPNG(this.closest('.card').querySelector('canvas').id,'organization-chart')">⬇ PNG</button>
 <div class="card-controls">
 <select class="dim-select" id="r-org-sel" onchange="updateROrg()"><option value="business">By Business</option><option value="legal">By Legal Entity</option><option value="region">By Region</option></select>
 <div class="pill-group" id="r-org-pills">
@@ -379,7 +387,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 
 <div class="section-title">Due Date Status Overview</div>
 <div class="card full-width card-h-320" style="padding:10px 20px 20px 20px;margin-bottom:16px">
-<div class="card-header" style="margin-bottom:4px"><span class="card-title">By Due Date Status</span></div>
+<div class="card-header" style="margin-bottom:4px"><span class="card-title">By Due Date Status</span><button class="dl-btn" onclick="downloadChartPNG('lc-a-due','due-date-status')">⬇ PNG</button></div>
 <div class="due-layout">
 <div class="due-chart"><canvas id="lc-a-due" class="cc" style="flex:1;min-height:0"></canvas></div>
 <div class="due-key">
@@ -401,7 +409,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 </table>
 </div>
 
-<div class="section-title">Documents Needing Attention (<span id="attention-count">48</span>)</div>
+<div class="section-title">Documents Needing Attention (<span id="attention-count">48</span>)</div><button class="table-dl-btn" style="float:right;margin-top:-28px" onclick="downloadVisibleTableCSV('attention-tbody',['Document','Domain','Legal Entity','Status','Current Step'],'attention-documents')">⬇ CSV</button>
 <div class="table-toolbar">
 <input class="dd-search" id="attention-search" type="text" placeholder="Search documents..." oninput="applyAttentionFilters()">
 <select class="repo-filter-select" id="attention-filter1-col" onchange="updateAttentionFilterOptions('filter1')"><option value="">Primary Filter...</option><option value="1">Domain</option><option value="2">Legal Entity</option><option value="3">Status</option><option value="4">Current Step</option></select>
@@ -425,7 +433,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 <div class="section-title">Document Lifecycle Tracking</div>
 <div class="grid-2" style="grid-template-columns:0.88fr 1.12fr;margin-bottom:16px">
 <div class="card card-h-300">
-<div class="card-header"><span class="card-title">By Current Step</span></div>
+<div class="card-header"><span class="card-title">By Current Step</span><button class="dl-btn" onclick="downloadChartPNG('lc-i-stage','intake-stage-chart')">⬇ PNG</button></div>
 <canvas id="lc-i-stage" class="cc" style="flex:1;min-height:0"></canvas>
 </div>
 <div class="card card-h-300" style="padding:0;overflow-y:auto">
@@ -456,7 +464,7 @@ header{padding:16px 20px;flex-wrap:wrap}
 <div class="section-title">Document Repository</div>
 <div class="repo-toolbar">
 <div class="repo-toolbar-main">
-<div class="repo-count-chip"><span style="font-weight:700;color:#fff;font-size:16px" id="repo-count">160</span>&nbsp;Published Documents</div>
+<button class="table-dl-btn" style="margin-right:auto" onclick="downloadVisibleTableCSV('repo-tbody',['Document','Domain','Legal Entity','Owner','Tier'],'document-repository')">⬇ CSV</button><div class="repo-count-chip"><span style="font-weight:700;color:#fff;font-size:16px" id="repo-count">160</span>&nbsp;Published Documents</div>
 <input class="dd-search repo-search-input" id="repo-search" type="text" placeholder="Search documents & PDF content..." oninput="filterRepo()">
 </div>
 </div>
@@ -1300,6 +1308,72 @@ refreshVisibleCharts();
 }
 });
 window.addEventListener('load',refreshVisibleCharts);
+
+// === Download Utilities ===
+function downloadChartPNG(chartId, filename) {
+  var c = charts[chartId];
+  if (!c) return;
+  var canvas = c.canvas;
+  var tmpCanvas = document.createElement("canvas");
+  tmpCanvas.width = canvas.width * 2;
+  tmpCanvas.height = canvas.height * 2;
+  var ctx = tmpCanvas.getContext("2d");
+  ctx.scale(2, 2);
+  ctx.fillStyle = "#111";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(canvas, 0, 0);
+  var link = document.createElement("a");
+  link.download = (filename || chartId) + ".png";
+  link.href = tmpCanvas.toDataURL("image/png");
+  link.click();
+}
+
+function downloadTableCSV(tableEl, filename) {
+  if (typeof tableEl === "string") tableEl = document.getElementById(tableEl);
+  if (!tableEl) return;
+  var table = tableEl.closest("table") || tableEl.querySelector("table") || tableEl;
+  var rows = table.querySelectorAll("tr");
+  var csv = [];
+  rows.forEach(function(row) {
+    if (row.style && row.style.display === "none") return;
+    var cols = row.querySelectorAll("th, td");
+    var rowData = [];
+    cols.forEach(function(col) {
+      var text = col.textContent.replace(/"/g, ).trim();
+      rowData.push(' + text + ');
+    });
+    csv.push(rowData.join(","));
+  });
+  var blob = new Blob([csv.join("\n")], { type: "text/csv" });
+  var link = document.createElement("a");
+  link.download = (filename || "export") + ".csv";
+  link.href = URL.createObjectURL(blob);
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+function downloadVisibleTableCSV(tbodyId, headers, filename) {
+  var tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  var rows = tbody.querySelectorAll("tr");
+  var csv = [headers.map(function(h){ return ' + h + '; }).join(",")];
+  rows.forEach(function(row) {
+    if (row.style && row.style.display === "none") return;
+    var cols = row.querySelectorAll("td");
+    var rowData = [];
+    cols.forEach(function(col) {
+      var text = col.textContent.replace(/"/g, ).trim();
+      rowData.push(' + text + ');
+    });
+    csv.push(rowData.join(","));
+  });
+  var blob = new Blob([csv.join("\n")], { type: "text/csv" });
+  var link = document.createElement("a");
+  link.download = (filename || "export") + ".csv";
+  link.href = URL.createObjectURL(blob);
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
 </script>
 <script src="pdf_search.js"></script>
 </body>
